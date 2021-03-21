@@ -13,8 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
+});
+Route::get('/', function () {
+    return view('index');
+});
+Route::get('/blog', function () {
+    return view('pages.blog');
+});
+Route::get('/users', function () {
+    return view('pages.users');
 });
 Route::get('/callback', function () {
     dump('Возврат результата работы callback function');
