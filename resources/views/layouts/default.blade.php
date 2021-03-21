@@ -38,11 +38,6 @@
     </div>
     <!-- Javascript files-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="js/tether.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.cookie.js"> </script>
-    <script src="js/jquery.fancybox.min.js"></script>
-    <script src="js/animsition.min.js"></script>
-    <script src="js/front.js"></script>
+    <script src="{{ asset('/js/app.js') }}"></script>
   </body>
 </html>

@@ -12,5 +12,12 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
+    .scripts([
+        'resources/js/tether.min.js',
+        'resources/js/jquery.cookie.js',
+        'resources/js/jquery.fancybox.min.js',
+        'resources/js/animsition.min.js',
+        'resources/js/front.js'
+     ], 'public/js/app.js')
     .vue()
     .sass('resources/sass/app.scss', 'public/css');
