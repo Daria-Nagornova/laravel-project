@@ -7,6 +7,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
+
+     <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- Google fonts - Open Sans-->
@@ -26,14 +28,13 @@
     <script src="https://use.fontawesome.com/99347ac47f.js"></script>
     <!-- Font Icons CSS-->
     <link rel="stylesheet" href="css/fontastic.css">
-    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+
   </head>
   <body>
     <div class="animsition">
       @include('layouts.blocks.header')
       @yield('content')
+
       @include('layouts.blocks.footer')
     </div>
     <!-- Javascript files-->

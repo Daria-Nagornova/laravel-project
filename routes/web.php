@@ -19,12 +19,8 @@ Route::get('/welcome', function () {
 Route::get('/', function () {
     return view('index');
 });
-Route::get('/blog', function () {
-    return view('pages.blog');
-});
-Route::get('/users', function () {
-    return view('pages.users');
-});
+Route::view('/blog', 'pages.blog');
+Route::get('/users', 'App\Http\Controllers\UserController@index');
 Route::get('/callback', function () {
     dump('Возврат результата работы callback function');
 });
@@ -39,3 +35,15 @@ Route::get('/community/{topic?}', function ($topic='pregnancy') {
 });
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
