@@ -7,7 +7,7 @@
               <a href="/" class="navbar-brand animsition-link">Mom and baby</a>
               <button type="button" data-toggle="collapse" data-target="#navbarcollapse" aria-controls="navbarcollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span></span><span></span><span></span></button>
             </div>
-            <div id="navbarcollapse" class="collapse navbar-collapse">
+            <div id="navbarcollapse" class="collapse navbar-collapse align-items-center">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a href="/" class="nav-link animsition-link active">Главная</a></li>
                 <li class="nav-item"><a href="blog.html" class="nav-link animsition-link">Сообщества</a></li>
@@ -21,7 +21,12 @@
               </ul>
             </div>
           </div>
+          <ul class="navbar-nav ml-auto align-items-center">
+             <li class="nav-item"><a href="/login" class="nav-link animsition-link">Вход</a></li>
+             <li class="nav-item"><a href="/register" class="nav-link animsition-link">Регистрация</a></li>
+          </ul>
         </nav>
+
       </header>
 
 </header>
