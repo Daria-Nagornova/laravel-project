@@ -1,7 +1,7 @@
 @extends('layouts.default')
 @section('content')
-      <!-- Hero Section-->
-      <section style="background: url(img/45.jpg); background-size: cover; background-position: center center" class="hero">
+<!-- Hero Section-->
+      <section class="hero">
         <div class="container">
           <div class="row">
             <div class="col-lg-7">
@@ -10,7 +10,7 @@
         </div>
       </section>
       <!-- Intro Section-->
-      <section class="intro" id="intro">
+      <section>
         <div class="container">
           <div class="row">
             <div class="col-lg-8">
@@ -35,18 +35,18 @@
                   </header>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrude consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
                   <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                      <div class="avatar"><img src="img/avatar-1.jpg" alt="..." class="img-fluid"></div>
+                      <div class="avatar"><img src="img/avatar-1.jpg" class="img-fluid"></div>
                       <div class="title"><span>Доктор Комаровский</span></div></a>
-                    <div class="date"><i class="icon-clock"></i> 2 месяца назад</div>
-                    <div class="comments"><i class="icon-comment"></i>12</div>
+                    <div class="date">11.10.2020</div>
+                    <div class="comments">12</div>
                   </footer>
                 </div>
               </div>
             </div>
-            <div class="image col-lg-5"><img src="img/38.jpg" alt="..."></div>
+            <div class="image col-lg-5"><img src="img/38.jpg"></div>
           </div>
          <div class="row d-flex align-items-stretch">
-            <div class="image col-lg-5"><img src="img/49.jpg" alt="..."></div>
+            <div class="image col-lg-5 img-fluid"><img src="img/49.jpg"></div>
             <div class="text col-lg-7">
               <div class="text-inner d-flex align-items-center">
                 <div class="content">
@@ -56,10 +56,10 @@
                   </header>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrude consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
                   <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                      <div class="avatar"><img src="img/avatar-1.jpg" alt="..." class="img-fluid"></div>
+                      <div class="avatar"><img src="img/avatar-1.jpg" class="img-fluid"></div>
                       <div class="title"><span>Доктор Комаровский</span></div></a>
-                    <div class="date"><i class="icon-clock"></i> 2 месяца назад</div>
-                    <div class="comments"><i class="icon-comment"></i>12</div>
+                    <div class="date">11.10.2020</div>
+                    <div class="comments">12</div>
                   </footer>
                 </div>
               </div>
@@ -76,20 +76,20 @@
                   </header>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrude consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
                   <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                      <div class="avatar"><img src="img/avatar-1.jpg" alt="..." class="img-fluid"></div>
+                      <div class="avatar"><img src="img/avatar-1.jpg" class="img-fluid"></div>
                       <div class="title"><span>Доктор Комаровский</span></div></a>
-                    <div class="date"><i class="icon-clock"></i> 2 месяца назад</div>
-                    <div class="comments"><i class="icon-comment"></i>12</div>
+                    <div class="date">11.10.2020</div>
+                    <div class="comments">12</div>
                   </footer>
                 </div>
               </div>
             </div>
-            <div class="image col-lg-5"><img src="img/48.jpg" alt="..."></div>
+            <div class="image col-lg-5"><img src="img/48.jpg"></div>
           </div>
         </div>
       </section>
       <!-- Latest Posts -->
-      <section class="latest-posts">
+      <section class="latest-posts no-padding-top">
         <div class="container">
           <header>
             <h2>Последние посты блога</h2>
@@ -99,7 +99,7 @@
               <div class="post-thumbnail"><a href="post.html" class="animsition-link"><img src="img/67.jpg" alt="..." class="img-fluid"></a></div>
               <div class="post-details">
                 <div class="post-meta d-flex justify-content-between">
-                  <div class="date">20 May | 2020</div>
+                  <div class="date">20 мая | 2020</div>
                   <div class="category"><a href="#">Здоровье будущей мамы</a></div>
                 </div><a href="post.html" class="animsition-link">
                   <h3 class="h4">Здоровье будущей мамы</h3></a>
@@ -110,7 +110,7 @@
               <div class="post-thumbnail"><a href="post.html" class="animsition-link"><img src="img/19.jpg" alt="..." class="img-fluid"></a></div>
               <div class="post-details">
                 <div class="post-meta d-flex justify-content-between">
-                  <div class="date">20 May | 2020</div>
+                  <div class="date">20 мая | 2020</div>
                   <div class="category"><a href="#">Развивающие занятия</a></div>
                 </div><a href="post.html" class="animsition-link">
                   <h3 class="h4">Развивающие занятия</h3></a>
@@ -118,10 +118,10 @@
               </div>
             </div>
             <div class="post col-md-4">
-              <div class="post-thumbnail"><a href="post.html" class="animsition-link"><img src="img/75.jpg" alt="..." class="img-fluid"></a></div>
+              <div class="post-thumbnail"><a href="post.html" class="animsition-link"><img src="img/75.jpg" class="img-fluid"></a></div>
               <div class="post-details">
                 <div class="post-meta d-flex justify-content-between">
-                  <div class="date">20 May | 2020</div>
+                  <div class="date">20 мая | 2020</div>
                   <div class="category"><a href="#">Здоровье малыша</a></div>
                 </div><a href="post.html" class="animsition-link">
                   <h3 class="h4">Здоровье малыша</h3></a>
