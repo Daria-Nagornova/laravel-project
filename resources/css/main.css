@@ -400,7 +400,7 @@ a.hero-link:hover::after {
 section.hero {
   padding: 0;
   color: #fff;
-  background: url(../img/45.jpg);
+  background: url(../../public/img/45.jpg);
   background-size: cover;
   background-position: center center;
 }
@@ -486,7 +486,7 @@ section.featured-posts .comments::after {
 }
 
 section.featured-posts .comments {
-  background: url(../img/massage.png) 0 50% no-repeat;
+  background: url(../../public/img/massage.png) 0 50% no-repeat;
   padding-left: 15px;
 }
 
