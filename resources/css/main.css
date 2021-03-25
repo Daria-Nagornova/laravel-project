@@ -1,11 +1,10 @@
 body {
   overflow-x: hidden;
-  font-family: "Open Sans", sans-serif;
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.5;
   color: #292b2c;
-  background-color: #fff;
+  background-color: #fff !important;
 }
 
 a,
@@ -276,6 +275,7 @@ h6 {
 }
 .animsition-link {
   font-weight: 700;
+  color: black;
 }
 .text-big {
   font-size: 1.4em;
@@ -400,7 +400,7 @@ a.hero-link:hover::after {
 section.hero {
   padding: 0;
   color: #fff;
-  background: url(../img/45.jpg);
+  background: url(../../public/img/45.jpg);
   background-size: cover;
   background-position: center center;
 }
@@ -486,7 +486,7 @@ section.featured-posts .comments::after {
 }
 
 section.featured-posts .comments {
-  background: url(../img/massage.png) 0 50% no-repeat;
+  background: url(../../public/img/massage.png) 0 50% no-repeat;
   padding-left: 15px;
 }
 
@@ -584,7 +584,21 @@ section.latest-posts header {
   font-size: 0.9em;
   color: #ccc;
 }
+.community {
+    margin-top: 50px;
+}
+.community .image {
+    max-height: 300px !important;
+    width: auto;
+    overflow: hidden;
+    padding: 0;
+}
 
+.community .image img {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+}
 /*
 * ==========================================================
 *     FOOTER

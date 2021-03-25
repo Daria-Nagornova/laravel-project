@@ -1,6 +1,6 @@
 <header class="header">
 <header class="header">
-        <nav class="navbar navbar-toggleable-lg">
+        <nav class="navbar navbar-toggleable-md">
           <div class="container">
             <div class="navbar-header d-flex align-items-center justify-content-between">
               <a href="/"><img src="img/logo.png"></a>
@@ -19,7 +19,7 @@
               <ul class="langs navbar-text">
                 <a href="#" class="active">RU</a><span>           </span><a href="#">EN</a>
               </ul>
-            </div>
+
           </div>
           <ul class="navbar-nav ml-auto align-items-center">
              <li class="nav-item"><a href="/login" class="nav-link animsition-link">Вход</a></li>
