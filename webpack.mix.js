@@ -15,8 +15,8 @@ mix.js('resources/js/app.js', 'public/js')
     /*.scripts([
         'resources/js/main.js'
      ], 'public/js/app.js')*/
-    .vue()
-    .sass('resources/sass/app.scss', 'public/css')
-    .styles([
+    /*.styles([
         'resources/css/main.css'
-    ], 'public/css/app.css');
+    ], 'public/css/app.css')*/
+    .vue()
+    .sass('resources/sass/app.scss', 'public/css');
