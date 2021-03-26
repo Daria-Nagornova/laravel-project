@@ -35,7 +35,10 @@ class ChildController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $child = new Child;
+        $child->fill($request->all());
+
+        $child->save();
     }
 
     /**
@@ -67,9 +70,12 @@ class ChildController extends Controller
      * @param  \App\Models\Child  $child
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Child $child)
+    public function update(Request $request, $id)
     {
-        //
+        $child = Child::find($id);
+        $child->fill($request->all());
+
+        $child->save();
     }
 
     /**
@@ -78,8 +84,8 @@ class ChildController extends Controller
      * @param  \App\Models\Child  $child
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Child $child)
+    public function destroy($id)
     {
-        //
+        Child::destroy($id);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,10 @@ Route::get('/welcome', function () {
 });
 Route::get('/', function () {
     return view('index');
+});
+Route::get('/db', function () {
+$category = Category::first();
+    dd($category->subcategories());
 });
 Route::view('/blog', 'pages.blog');
 Route::get('/users', 'App\Http\Controllers\UserController@index');
