@@ -12,7 +12,7 @@
                     <span> Пол </span>
                 </div>
             </div>
-            <router-link to="/profile-user/child-diary/addNotes" class="btn btn-primary addNotes">+ Добавить запись</router-link>
+            <router-link to="/profile-user/child-diary/add-notes" class="btn btn-primary addNotes">+ Добавить запись</router-link>
             <div class="col">
                 <label>Выбрать дату</label>
                 <input class="form-control" type="date" v-model="date">

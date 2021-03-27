@@ -10,6 +10,13 @@ import Consultations from "./components/Consultations";
 import ChildDiary from "./components/ChildDiary";
 import Communities from "./components/Communities";
 import AddChild from "./components/AddChild";
+import AddNotes from "./components/AddNotes";
+import Feeding from "./components/NoteCategoties/Feeding";
+import Height from "./components/NoteCategoties/Height";
+import Sleep from "./components/NoteCategoties/Sleep";
+import Teeth from "./components/NoteCategoties/Teeth";
+import Vaccination from "./components/NoteCategoties/Vaccination";
+import Walk from "./components/NoteCategoties/Walk";
 
 
 
@@ -42,6 +49,19 @@ Vue.component('home-page', require('./components/HomePage.vue').default);
 
 const app = new Vue({
     el: '#app',
-    components: { Communities, ProfileUser, Consultations, ChildDiary, AddChild },
+    components: {
+        Communities,
+        ProfileUser,
+        Consultations,
+        ChildDiary,
+        AddChild,
+        AddNotes,
+        Feeding,
+        Height,
+        Sleep,
+        Teeth,
+        Vaccination,
+        Walk
+    },
     router
 });
