@@ -14,7 +14,7 @@ use App\Models\Category;
 |
 */
 
-Route::get('/welcome', function () {
+/*Route::get('/welcome', function () {
     return view('welcome');
 });
 Route::get('/', function () {
@@ -39,16 +39,9 @@ Route::get('/community/{topic?}', function ($topic='pregnancy') {
     dump('Сообщество - '.$topic);
 });
 
-
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+*/
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/{any}', [App\Http\Controllers\HomeController::class, 'index'])->where('any', '.*');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

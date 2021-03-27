@@ -9,5 +9,5 @@ class Child extends Model
 {
     use HasFactory;
 
-
+    protected $fillable = ['id', 'name', 'date_birth', 'gender', 'user_id'];
 }

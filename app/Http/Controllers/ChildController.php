@@ -70,7 +70,7 @@ class ChildController extends Controller
      * @param  \App\Models\Child  $child
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Child $child)
     {
         $child = Child::find($id);
         $child->fill($request->all());
@@ -84,7 +84,7 @@ class ChildController extends Controller
      * @param  \App\Models\Child  $child
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Child $child)
     {
         Child::destroy($id);
     }

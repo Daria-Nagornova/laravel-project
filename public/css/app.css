@@ -415,6 +415,20 @@ section.hero h1 {
   line-height: 1.2em;
 }
 
+.community .image {
+    max-height: 300px !important;
+    width: auto;
+    overflow: hidden;
+    padding: 0;
+}
+
+.community .image img {
+    height: 100%;
+    width: auto;
+    -o-object-fit: cover;
+       object-fit: cover;
+}
+
 /*
 * ==========================================================
 *     FEATURED POSTS SECTION
@@ -589,19 +603,7 @@ section.latest-posts header {
 .community {
     margin-top: 50px;
 }
-.community .image {
-    max-height: 300px !important;
-    width: auto;
-    overflow: hidden;
-    padding: 0;
-}
 
-.community .image img {
-    height: 100%;
-    width: auto;
-    -o-object-fit: cover;
-       object-fit: cover;
-}
 /*
 * ==========================================================
 *     FOOTER
@@ -655,7 +657,9 @@ footer.main-footer .social-menu li {
   padding: 0 5px;
 }
 
-
+.addChild {
+    padding: 20px;
+}
 @media (max-width: 992px) {
   section.featured-posts .image {
     order: 1;

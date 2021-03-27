@@ -1,6 +1,8 @@
 <template>
     <section class="featured-posts no-padding-top">
         <div class="container">
+            <h1>Сообщества</h1>
+            <h2>Обменивайтесь знанием и опытом в тематических сообществах, общайтесь и находите новых подруг</h2>
             <div class="row d-flex align-items-stretch community">
                 <div class="image col-lg-4"><img src="img/pregn.jpg"></div>
                 <div class="text col-lg-8">

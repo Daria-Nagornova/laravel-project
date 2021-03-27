@@ -415,7 +415,7 @@ section.hero h1 {
 }
 
 .community .image {
-    max-height: 300px;
+    max-height: 300px !important;
     width: auto;
     overflow: hidden;
     padding: 0;
@@ -654,7 +654,9 @@ footer.main-footer .social-menu li {
   padding: 0 5px;
 }
 
-
+.addChild {
+    padding: 20px;
+}
 @media (max-width: 992px) {
   section.featured-posts .image {
     order: 1;

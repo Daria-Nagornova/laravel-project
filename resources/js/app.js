@@ -3,10 +3,19 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+import Vue from 'vue'
+import router from './router'
+import ProfileUser from "./components/ProfileUser";
+import Consultations from "./components/Consultations";
+import ChildDiary from "./components/ChildDiary";
+import Communities from "./components/Communities";
+import AddChild from "./components/AddChild";
+
+
 
 require('./bootstrap');
 
-window.Vue = require('vue').default;
+//window.Vue = require('vue').default;
 
 /**
  * The following block of code may be used to automatically register your
@@ -20,8 +29,11 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('communities', require('./components/Communities.vue').default);
+Vue.component('header-component', require('./components/HeaderComponent.vue').default);
+Vue.component('footer-component', require('./components/FooterComponent.vue').default);
 Vue.component('home-page', require('./components/HomePage.vue').default);
+
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -30,4 +42,6 @@ Vue.component('home-page', require('./components/HomePage.vue').default);
 
 const app = new Vue({
     el: '#app',
+    components: { Communities, ProfileUser, Consultations, ChildDiary, AddChild },
+    router
 });
