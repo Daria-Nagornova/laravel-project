@@ -17,6 +17,8 @@ import Sleep from "./components/NoteCategoties/Sleep";
 import Teeth from "./components/NoteCategoties/Teeth";
 import Vaccination from "./components/NoteCategoties/Vaccination";
 import Walk from "./components/NoteCategoties/Walk";
+import Blog from "./components/Blog";
+import BlogPost from "./components/BlogPost";
 
 
 
@@ -61,7 +63,9 @@ const app = new Vue({
         Sleep,
         Teeth,
         Vaccination,
-        Walk
+        Walk,
+        Blog,
+        BlogPost
     },
     router
 });

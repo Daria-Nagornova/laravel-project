@@ -13,6 +13,8 @@ import Sleep from "./components/NoteCategoties/Sleep";
 import Teeth from "./components/NoteCategoties/Teeth";
 import Vaccination from "./components/NoteCategoties/Vaccination";
 import Walk from "./components/NoteCategoties/Walk";
+import Blog from "./components/Blog";
+import BlogPost from "./components/BlogPost";
 
 
 
@@ -23,6 +25,8 @@ export default new VueRouter({
     routes: [
         { path: '/', component: HomePage },
         { path: '/communities', component: Communities },
+        { path: '/communities/:categories', component: Blog },
+        { path: '/communities/:categories/:post', component: BlogPost },
         { path: '/consultations', component: Consultations },
         { path: '/profile-user', component: ProfileUser },
         { path: '/profile-user/child-diary', component: ChildDiary },
@@ -34,6 +38,7 @@ export default new VueRouter({
         { path: '/profile-user/child-diary/add-notes/teeth', component: Teeth },
         { path: '/profile-user/child-diary/add-notes/vaccination', component: Vaccination },
         { path: '/profile-user/child-diary/add-notes/walk', component: Walk },
+
 
     ],
     mode: 'history'

@@ -33,7 +33,7 @@
                                     <div class="category">
                                         <a href="#">Полезные статьи</a>
                                     </div>
-                                    <a href="post.html" class="animsition-link"><h2 class="h4">Семь правил лечения ОРВИ</h2></a>
+                                    <router-link to="/communities/pregnant/post1" class="animsition-link"><h2 class="h4">Семь правил лечения ОРВИ</h2></router-link>
                                 </header>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrude consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
                                 <footer class="post-footer d-flex align-items-center">
@@ -57,7 +57,7 @@
                                     <div class="category">
                                         <a href="#">Полезные статьи</a>
                                     </div>
-                                    <a href="post.html" class="animsition-link"><h2 class="h4">Семь правил лечения ОРВИ</h2></a>
+                                    <router-link to="/communities/pregnant/post2" class="animsition-link"><h2 class="h4">Семь правил лечения ОРВИ</h2></router-link>
                                 </header>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrude consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
                                 <footer class="post-footer d-flex align-items-center">
@@ -77,8 +77,9 @@
                         <div class="text-inner d-flex align-items-center">
                             <div class="content">
                                 <header class="post-header">
-                                    <div class="category"><a href="#">Полезные статьи</a></div><a href="post.html" class="animsition-link">
-                                    <h2 class="h4">Семь правил лечения ОРВИ</h2></a>
+                                    <div class="category"><a href="#">Полезные статьи</a></div>
+                                    <router-link to="/communities/pregnant/post3" class="animsition-link">
+                                    <h2 class="h4">Семь правил лечения ОРВИ</h2></router-link>
                                 </header>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrude consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
                                 <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
