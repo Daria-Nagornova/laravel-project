@@ -41,12 +41,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function children()
+    public function children() : hasMany
     {
         return $this->hasMany(Child::class);
     }
 
-    public function consultations()
+    public function consultations() : hasMany
     {
         return $this->hasMany(Consultation::class);
     }

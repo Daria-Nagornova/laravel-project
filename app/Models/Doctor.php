@@ -9,11 +9,13 @@ class Doctor extends Model
 {
     use HasFactory;
 
-    public function specialisation()
+    protected $fillable = ['id', 'name', 'description', 'specialisation_id'];
+
+    public function specialisation() : belongsTo
     {
         return $this->belongsTo(Specialisation::class);
     }
-    public function consultations()
+    public function consultations() : hasMany
     {
         return $this->hasMany(Consultation::class);
     }

@@ -9,17 +9,19 @@ class Consultation extends Model
 {
     use HasFactory;
 
-    public function user()
+    protected $fillable = ['id', 'text', 'user_id', 'doctor_id'];
+
+    public function user() : belongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function doctor()
+    public function doctor() : belongsTo
     {
         return $this->belongsTo(Doctor::class);
     }
 
-    public function answer()
+    public function answer() : hasOne
     {
         return $this->hasOne(Answer::class);
     }
