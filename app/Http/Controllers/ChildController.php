@@ -72,7 +72,7 @@ class ChildController extends Controller
      */
     public function update(Request $request, Child $child)
     {
-        $child = Child::find($id);
+        $child = Child::find($child);
         $child->fill($request->all());
 
         $child->save();
@@ -86,6 +86,6 @@ class ChildController extends Controller
      */
     public function destroy(Child $child)
     {
-        Child::destroy($id);
+        Child::destroy($child);
     }
 }

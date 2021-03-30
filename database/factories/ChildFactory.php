@@ -22,7 +22,10 @@ class ChildFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->name,
+            'date_birth' => $this->faker->date(),
+            'gender' => 'женский',
+            'user_id' => rand(1, 10),
         ];
     }
 }

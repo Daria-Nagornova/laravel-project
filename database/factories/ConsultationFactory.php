@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Consultation;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class ConsultationFactory extends Factory
 {
@@ -22,7 +23,9 @@ class ConsultationFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'text'  => Str::random(200),
+            'user_id' => rand(1, 10),
+            'doctor_id' => rand(1, 10)
         ];
     }
 }

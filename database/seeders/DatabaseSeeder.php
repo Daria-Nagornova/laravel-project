@@ -13,9 +13,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-        $this->call([
-            CatedoryPostsTableSeeder::class
-        ]);
+        \App\Models\User::factory(10)->create();
+        \App\Models\Answer::factory(10)->create();
+        \App\Models\Child::factory(10)->create();
+        \App\Models\Consultation::factory(10)->create();
+        \App\Models\Feeding::factory(10)->create();
+        \App\Models\Heighth::factory(10)->create();
     }
 }
