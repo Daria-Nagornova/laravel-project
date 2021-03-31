@@ -23,9 +23,11 @@ class ConsultationFactory extends Factory
     public function definition()
     {
         return [
-            'text'  => Str::random(200),
+            'text'  => $this->faker->text(100),
             'user_id' => rand(1, 10),
-            'doctor_id' => rand(1, 10)
+            'doctor_id' => rand(1, 10),
+            'email'  => $this->faker->email,
+            'status'  => $this->faker->text(10),
         ];
     }
 }

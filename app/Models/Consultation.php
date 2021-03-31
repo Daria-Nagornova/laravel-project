@@ -9,6 +9,9 @@ class Consultation extends Model
 {
     use HasFactory;
 
+    const HELD = 'Проведена';
+    const NO_HELD = 'Не проведена';
+
     protected $fillable = ['id', 'text', 'user_id', 'doctor_id'];
 
     public function user() : belongsTo

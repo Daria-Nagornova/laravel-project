@@ -2206,8 +2206,23 @@ __webpack_require__.r(__webpack_exports__);
   name: "ChildDiary",
   data: function data() {
     return {
+      children: [],
       date: ''
     };
+  },
+  methods: {
+    loadChildren: function loadChildren() {
+      var _this = this;
+
+      axios.get('/api/profile-user/child-diary').then(function (r) {
+        return _this.children = r.data.data;
+      })["catch"](function (e) {
+        return console.log(e);
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.loadChildren();
   }
 });
 
@@ -41857,24 +41872,37 @@ var render = function() {
         "div",
         { staticClass: "row" },
         [
-          _c("div", { staticClass: "col" }, [
-            _c(
-              "div",
-              [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { to: "/profile-user/child-diary/add-child" }
-                  },
-                  [_vm._v("Добавить ребенка")]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _vm._m(0)
-          ]),
+          _c(
+            "div",
+            { staticClass: "col" },
+            [
+              _c(
+                "div",
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { to: "/profile-user/child-diary/add-child" }
+                    },
+                    [_vm._v("Добавить ребенка")]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.children, function(child) {
+                return _c("div", { key: child, staticClass: "child" }, [
+                  _c("span", [_vm._v(" " + _vm._s(child.name) + " ")]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v(" " + _vm._s(child.date_bith) + " ")]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v(" " + _vm._s(child.gender) + " ")])
+                ])
+              })
+            ],
+            2
+          ),
           _vm._v(" "),
           _c(
             "router-link",
@@ -41914,7 +41942,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _vm._m(1),
+      _vm._m(0),
       _vm._v(" "),
       _c("router-view")
     ],
@@ -41922,18 +41950,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "child" }, [
-      _c("span", [_vm._v(" Имя ")]),
-      _vm._v(" "),
-      _c("span", [_vm._v(" Дата рождения ")]),
-      _vm._v(" "),
-      _c("span", [_vm._v(" Пол ")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
