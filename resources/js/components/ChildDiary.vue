@@ -6,11 +6,12 @@
                 <div>
                     <router-link to="/profile-user/child-diary/add-child" class="btn btn-primary">Добавить ребенка</router-link>
                 </div>
-                <div v-for="child in children" :key="child" class="child">
+                <div v-for="child in childrenData.data" :key="child.id" class="child">
                     <span> {{ child.name }} </span>
-                    <span> {{ child.date_bith }} </span>
+                    <span> {{ child.date_birth }} </span>
                     <span> {{ child.gender }} </span>
                 </div>
+                <pagination :data="childrenData" @pagination-change-page="loadChildren"></pagination>
             </div>
             <router-link to="/profile-user/child-diary/add-notes" class="btn btn-primary addNotes">+ Добавить запись</router-link>
             <div class="col">
@@ -33,15 +34,15 @@ export default {
     name: "ChildDiary",
     data() {
         return {
-            children: [],
+            childrenData: {},
             date: '',
 
         }
     },
     methods: {
-       loadChildren() {
-           axios.get('/api/profile-user/child-diary')
-               .then(r => this.children = r.data.data)
+       loadChildren(page = 1) {
+           axios.get('/api/profile-user/child-diary?page=' + page)
+                .then(r => this.childrenData = r.data)
                 .catch(e => console.log(e))
        }
     },

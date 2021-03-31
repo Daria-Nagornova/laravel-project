@@ -41,6 +41,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('header-component', require('./components/HeaderComponent.vue').default);
 Vue.component('footer-component', require('./components/FooterComponent.vue').default);
 Vue.component('home-page', require('./components/HomePage.vue').default);
+Vue.component('pagination', require('laravel-vue-pagination'));
 
 
 /**

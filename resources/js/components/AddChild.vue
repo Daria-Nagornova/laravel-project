@@ -24,7 +24,7 @@
     </div>
     <div class="row">
       <div class="col">
-        <button class="btn btn-primary" @click="save">Сохранить</button>
+        <button class="btn btn-primary" @click="saveChildren">Сохранить</button>
       </div>
       <div class="col">
         <button class="btn btn-primary" @click="cancel">Отменить</button>
@@ -42,30 +42,23 @@ export default {
       name: '',
       dateOfBirth: '',
       gender: '',
+      childData: [],
       errorName: '',
       errorDate: '',
       errorGender: ''
     }
   },
   methods: {
-    /*save () {
-
-      if(this.name == '') {
-        this.errorName = "Заполните поле"
-      }
-      if(this.dateOfBirth == '') {
-        this.errorDate = "Выберите дату"
-      }
-      if(this.gender == '') {
-        this.errorGender = "Выберите пол"
-      }
-      if(this.name != '' && this.dateOfBirth != '' && this.gender != ''){
-        this.$store.dispatch('addChild', {childName: this.name, childDateOfBirth: this.dateOfBirth, childGender: this.gender})
-        this.$store.dispatch('loadChild')
-        this.cancel()
-      }
-
-    },*/
+      saveChildren() {
+          axios.post('/api/profile-user/child-diary/add-child', {
+              name: this.name,
+              date_birth: this.dateOfBirth,
+              gender: this.gender
+          })
+              .then(r => console.log(r))
+              .catch(e => console.log(e))
+          this.cancel()
+      },
     cancel () {
       this.$router.push('/profile-user/child-diary')
     }

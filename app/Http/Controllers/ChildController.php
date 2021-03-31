@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Child\StoreRequest;
 use App\Http\Requests\Child\UpdateRequest;
+use App\Http\Resources\ChildResource;
 use App\Models\Child;
 use Illuminate\Http\Request;
 
@@ -12,12 +13,12 @@ class ChildController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index(): \Illuminate\Http\Response
+    public function index(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-       $children = Child::all()->paginate(10);
-        return ChildRecource::collection($children);
+       $children = Child::all();
+        return ChildResource::collection($children);
     }
 
 

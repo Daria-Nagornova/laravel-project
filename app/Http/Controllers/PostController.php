@@ -2,29 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    private $category = 'pregnant';
+    public function __construct()
+    {
+        $uri = explode('/api/communities/', $_SERVER['REQUEST_URI']);
+        $uri = array_diff($uri, []);
+
+        if(isset($uri[1]) && ! empty($uri[1])) {
+            $this->category = ucfirst($uri[1]);
+           // dd($this->category);
+        }
+
+    }
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+    public function index(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $posts = Post::with('category')->get();
+        //$posts = Post::with('category')->where('name', $this->category);
+        return PostResource::collection($posts);
+
     }
 
     /**
@@ -49,16 +56,6 @@ class PostController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Post $post)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
