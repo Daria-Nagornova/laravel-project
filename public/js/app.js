@@ -1890,7 +1890,8 @@ __webpack_require__.r(__webpack_exports__);
       childData: [],
       errorName: '',
       errorDate: '',
-      errorGender: ''
+      errorGender: '',
+      user: 2
     };
   },
   methods: {
@@ -1899,7 +1900,7 @@ __webpack_require__.r(__webpack_exports__);
         name: this.name,
         date_birth: this.dateOfBirth,
         gender: this.gender,
-        user_id: 10
+        user_id: this.user
       }).then(function (r) {
         return console.log(r);
       })["catch"](function (e) {
@@ -2070,73 +2071,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Blog",
   data: function data() {
@@ -2149,7 +2083,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      axios.get('/api/communities/{category}?page=' + page).then(function (r) {
+      axios.get('/api/communities/' + 1 + '?page=' + page).then(function (r) {
         return _this.postData = r.data;
       })["catch"](function (e) {
         return console.log(e);
@@ -2180,8 +2114,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "BlogPost"
+  name: "BlogPost",
+  data: function data() {
+    return {
+      blogPostData: {}
+    };
+  },
+  methods: {
+    loadBlogPost: function loadBlogPost() {
+      var _this = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      axios.get('/api/communities/{category}?page=' + page).then(function (r) {
+        return _this.blogPostData = r.data;
+      })["catch"](function (e) {
+        return console.log(e);
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.loadBlogPost();
+  }
 });
 
 /***/ }),
@@ -41869,7 +41836,7 @@ var render = function() {
                       "router-link",
                       {
                         staticClass: "animsition-link",
-                        attrs: { to: "/communities/pregnant/post1" }
+                        attrs: { to: "/communities/pregnant/1" }
                       },
                       [
                         _c("img", {
@@ -42127,9 +42094,78 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    Тут будет пост\n")])
+  return _c("div", [
+    _vm._v("\n    Тут будет пост\n    "),
+    _c(
+      "div",
+      { staticClass: "post-details" },
+      [
+        _c("div", { staticClass: "post-meta d-flex justify-content-between" }, [
+          _c("div", { staticClass: "date meta-last" }, [
+            _vm._v("20 мая | 2020")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "category" }, [
+            _c("a", { attrs: { href: "#" } }, [
+              _vm._v(_vm._s(_vm.blogPostData.subcategory.name))
+            ])
+          ])
+        ]),
+        _c(
+          "router-link",
+          {
+            staticClass: "animsition-link",
+            attrs: { to: "/communities/pregnant/post1" }
+          },
+          [
+            _c("h3", { staticClass: "h4" }, [
+              _vm._v(_vm._s(_vm.blogPostData.title))
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c("p", { staticClass: "text-muted" }, [
+          _vm._v(_vm._s(_vm.blogPostData.content))
+        ]),
+        _vm._v(" "),
+        _c("footer", { staticClass: "post-footer d-flex align-items-center" }, [
+          _c(
+            "a",
+            {
+              staticClass: "author d-flex align-items-center flex-wrap",
+              attrs: { href: "#" }
+            },
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "title" }, [
+                _c("span", [_vm._v(_vm._s(_vm.blogPostData.user.name))])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "comments meta-last comments-icon" }, [
+            _vm._v("12")
+          ])
+        ])
+      ],
+      1
+    )
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "avatar" }, [
+      _c("img", {
+        staticClass: "img-fluid",
+        attrs: { src: "img/avatar-3.jpg", alt: "..." }
+      })
+    ])
+  }
+]
 render._withStripped = true
 
 

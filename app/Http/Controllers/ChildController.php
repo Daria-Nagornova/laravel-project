@@ -6,6 +6,7 @@ use App\Http\Requests\Child\StoreRequest;
 use App\Http\Requests\Child\UpdateRequest;
 use App\Http\Resources\ChildResource;
 use App\Models\Child;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ChildController extends Controller
@@ -17,7 +18,7 @@ class ChildController extends Controller
      */
     public function index(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-       $children = Child::all();
+       $children = Child::paginate(10);
         return ChildResource::collection($children);
     }
 

@@ -7,7 +7,7 @@
                     <div class="row">
                         <!-- post -->
                         <div v-for="post in postData.data" :key="post" class="post col-xl-6">
-                            <div class="post-thumbnail"><router-link to="/communities/pregnant/post1" class="animsition-link"><img src="img/blog-post-1.jpeg" alt="..." class="img-fluid"></router-link></div>
+                            <div class="post-thumbnail"><router-link to="/communities/pregnant/1" class="animsition-link"><img src="img/blog-post-1.jpeg" alt="..." class="img-fluid"></router-link></div>
                             <div class="post-details">
                                 <div class="post-meta d-flex justify-content-between">
                                     <div class="date meta-last">20 мая | 2020</div>
@@ -22,73 +22,6 @@
                                 </footer>
                             </div>
                         </div>
-                        <!--<div class="post col-xl-6">
-                            <div class="post-thumbnail"><router-link to="/communities/pregnant/post1" class="animsition-link"><img src="img/blog-post-1.jpeg" alt="..." class="img-fluid"></router-link></div>
-                            <div class="post-details">
-                                <div class="post-meta d-flex justify-content-between">
-                                    <div class="date meta-last">20 мая | 2020</div>
-                                    <div class="category"><a href="#">Питание</a></div>
-                                </div><router-link to="/communities/pregnant/post1" class="animsition-link">
-                                <h3 class="h4">Какие продукты помогают повысить гемоглобин?</h3></router-link>
-                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                                <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                                    <div class="avatar"><img src="img/avatar-3.jpg" alt="..." class="img-fluid"></div>
-                                    <div class="title"><span>Елена Иванова</span></div></a>
-                                    <div class="comments meta-last comments-icon">12</div>
-                                </footer>
-                            </div>
-                        </div>-->
-                        <!-- post             -->
-                        <!--<div class="post col-xl-6">
-                            <div class="post-thumbnail"><a href="post.html" class="animsition-link"><img src="img/blog-post-2.jpg" alt="..." class="img-fluid"></a></div>
-                            <div class="post-details">
-                                <div class="post-meta d-flex justify-content-between">
-                                    <div class="date meta-last">20 мая | 2020</div>
-                                    <div class="category"><a href="#">Спорт</a></div>
-                                </div><router-link to="/communities/pregnant/post2" href="post.html" class="animsition-link">
-                                <h3 class="h4">Занятия йогой во втором триместре</h3></router-link>
-                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                                <div class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                                    <div class="avatar"><img src="img/avatar-2.jpg" alt="..." class="img-fluid"></div>
-                                    <div class="title"><span>Елена Иванова</span></div></a>
-                                    <div class="comments meta-last comments-icon">12</div>
-                                </div>
-                            </div>
-                        </div>-->
-                        <!-- post             -->
-                        <!--<div class="post col-xl-6">
-                            <div class="post-thumbnail"><a href="post.html" class="animsition-link"><img src="img/blog-post-3.jpeg" alt="..." class="img-fluid"></a></div>
-                            <div class="post-details">
-                                <div class="post-meta d-flex justify-content-between">
-                                    <div class="date meta-last">20 мая | 2020</div>
-                                    <div class="category"><a href="#">Анализы</a></div>
-                                </div><router-link to="/communities/pregnant/post3" class="animsition-link">
-                                <h3 class="h4">Какие анализы необходимо сдать при постановке на учет?</h3></router-link>
-                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                                <div class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                                    <div class="avatar"><img src="img/avatar-3.jpg" alt="..." class="img-fluid"></div>
-                                    <div class="title"><span>Елена Иванова</span></div></a>
-                                    <div class="comments meta-last comments-icon">12</div>
-                                </div>
-                            </div>
-                        </div>-->
-                        <!-- post -->
-                        <!--<div class="post col-xl-6">
-                            <div class="post-thumbnail"><a href="post.html" class="animsition-link"><img src="img/blog-post-4.jpeg" alt="..." class="img-fluid"></a></div>
-                            <div class="post-details">
-                                <div class="post-meta d-flex justify-content-between">
-                                    <div class="date meta-last">20 мая | 2020</div>
-                                    <div class="category"><a href="#">Покупки</a></div>
-                                </div><router-link to="/communities/pregnant/post4" class="animsition-link">
-                                <h3 class="h4">Покупка одежды для малыша до родов</h3></router-link>
-                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                                <div class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                                    <div class="avatar"><img src="img/avatar-1.jpg" alt="..." class="img-fluid"></div>
-                                    <div class="title"><span>Елена Иванова</span></div></a>
-                                    <div class="comments meta-last comments-icon">12</div>
-                                </div>
-                            </div>
-                        </div>-->
                     </div>
 
                 </div>
@@ -167,7 +100,7 @@ name: "Blog",
     },
     methods: {
         loadPost(page = 1) {
-            axios.get('/api/communities/{category}?page=' + page)
+            axios.get('/api/communities/' + 1 +'?page=' + page)
                 .then(r => this.postData = r.data)
                 .catch(e => console.log(e))
         }

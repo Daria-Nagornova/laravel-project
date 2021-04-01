@@ -45,7 +45,8 @@ export default {
       childData: [],
       errorName: '',
       errorDate: '',
-      errorGender: ''
+      errorGender: '',
+      user: 2
     }
   },
   methods: {
@@ -54,7 +55,7 @@ export default {
               name: this.name,
               date_birth: this.dateOfBirth,
               gender: this.gender,
-              user_id: 10
+              user_id: this.user,
           })
               .then(r => console.log(r))
               .catch(e => console.log(e))

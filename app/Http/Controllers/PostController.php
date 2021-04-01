@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\PostResource;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     private $category = 'pregnant';
-    public function __construct()
+    /*public function __construct()
     {
         $uri = explode('/api/communities/', $_SERVER['REQUEST_URI']);
         $uri = array_diff($uri, []);
@@ -19,15 +20,16 @@ class PostController extends Controller
            // dd($this->category);
         }
 
-    }
+    }*/
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    public function index(Category $category): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-
+        $category->load('posts');
+        dd($category);
         $posts = Post::with('user', 'category', 'subcategory')->paginate(10);
         //$posts = Post::with('category')->where('category.name', $this->category);
         return PostResource::collection($posts);

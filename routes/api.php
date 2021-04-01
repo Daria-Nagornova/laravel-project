@@ -20,11 +20,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::prefix('/profile-user/child-diary')->group(function () {
     Route::get('/', [App\Http\Controllers\ChildController::class, 'index']);
-    Route::post('/add-child', [App\Http\Controllers\ChildController::class, 'store']);
+    Route::post('/add-child', [App\Http\Controllers\ChildController::    class, 'store']);
     Route::get('/{child}', [App\Http\Controllers\ChildController::class, 'show']);
     Route::patch('/{child}', [App\Http\Controllers\ChildController::class, 'update']);
     Route::delete('/{child}', [App\Http\Controllers\ChildController::class, 'destroy']);
 });
+
 Route::prefix('/communities/{category}')->group(function () {
     Route::get('/', [App\Http\Controllers\PostController::class, 'index']);
     Route::post('/', [App\Http\Controllers\PostController::class, 'store']);
