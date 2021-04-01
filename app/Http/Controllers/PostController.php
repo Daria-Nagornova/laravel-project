@@ -28,8 +28,8 @@ class PostController extends Controller
     public function index(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
 
-        $posts = Post::with('category')->get();
-        //$posts = Post::with('category')->where('name', $this->category);
+        $posts = Post::with('user', 'category', 'subcategory')->paginate(10);
+        //$posts = Post::with('category')->where('category.name', $this->category);
         return PostResource::collection($posts);
 
     }
@@ -38,22 +38,26 @@ class PostController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request) : JsonResponse
     {
-        //
+        $post = new Post;
+        $post->fill($request->validated());
+        $post->save();
+
+        return response()->json($post, 200);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Post $post)
+    public function show(Post $post) : JsonResponse
     {
-        //
+        return response()->json($post, 200);
     }
 
 
@@ -62,11 +66,13 @@ class PostController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Post $post) : JsonResponse
     {
-        //
+        $post->update($request->validate());
+
+        return response()->json($post, 200);
     }
 
     /**
@@ -77,6 +83,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return response()->json($post, 200);
     }
 }

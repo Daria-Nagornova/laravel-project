@@ -53,7 +53,8 @@ export default {
           axios.post('/api/profile-user/child-diary/add-child', {
               name: this.name,
               date_birth: this.dateOfBirth,
-              gender: this.gender
+              gender: this.gender,
+              user_id: 10
           })
               .then(r => console.log(r))
               .catch(e => console.log(e))

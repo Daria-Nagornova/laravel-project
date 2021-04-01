@@ -1898,7 +1898,8 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/api/profile-user/child-diary/add-child', {
         name: this.name,
         date_birth: this.dateOfBirth,
-        gender: this.gender
+        gender: this.gender,
+        user_id: 10
       }).then(function (r) {
         return console.log(r);
       })["catch"](function (e) {
@@ -2129,8 +2130,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "Blog"
+  name: "Blog",
+  data: function data() {
+    return {
+      postData: {}
+    };
+  },
+  methods: {
+    loadPost: function loadPost() {
+      var _this = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      axios.get('/api/communities/{category}?page=' + page).then(function (r) {
+        return _this.postData = r.data;
+      })["catch"](function (e) {
+        return console.log(e);
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.loadPost();
+  }
 });
 
 /***/ }),
@@ -41828,169 +41856,108 @@ var render = function() {
     _c("div", { staticClass: "row" }, [
       _c("main", { staticClass: "posts-listing col-lg-8" }, [
         _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "post col-xl-6" }, [
-              _c(
-                "div",
-                { staticClass: "post-thumbnail" },
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "animsition-link",
-                      attrs: { to: "/communities/pregnant/post1" }
-                    },
-                    [
-                      _c("img", {
-                        staticClass: "img-fluid",
-                        attrs: { src: "img/blog-post-1.jpeg", alt: "..." }
-                      })
-                    ]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "post-details" },
-                [
-                  _vm._m(0),
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "animsition-link",
-                      attrs: { to: "/communities/pregnant/post1" }
-                    },
-                    [
-                      _c("h3", { staticClass: "h4" }, [
-                        _vm._v("Какие продукты помогают повысить гемоглобин?")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "text-muted" }, [
-                    _vm._v(
-                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore."
+          _c(
+            "div",
+            { staticClass: "row" },
+            _vm._l(_vm.postData.data, function(post) {
+              return _c("div", { key: post, staticClass: "post col-xl-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "post-thumbnail" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "animsition-link",
+                        attrs: { to: "/communities/pregnant/post1" }
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "img-fluid",
+                          attrs: { src: "img/blog-post-1.jpeg", alt: "..." }
+                        })
+                      ]
                     )
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(1)
-                ],
-                1
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "post col-xl-6" }, [
-              _vm._m(2),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "post-details" },
-                [
-                  _vm._m(3),
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "animsition-link",
-                      attrs: {
-                        to: "/communities/pregnant/post2",
-                        href: "post.html"
-                      }
-                    },
-                    [
-                      _c("h3", { staticClass: "h4" }, [
-                        _vm._v("Занятия йогой во втором триместре")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "text-muted" }, [
-                    _vm._v(
-                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore."
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(4)
-                ],
-                1
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "post col-xl-6" }, [
-              _vm._m(5),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "post-details" },
-                [
-                  _vm._m(6),
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "animsition-link",
-                      attrs: { to: "/communities/pregnant/post3" }
-                    },
-                    [
-                      _c("h3", { staticClass: "h4" }, [
-                        _vm._v(
-                          "Какие анализы необходимо сдать при постановке на учет?"
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "post-details" },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "post-meta d-flex justify-content-between"
+                      },
+                      [
+                        _c("div", { staticClass: "date meta-last" }, [
+                          _vm._v("20 мая | 2020")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "category" }, [
+                          _c("a", { attrs: { href: "#" } }, [
+                            _vm._v(_vm._s(post.subcategory.name))
+                          ])
+                        ])
+                      ]
+                    ),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "animsition-link",
+                        attrs: { to: "/communities/pregnant/post1" }
+                      },
+                      [
+                        _c("h3", { staticClass: "h4" }, [
+                          _vm._v(_vm._s(post.title))
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "text-muted" }, [
+                      _vm._v(_vm._s(post.content))
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "footer",
+                      { staticClass: "post-footer d-flex align-items-center" },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "author d-flex align-items-center flex-wrap",
+                            attrs: { href: "#" }
+                          },
+                          [
+                            _vm._m(0, true),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "title" }, [
+                              _c("span", [_vm._v(_vm._s(post.user.name))])
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "comments meta-last comments-icon" },
+                          [_vm._v("12")]
                         )
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "text-muted" }, [
-                    _vm._v(
-                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore."
+                      ]
                     )
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(7)
-                ],
-                1
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "post col-xl-6" }, [
-              _vm._m(8),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "post-details" },
-                [
-                  _vm._m(9),
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "animsition-link",
-                      attrs: { to: "/communities/pregnant/post4" }
-                    },
-                    [
-                      _c("h3", { staticClass: "h4" }, [
-                        _vm._v("Покупка одежды для малыша до родов")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "text-muted" }, [
-                    _vm._v(
-                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore."
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(10)
-                ],
-                1
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _vm._m(11)
+                  ],
+                  1
+                )
+              ])
+            }),
+            0
+          )
         ])
       ]),
       _vm._v(" "),
-      _vm._m(12)
+      _vm._m(1)
     ])
   ])
 }
@@ -41999,280 +41966,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "post-meta d-flex justify-content-between" },
-      [
-        _c("div", { staticClass: "date meta-last" }, [_vm._v("20 мая | 2020")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "category" }, [
-          _c("a", { attrs: { href: "#" } }, [_vm._v("Питание")])
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "footer",
-      { staticClass: "post-footer d-flex align-items-center" },
-      [
-        _c(
-          "a",
-          {
-            staticClass: "author d-flex align-items-center flex-wrap",
-            attrs: { href: "#" }
-          },
-          [
-            _c("div", { staticClass: "avatar" }, [
-              _c("img", {
-                staticClass: "img-fluid",
-                attrs: { src: "img/avatar-3.jpg", alt: "..." }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "title" }, [
-              _c("span", [_vm._v("Елена Иванова")])
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "comments meta-last comments-icon" }, [
-          _vm._v("12")
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "post-thumbnail" }, [
-      _c(
-        "a",
-        { staticClass: "animsition-link", attrs: { href: "post.html" } },
-        [
-          _c("img", {
-            staticClass: "img-fluid",
-            attrs: { src: "img/blog-post-2.jpg", alt: "..." }
-          })
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "post-meta d-flex justify-content-between" },
-      [
-        _c("div", { staticClass: "date meta-last" }, [_vm._v("20 мая | 2020")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "category" }, [
-          _c("a", { attrs: { href: "#" } }, [_vm._v("Спорт")])
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "post-footer d-flex align-items-center" }, [
-      _c(
-        "a",
-        {
-          staticClass: "author d-flex align-items-center flex-wrap",
-          attrs: { href: "#" }
-        },
-        [
-          _c("div", { staticClass: "avatar" }, [
-            _c("img", {
-              staticClass: "img-fluid",
-              attrs: { src: "img/avatar-2.jpg", alt: "..." }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "title" }, [
-            _c("span", [_vm._v("Елена Иванова")])
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "comments meta-last comments-icon" }, [
-        _vm._v("12")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "post-thumbnail" }, [
-      _c(
-        "a",
-        { staticClass: "animsition-link", attrs: { href: "post.html" } },
-        [
-          _c("img", {
-            staticClass: "img-fluid",
-            attrs: { src: "img/blog-post-3.jpeg", alt: "..." }
-          })
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "post-meta d-flex justify-content-between" },
-      [
-        _c("div", { staticClass: "date meta-last" }, [_vm._v("20 мая | 2020")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "category" }, [
-          _c("a", { attrs: { href: "#" } }, [_vm._v("Анализы")])
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "post-footer d-flex align-items-center" }, [
-      _c(
-        "a",
-        {
-          staticClass: "author d-flex align-items-center flex-wrap",
-          attrs: { href: "#" }
-        },
-        [
-          _c("div", { staticClass: "avatar" }, [
-            _c("img", {
-              staticClass: "img-fluid",
-              attrs: { src: "img/avatar-3.jpg", alt: "..." }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "title" }, [
-            _c("span", [_vm._v("Елена Иванова")])
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "comments meta-last comments-icon" }, [
-        _vm._v("12")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "post-thumbnail" }, [
-      _c(
-        "a",
-        { staticClass: "animsition-link", attrs: { href: "post.html" } },
-        [
-          _c("img", {
-            staticClass: "img-fluid",
-            attrs: { src: "img/blog-post-4.jpeg", alt: "..." }
-          })
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "post-meta d-flex justify-content-between" },
-      [
-        _c("div", { staticClass: "date meta-last" }, [_vm._v("20 мая | 2020")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "category" }, [
-          _c("a", { attrs: { href: "#" } }, [_vm._v("Покупки")])
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "post-footer d-flex align-items-center" }, [
-      _c(
-        "a",
-        {
-          staticClass: "author d-flex align-items-center flex-wrap",
-          attrs: { href: "#" }
-        },
-        [
-          _c("div", { staticClass: "avatar" }, [
-            _c("img", {
-              staticClass: "img-fluid",
-              attrs: { src: "img/avatar-1.jpg", alt: "..." }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "title" }, [
-            _c("span", [_vm._v("Елена Иванова")])
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "comments meta-last comments-icon" }, [
-        _vm._v("12")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
-      _c(
-        "ul",
-        {
-          staticClass:
-            "pagination pagination-template d-flex justify-content-center"
-        },
-        [
-          _c("li", { staticClass: "page-item" }, [
-            _c("a", { staticClass: "page-link", attrs: { href: "#" } })
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "page-item" }, [
-            _c("a", { staticClass: "page-link active", attrs: { href: "#" } }, [
-              _vm._v("1")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "page-item" }, [
-            _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-              _vm._v("2")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "page-item" }, [
-            _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-              _vm._v("3")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "page-item" }, [
-            _c("a", { staticClass: "page-link", attrs: { href: "#" } })
-          ])
-        ]
-      )
+    return _c("div", { staticClass: "avatar" }, [
+      _c("img", {
+        staticClass: "img-fluid",
+        attrs: { src: "img/avatar-3.jpg", alt: "..." }
+      })
     ])
   },
   function() {
