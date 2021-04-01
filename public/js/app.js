@@ -2083,7 +2083,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      axios.get('/api/communities/' + 1 + '?page=' + page).then(function (r) {
+      axios.get('/api/communities/' + this.$route.params.categories + '?page=' + page).then(function (r) {
         return _this.postData = r.data;
       })["catch"](function (e) {
         return console.log(e);
@@ -41860,12 +41860,12 @@ var render = function() {
                       },
                       [
                         _c("div", { staticClass: "date meta-last" }, [
-                          _vm._v("20 мая | 2020")
+                          _vm._v(_vm._s(post.created_at))
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "category" }, [
                           _c("a", { attrs: { href: "#" } }, [
-                            _vm._v(_vm._s(post.subcategory.name))
+                            _vm._v(_vm._s(post.subcategory_name))
                           ])
                         ])
                       ]
@@ -41902,7 +41902,7 @@ var render = function() {
                             _vm._m(0, true),
                             _vm._v(" "),
                             _c("div", { staticClass: "title" }, [
-                              _c("span", [_vm._v(_vm._s(post.user.name))])
+                              _c("span", [_vm._v(_vm._s(post.user_name))])
                             ])
                           ]
                         ),

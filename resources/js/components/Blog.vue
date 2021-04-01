@@ -10,14 +10,14 @@
                             <div class="post-thumbnail"><router-link to="/communities/pregnant/1" class="animsition-link"><img src="img/blog-post-1.jpeg" alt="..." class="img-fluid"></router-link></div>
                             <div class="post-details">
                                 <div class="post-meta d-flex justify-content-between">
-                                    <div class="date meta-last">20 мая | 2020</div>
-                                    <div class="category"><a href="#">{{ post.subcategory.name }}</a></div>
+                                    <div class="date meta-last">{{ post.created_at }}</div>
+                                    <div class="category"><a href="#">{{ post.subcategory_name }}</a></div>
                                 </div><router-link to="/communities/pregnant/post1" class="animsition-link">
                                 <h3 class="h4">{{ post.title }}</h3></router-link>
                                 <p class="text-muted">{{ post.content }}</p>
                                 <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
                                     <div class="avatar"><img src="img/avatar-3.jpg" alt="..." class="img-fluid"></div>
-                                    <div class="title"><span>{{ post.user.name }}</span></div></a>
+                                    <div class="title"><span>{{ post.user_name }}</span></div></a>
                                     <div class="comments meta-last comments-icon">12</div>
                                 </footer>
                             </div>
@@ -100,9 +100,10 @@ name: "Blog",
     },
     methods: {
         loadPost(page = 1) {
-            axios.get('/api/communities/' + 1 +'?page=' + page)
+            axios.get('/api/communities/' + this.$route.params.categories + '?page=' + page)
                 .then(r => this.postData = r.data)
                 .catch(e => console.log(e))
+
         }
     },
     mounted() {

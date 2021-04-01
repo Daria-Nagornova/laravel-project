@@ -9,30 +9,23 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    private $category = 'pregnant';
-    /*public function __construct()
-    {
-        $uri = explode('/api/communities/', $_SERVER['REQUEST_URI']);
-        $uri = array_diff($uri, []);
-
-        if(isset($uri[1]) && ! empty($uri[1])) {
-            $this->category = ucfirst($uri[1]);
-           // dd($this->category);
-        }
-
-    }*/
     /**
      * Display a listing of the resource.
      *
+     * @param Category $category
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index(Category $category): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    public function index($category): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-        $category->load('posts');
-        dd($category);
+
+       // return Category::where('name', $category)->get();
+
+       //$category->load('posts');
+
         $posts = Post::with('user', 'category', 'subcategory')->paginate(10);
-        //$posts = Post::with('category')->where('category.name', $this->category);
+        //$posts = Post::with('category')->whereColumn('category.id', 1)->paginate(10);
         return PostResource::collection($posts);
+
 
     }
 
