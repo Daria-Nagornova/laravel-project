@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\PostResource;
 use App\Models\Category;
 use App\Models\Post;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -15,18 +16,10 @@ class PostController extends Controller
      * @param Category $category
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index($category): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    public function index(Category $category): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-
-       // return Category::where('name', $category)->get();
-
-       //$category->load('posts');
-
-        $posts = Post::with('user', 'category', 'subcategory')->paginate(10);
-        //$posts = Post::with('category')->whereColumn('category.id', 1)->paginate(10);
+        $posts = $category->posts()->paginate(10);
         return PostResource::collection($posts);
-
-
     }
 
     /**
@@ -50,9 +43,10 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Post $post) : JsonResponse
+    public function show(Category $category, Post $post) : JsonResponse
     {
-        return response()->json($post, 200);
+        $blog = $post->load('user', 'subcategory');
+        return response()->json($blog, 200);
     }
 
 
@@ -74,9 +68,9 @@ class PostController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Post $post)
+    public function destroy(Post $post): JsonResponse
     {
         $post->delete();
 

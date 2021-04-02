@@ -2071,6 +2071,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Blog",
   data: function data() {
@@ -2088,6 +2089,11 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (e) {
         return console.log(e);
       });
+    }
+  },
+  computed: {
+    category: function category() {
+      return this.$route.params.categories;
     }
   },
   mounted: function mounted() {
@@ -2126,7 +2132,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "BlogPost",
   data: function data() {
@@ -2138,8 +2143,7 @@ __webpack_require__.r(__webpack_exports__);
     loadBlogPost: function loadBlogPost() {
       var _this = this;
 
-      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      axios.get('/api/communities/{category}?page=' + page).then(function (r) {
+      axios.get('/api/communities/' + this.$route.params.categories + '/' + this.$route.params.post).then(function (r) {
         return _this.blogPostData = r.data;
       })["catch"](function (e) {
         return console.log(e);
@@ -2194,13 +2198,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ChildDiary",
   data: function data() {
     return {
-      childrenData: {},
-      date: ''
+      childrenData: {}
     };
   },
   methods: {
@@ -2254,33 +2256,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "Communities"
+  name: "Communities",
+  data: function data() {
+    return {
+      categoriesData: {}
+    };
+  },
+  methods: {
+    loadCommunity: function loadCommunity() {
+      var _this = this;
+
+      axios.get('/api/communities').then(function (r) {
+        return _this.categoriesData = r.data;
+      })["catch"](function (e) {
+        return console.log(e);
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.loadCommunity();
+  }
 });
 
 /***/ }),
@@ -41826,100 +41822,112 @@ var render = function() {
           _c(
             "div",
             { staticClass: "row" },
-            _vm._l(_vm.postData.data, function(post) {
-              return _c("div", { key: post, staticClass: "post col-xl-6" }, [
-                _c(
-                  "div",
-                  { staticClass: "post-thumbnail" },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "animsition-link",
-                        attrs: { to: "/communities/pregnant/1" }
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "img-fluid",
-                          attrs: { src: "img/blog-post-1.jpeg", alt: "..." }
-                        })
-                      ]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "post-details" },
-                  [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "post-meta d-flex justify-content-between"
-                      },
-                      [
-                        _c("div", { staticClass: "date meta-last" }, [
-                          _vm._v(_vm._s(post.created_at))
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "category" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _vm._v(_vm._s(post.subcategory_name))
-                          ])
-                        ])
-                      ]
-                    ),
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "animsition-link",
-                        attrs: { to: "/communities/pregnant/post1" }
-                      },
-                      [
-                        _c("h3", { staticClass: "h4" }, [
-                          _vm._v(_vm._s(post.title))
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "text-muted" }, [
-                      _vm._v(_vm._s(post.content))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "footer",
-                      { staticClass: "post-footer d-flex align-items-center" },
-                      [
-                        _c(
-                          "a",
-                          {
-                            staticClass:
-                              "author d-flex align-items-center flex-wrap",
-                            attrs: { href: "#" }
-                          },
-                          [
-                            _vm._m(0, true),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "title" }, [
-                              _c("span", [_vm._v(_vm._s(post.user_name))])
+            [
+              _vm._l(_vm.postData.data, function(post) {
+                return _c("div", { key: post, staticClass: "post col-xl-6" }, [
+                  _c(
+                    "div",
+                    { staticClass: "post-thumbnail" },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "animsition-link",
+                          attrs: { to: "/communities/pregnant/1" }
+                        },
+                        [
+                          _c("img", {
+                            staticClass: "img-fluid",
+                            attrs: { src: "img/blog-post-1.jpeg", alt: "..." }
+                          })
+                        ]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "post-details" },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "post-meta d-flex justify-content-between"
+                        },
+                        [
+                          _c("div", { staticClass: "date meta-last" }, [
+                            _vm._v(_vm._s(post.created_at))
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "category" }, [
+                            _c("a", { attrs: { href: "#" } }, [
+                              _vm._v(_vm._s(post.subcategory_name))
                             ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "comments meta-last comments-icon" },
-                          [_vm._v("12")]
-                        )
-                      ]
-                    )
-                  ],
-                  1
-                )
-              ])
-            }),
-            0
+                          ])
+                        ]
+                      ),
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "animsition-link",
+                          attrs: {
+                            to: "/communities/" + _vm.category + "/" + post.id
+                          }
+                        },
+                        [
+                          _c("h3", { staticClass: "h4" }, [
+                            _vm._v(_vm._s(post.title))
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "text-muted" }, [
+                        _vm._v(_vm._s(post.content))
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "footer",
+                        {
+                          staticClass: "post-footer d-flex align-items-center"
+                        },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass:
+                                "author d-flex align-items-center flex-wrap",
+                              attrs: { href: "#" }
+                            },
+                            [
+                              _vm._m(0, true),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "title" }, [
+                                _c("span", [_vm._v(_vm._s(post.user_name))])
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "comments meta-last comments-icon" },
+                            [_vm._v("12")]
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ])
+              }),
+              _vm._v(" "),
+              _c("pagination", {
+                attrs: { data: _vm.postData },
+                on: { "pagination-change-page": _vm.loadPost }
+              })
+            ],
+            2
           )
         ])
       ]),
@@ -42095,7 +42103,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm._v("\n    Тут будет пост\n    "),
     _c(
       "div",
       { staticClass: "post-details" },
@@ -42225,11 +42232,6 @@ var render = function() {
                   _vm._v(" "),
                   _c("span", [_vm._v(" " + _vm._s(child.gender) + " ")])
                 ])
-              }),
-              _vm._v(" "),
-              _c("pagination", {
-                attrs: { data: _vm.childrenData },
-                on: { "pagination-change-page": _vm.loadChildren }
               })
             ],
             2
@@ -42317,113 +42319,63 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("section", { staticClass: "featured-posts no-padding-top" }, [
-    _c("div", { staticClass: "container" }, [
-      _c("h1", [_vm._v("Сообщества")]),
-      _vm._v(" "),
-      _c("h2", [
-        _vm._v(
-          "Обменивайтесь знанием и опытом в тематических сообществах, общайтесь и находите новых подруг"
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row d-flex align-items-stretch community" }, [
-        _vm._m(0),
+    _c(
+      "div",
+      { staticClass: "container" },
+      [
+        _c("h1", [_vm._v("Сообщества")]),
         _vm._v(" "),
-        _c("div", { staticClass: "text col-lg-8" }, [
-          _c("div", { staticClass: "text-inner d-flex align-items-center" }, [
-            _c(
-              "div",
-              { staticClass: "content" },
-              [
+        _c("h2", [
+          _vm._v(
+            "Обменивайтесь знанием и опытом в тематических сообществах, общайтесь и находите новых подруг"
+          )
+        ]),
+        _vm._v(" "),
+        _vm._l(_vm.categoriesData.data, function(category) {
+          return _c(
+            "div",
+            {
+              key: category.id,
+              staticClass: "row d-flex align-items-stretch community"
+            },
+            [
+              _vm._m(0, true),
+              _vm._v(" "),
+              _c("div", { staticClass: "text col-lg-8" }, [
                 _c(
-                  "router-link",
-                  {
-                    staticClass: "animsition-link",
-                    attrs: { to: "/communities/pregnant" }
-                  },
+                  "div",
+                  { staticClass: "text-inner d-flex align-items-center" },
                   [
-                    _c("h2", { staticClass: "h4" }, [
-                      _vm._v("Здоровье будущей мамы")
-                    ])
+                    _c(
+                      "div",
+                      { staticClass: "content" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "animsition-link",
+                            attrs: { to: "/communities/" + category.id }
+                          },
+                          [
+                            _c("h2", { staticClass: "h4" }, [
+                              _vm._v(_vm._s(category.name) + " ")
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("p", [_vm._v(_vm._s(category.description))])
+                      ],
+                      1
+                    )
                   ]
-                ),
-                _vm._v(" "),
-                _c("p", [
-                  _vm._v(
-                    "Беременность – это совершенно особенное состояние женщины. Будущей маме необходимо не только своевременно встать на учет и наблюдаться у специалиста, но и уделить немало времени самообразованию. Данное сообщество поможет вам найти единомышленников и множество полезной информации"
-                  )
-                ])
-              ],
-              1
-            )
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row d-flex align-items-stretch community" }, [
-        _vm._m(1),
-        _vm._v(" "),
-        _c("div", { staticClass: "text col-lg-8" }, [
-          _c("div", { staticClass: "text-inner d-flex align-items-center" }, [
-            _c(
-              "div",
-              { staticClass: "content" },
-              [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "animsition-link",
-                    attrs: { to: "/communities/newborn" }
-                  },
-                  [_c("h2", { staticClass: "h4" }, [_vm._v("Дети до года")])]
-                ),
-                _vm._v(" "),
-                _c("p", [
-                  _vm._v(
-                    "Развитие малышей на первом году жизни. Здоровье, питание, прикорм, покупки для ребенка и многие другие вопросы, на которые вы найдете ответы в данном сообществе."
-                  )
-                ])
-              ],
-              1
-            )
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row d-flex align-items-stretch community" }, [
-        _vm._m(2),
-        _vm._v(" "),
-        _c("div", { staticClass: "text col-lg-8" }, [
-          _c("div", { staticClass: "text-inner d-flex align-items-center" }, [
-            _c(
-              "div",
-              { staticClass: "content" },
-              [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "animsition-link",
-                    attrs: { to: "/communities/baby" }
-                  },
-                  [
-                    _c("h2", { staticClass: "h4" }, [
-                      _vm._v("Дети от 1 года до 3 лет")
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c("p", [
-                  _vm._v(
-                    "Ребенок подрос, появились новые умелки и интересы. В этос сообществе вы сможете обсудить все, что касается здоровья, развития, психологии детей до 3х лет."
-                  )
-                ])
-              ],
-              1
-            )
-          ])
-        ])
-      ])
-    ])
+                )
+              ])
+            ]
+          )
+        })
+      ],
+      2
+    )
   ])
 }
 var staticRenderFns = [
@@ -42433,22 +42385,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "image col-lg-4" }, [
       _c("img", { attrs: { src: "img/pregn.jpg" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "image col-lg-4" }, [
-      _c("img", { attrs: { src: "img/412.jpg" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "image col-lg-4" }, [
-      _c("img", { attrs: { src: "img/413.jpg" } })
     ])
   }
 ]

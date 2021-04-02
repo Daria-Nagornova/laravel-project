@@ -11,7 +11,6 @@
                     <span> {{ child.date_birth }} </span>
                     <span> {{ child.gender }} </span>
                 </div>
-                <pagination :data="childrenData" @pagination-change-page="loadChildren"></pagination>
             </div>
             <router-link to="/profile-user/child-diary/add-notes" class="btn btn-primary addNotes">+ Добавить запись</router-link>
             <div class="col">
@@ -35,8 +34,6 @@ export default {
     data() {
         return {
             childrenData: {},
-            date: '',
-
         }
     },
     methods: {

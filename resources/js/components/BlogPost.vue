@@ -1,6 +1,5 @@
 <template>
     <div>
-        Тут будет пост
         <div class="post-details">
             <div class="post-meta d-flex justify-content-between">
                 <div class="date meta-last">20 мая | 2020</div>
@@ -26,8 +25,8 @@ export default {
         }
     },
     methods: {
-        loadBlogPost(page = 1) {
-            axios.get('/api/communities/{category}?page=' + page)
+        loadBlogPost() {
+            axios.get('/api/communities/' + this.$route.params.categories+ '/' + this.$route.params.post)
                 .then(r => this.blogPostData = r.data)
                 .catch(e => console.log(e))
         }

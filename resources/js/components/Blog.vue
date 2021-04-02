@@ -12,7 +12,7 @@
                                 <div class="post-meta d-flex justify-content-between">
                                     <div class="date meta-last">{{ post.created_at }}</div>
                                     <div class="category"><a href="#">{{ post.subcategory_name }}</a></div>
-                                </div><router-link to="/communities/pregnant/post1" class="animsition-link">
+                                </div><router-link :to="'/communities/' + category + '/' + post.id" class="animsition-link">
                                 <h3 class="h4">{{ post.title }}</h3></router-link>
                                 <p class="text-muted">{{ post.content }}</p>
                                 <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
@@ -22,6 +22,7 @@
                                 </footer>
                             </div>
                         </div>
+                        <pagination :data="postData" @pagination-change-page="loadPost"></pagination>
                     </div>
 
                 </div>
@@ -104,6 +105,11 @@ name: "Blog",
                 .then(r => this.postData = r.data)
                 .catch(e => console.log(e))
 
+        }
+    },
+    computed: {
+        category: function() {
+            return  this.$route.params.categories;
         }
     },
     mounted() {

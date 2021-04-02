@@ -33,4 +33,10 @@ Route::prefix('/communities/{category}')->group(function () {
     Route::patch('/{post}', [App\Http\Controllers\PostController::class, 'update']);
     Route::delete('/{post}', [App\Http\Controllers\PostController::class, 'destroy']);
 });
+Route::prefix('/communities')->group(function () {
+    Route::get('/', [App\Http\Controllers\CategoryController::class, 'index']);
+    Route::post('/', [App\Http\Controllers\CategoryController::class, 'store']);
+    Route::patch('/{category}', [App\Http\Controllers\CategoryController::class, 'update']);
+    Route::delete('/{category}', [App\Http\Controllers\CategoryController::class, 'destroy']);
+});
 
