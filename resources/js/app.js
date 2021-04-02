@@ -19,6 +19,7 @@ import Vaccination from "./components/NoteCategoties/Vaccination";
 import Walk from "./components/NoteCategoties/Walk";
 import Blog from "./components/Blog";
 import BlogPost from "./components/BlogPost";
+import AddPost from "./components/AddPost";
 
 
 
@@ -66,7 +67,8 @@ const app = new Vue({
         Vaccination,
         Walk,
         Blog,
-        BlogPost
+        BlogPost,
+        AddPost
     },
     router
 });

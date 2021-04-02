@@ -1,9 +1,10 @@
 <template>
     <div class="container">
-        <nav aria-label="breadcrumb path">
+        <nav aria-label="breadcrumb" class="path">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Сообщества</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{ postData.data[1].category_name }}</li>
+                <li class="breadcrumb-item"><router-link to="/">Главная</router-link></li>
+                <li class="breadcrumb-item"><router-link to="/communities">Сообщества</router-link></li>
+                <li v-for="post in postData.data" :key="post" class="breadcrumb-item active" aria-current="page">{{ post.category_name }}</li>
             </ol>
         </nav>
         <div class="row">
@@ -22,7 +23,7 @@
                                 <p class="text-muted">{{ post.content }}</p>
                                 <footer class="post-footer d-flex align-items-center">
                                     <div class="avatar"><img src="img/avatar-3.jpg" class="img-fluid"></div>
-                                    <div class="title"><span>{{ post.user_name }}</span></div>
+                                    <div class="title">{{ post.user_name }}</div>
                                     <div class="comments meta-last comments-icon">12</div>
                                 </footer>
                             </div>
@@ -34,7 +35,7 @@
             </main>
             <aside class="col-lg-4">
                 <div class="widget search">
-                    <button type="submit" class="write">Написать в сообществе</button>
+                    <router-link :to="'/communities/' + category + '/add-post'" class="write">Написать в сообществе</router-link>
                 </div>
                 <!-- Widget [Search Bar Widget]
                 <div class="widget search">
@@ -137,9 +138,11 @@ name: "Blog",
         background-color: white;
         border: none;
         border-bottom: 2px solid darkgray;
+        font-size: 20px;
     }
     .path {
         background-color: white;
         color: #494f54;
     }
+
 </style>

@@ -657,19 +657,6 @@ footer.main-footer .social-menu li {
 .addChild {
     padding: 20px;
 }
-@media (max-width: 992px) {
-  section.featured-posts .image {
-    order: 1;
-    min-height: auto;
-  }
-  section.featured-posts .image img {
-    width: 100%;
-    height: auto;
-  }
-  section.featured-posts .text {
-    order: 2;
-  }
-}
 .community {
     margin-top: 50px;
 }
@@ -1115,6 +1102,9 @@ main.blog-post .add-comment textarea {
    /* background: url(../../img/massage.png) 0 50% no-repeat;*/
     padding-left: 20px;
 }
+.container {
+    margin: 30px auto;
+}
 
 @media (max-width: 768px) {
   nav.navbar::after {
@@ -1149,6 +1139,19 @@ main.blog-post .add-comment textarea {
   footer.main-footer .copyrights div:last-of-type {
     margin-bottom: 0;
   }
+}
+@media (max-width: 992px) {
+    section.featured-posts .image {
+        order: 1;
+        min-height: auto;
+    }
+    section.featured-posts .image img {
+        width: 100%;
+        height: auto;
+    }
+    section.featured-posts .text {
+        order: 2;
+    }
 }
 
 @media (max-width: 576px) {

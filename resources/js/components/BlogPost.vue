@@ -1,17 +1,32 @@
 <template>
-    <div>
-        <div class="post-details">
-            <div class="post-meta d-flex justify-content-between">
-                <div class="date meta-last">20 мая | 2020</div>
-                <div class="category"><a href="#">{{ blogPostData.subcategory.name }}</a></div>
-            </div><router-link to="/communities/pregnant/post1" class="animsition-link">
-            <h3 class="h4">{{ blogPostData.title }}</h3></router-link>
-            <p class="text-muted">{{ blogPostData.content }}</p>
-            <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                <div class="avatar"><img src="img/avatar-3.jpg" alt="..." class="img-fluid"></div>
-                <div class="title"><span>{{ blogPostData.user.name }}</span></div></a>
-                <div class="comments meta-last comments-icon">12</div>
-            </footer>
+    <div class="container">
+        <nav aria-label="breadcrumb" class="path">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><router-link to="/">Главная</router-link></li>
+                <li class="breadcrumb-item"><router-link to="/communities">Сообщества</router-link></li>
+                <li class="breadcrumb-item"><router-link :to="'/communities/' + blogPostData.category.id">{{ blogPostData.category.name }}</router-link></li>
+                <li class="breadcrumb-item active" aria-current="page">Пост</li>
+            </ol>
+        </nav>
+        <div class="row">
+            <div class="post blogpost">
+                <div class="post-thumbnail"><img src="img/blog-post-1.jpeg" class="img-fluid"></div>
+                <div class="post-details">
+                    <div class="post-meta d-flex justify-content-between">
+                        <div class="date meta-last">20 мая | 2020</div>
+                        <div class="category"><a href="#">{{ blogPostData.subcategory.name }}</a></div>
+                    </div><router-link to="/communities/pregnant/post1" class="animsition-link">
+                    <h3 class="h4">{{ blogPostData.title }}</h3></router-link>
+                    <p class="text-muted">{{ blogPostData.content }}</p>
+                    <footer class="post-footer d-flex align-items-center">
+                        <div class="avatar">
+                            <img src="img/avatar-3.jpg" alt="..." class="img-fluid">
+                        </div>
+                        <div class="title">{{ blogPostData.user.name }}</div>
+                        <div class="comments meta-last comments-icon">12</div>
+                    </footer>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -38,5 +53,9 @@ export default {
 </script>
 
 <style scoped>
+.blogpost {
+    margin: 40px auto;
+    width: 70%;
+}
 
 </style>
