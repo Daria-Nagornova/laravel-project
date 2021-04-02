@@ -1,13 +1,18 @@
 <template>
     <div class="container">
+        <nav aria-label="breadcrumb path">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Сообщества</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ postData.data[1].category_name }}</li>
+            </ol>
+        </nav>
         <div class="row">
-            <!-- Latest Posts -->
             <main class="posts-listing col-lg-8">
                 <div class="container">
                     <div class="row">
                         <!-- post -->
                         <div v-for="post in postData.data" :key="post" class="post col-xl-6">
-                            <div class="post-thumbnail"><router-link to="/communities/pregnant/1" class="animsition-link"><img src="img/blog-post-1.jpeg" alt="..." class="img-fluid"></router-link></div>
+                            <div class="post-thumbnail"><router-link to="'/communities/' + category + '/' + post.id" class="animsition-link"><img src="img/blog-post-1.jpeg" alt="..." class="img-fluid"></router-link></div>
                             <div class="post-details">
                                 <div class="post-meta d-flex justify-content-between">
                                     <div class="date meta-last">{{ post.created_at }}</div>
@@ -15,20 +20,23 @@
                                 </div><router-link :to="'/communities/' + category + '/' + post.id" class="animsition-link">
                                 <h3 class="h4">{{ post.title }}</h3></router-link>
                                 <p class="text-muted">{{ post.content }}</p>
-                                <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                                    <div class="avatar"><img src="img/avatar-3.jpg" alt="..." class="img-fluid"></div>
-                                    <div class="title"><span>{{ post.user_name }}</span></div></a>
+                                <footer class="post-footer d-flex align-items-center">
+                                    <div class="avatar"><img src="img/avatar-3.jpg" class="img-fluid"></div>
+                                    <div class="title"><span>{{ post.user_name }}</span></div>
                                     <div class="comments meta-last comments-icon">12</div>
                                 </footer>
                             </div>
                         </div>
-                        <pagination :data="postData" @pagination-change-page="loadPost"></pagination>
+                        <pagination :data="postData" @pagination-change-page="loadPost" class="paginate"></pagination>
                     </div>
 
                 </div>
             </main>
             <aside class="col-lg-4">
-                <!-- Widget [Search Bar Widget]-->
+                <div class="widget search">
+                    <button type="submit" class="write">Написать в сообществе</button>
+                </div>
+                <!-- Widget [Search Bar Widget]
                 <div class="widget search">
                     <header>
                         <h3 class="h6">Поиск в сообществе</h3>
@@ -39,18 +47,18 @@
                             <button type="submit" class="submit search-icon"></button>
                         </div>
                     </form>
-                </div>
+                </div>-->
                 <!-- Widget [Latest Posts Widget]        -->
                 <div class="widget latest-posts">
                     <header>
-                        <h3 class="h6">Самые интересные посты</h3>
+                        <h3 class="h6 write">Самые интересные посты</h3>
                     </header>
                     <div class="blog-posts"><a href="#">
                         <div class="item d-flex align-items-center">
                             <div class="image"><img src="img/small-thumbnail-1.jpg" alt="..." class="img-fluid"></div>
                             <div class="title"><strong>Какие продукты помогают повысить гемоглобин?</strong>
                                 <div class="d-flex align-items-center">
-                                    <div class="views">500</div>
+
                                     <div class="comments">12</div>
                                 </div>
                             </div>
@@ -59,7 +67,7 @@
                             <div class="image"><img src="img/small-thumbnail-2.jpg" alt="..." class="img-fluid"></div>
                             <div class="title"><strong>Какие продукты помогают повысить гемоглобин?</strong>
                                 <div class="d-flex align-items-center">
-                                    <div class="views">500</div>
+
                                     <div class="comments">12</div>
                                 </div>
                             </div>
@@ -68,7 +76,7 @@
                             <div class="image"><img src="img/small-thumbnail-3.jpg" alt="..." class="img-fluid"></div>
                             <div class="title"><strong>Какие продукты помогают повысить гемоглобин?</strong>
                                 <div class="d-flex align-items-center">
-                                    <div class="views">500</div>
+
                                     <div class="comments">12</div>
                                 </div>
                             </div>
@@ -77,7 +85,7 @@
                 <!-- Widget [Categories Widget]-->
                 <div class="widget categories">
                     <header>
-                        <h3 class="h6">Подкатегории</h3>
+                        <h3 class="h6 write">Подкатегории</h3>
                     </header>
                     <div class="item d-flex justify-content-between"><a href="#">Питание</a><span>12</span></div>
                     <div class="item d-flex justify-content-between"><a href="#">Спорт</a><span>25</span></div>
@@ -104,7 +112,6 @@ name: "Blog",
             axios.get('/api/communities/' + this.$route.params.categories + '?page=' + page)
                 .then(r => this.postData = r.data)
                 .catch(e => console.log(e))
-
         }
     },
     computed: {
@@ -112,12 +119,27 @@ name: "Blog",
             return  this.$route.params.categories;
         }
     },
-    mounted() {
+    created() {
         this.loadPost()
     }
 }
 </script>
 
 <style scoped>
-
+    .paginate {
+        margin: 20px auto;
+        background-color: #c6e0f5;
+    }
+    .container {
+        margin: 30px auto;
+    }
+    .write {
+        background-color: white;
+        border: none;
+        border-bottom: 2px solid darkgray;
+    }
+    .path {
+        background-color: white;
+        color: #494f54;
+    }
 </style>
