@@ -27,6 +27,24 @@
                     </footer>
                 </div>
             </div>
+            <div class="add-comment">
+                <form>
+                    <div class="form-group">
+                        <label for="post">Комментарий:</label>
+                        <textarea class="form-control" id="post" rows="4"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-outline-secondary btn-post">Отправить</button>
+                </form>
+                <div v-for="comment in blogPostData.comments" :key="comment" class="post-details">
+                    <div class="post-footer d-flex align-items-center">
+                        <div class="avatar">
+                            <img src="img/avatar-3.jpg" class="img-fluid">
+                        </div>
+                        <div class="title">{{ comment.user_id }}</div>
+                    </div>
+                    <p class="text-muted">{{ comment.text }}</p>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -53,9 +71,22 @@ export default {
 </script>
 
 <style scoped>
-.blogpost {
-    margin: 40px auto;
-    width: 70%;
+.container {
+    background-color: #e9ecef;
+    font-family: "Nunito", sans-serif;
+    color: #494f54;
+    border-radius: 15px;
 }
+.blogpost, .add-comment {
+    margin: 20px auto;
+    width: 70%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+}
+.post-details {
+    margin: 20px auto;
+}
+
 
 </style>

@@ -28,7 +28,7 @@ export default new VueRouter({
         { path: '/communities', component: Communities },
         { path: '/communities/:categories', component: Blog },
         { path: '/communities/:categories/:post', component: BlogPost },
-        { path: '/communities/:categories/add-post', component: AddPost },
+        { path: '/communities/:categories/add/post', component: AddPost },
         { path: '/consultations', component: Consultations },
         { path: '/profile-user', component: ProfileUser },
         { path: '/profile-user/child-diary', component: ChildDiary },

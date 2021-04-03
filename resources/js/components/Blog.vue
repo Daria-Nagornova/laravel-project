@@ -35,7 +35,7 @@
             </main>
             <aside class="col-lg-4">
                 <div class="widget search">
-                    <router-link :to="'/communities/' + category + '/add-post'" class="write">Написать в сообществе</router-link>
+                    <router-link :to="'/communities/' + category + '/add/post'" class="write">Написать в сообществе</router-link>
                 </div>
                 <!-- Widget [Search Bar Widget]
                 <div class="widget search">
@@ -143,6 +143,9 @@ name: "Blog",
     .path {
         background-color: white;
         color: #494f54;
+    }
+    .post {
+        margin: 20px 20px;
     }
 
 </style>

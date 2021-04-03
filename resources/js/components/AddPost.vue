@@ -41,10 +41,14 @@ name: "AddPost"
 </script>
 
 <style scoped>
+* {
+    margin: 0 auto;
+}
+
 .add-post {
     margin: 40px auto;
     font-family: "Nunito", sans-serif;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 400;
     color: #494f54;
 }

@@ -2209,6 +2209,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "BlogPost",
   data: function data() {
@@ -3474,7 +3492,7 @@ vue__WEBPACK_IMPORTED_MODULE_16__.default.use(vue_router__WEBPACK_IMPORTED_MODUL
     path: '/communities/:categories/:post',
     component: _components_BlogPost__WEBPACK_IMPORTED_MODULE_14__.default
   }, {
-    path: '/communities/:categories/add-post',
+    path: '/communities/:categories/add/post',
     component: _components_AddPost__WEBPACK_IMPORTED_MODULE_15__.default
   }, {
     path: '/consultations',
@@ -7997,7 +8015,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.add-post[data-v-6aebc474] {\n    margin: 40px auto;\n    font-family: \"Nunito\", sans-serif;\n    font-size: 1.2rem;\n    font-weight: 400;\n    color: #494f54;\n}\n.btn-post[data-v-6aebc474] {\n\n    border-radius: 25px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-6aebc474] {\n    margin: 0 auto;\n}\n.add-post[data-v-6aebc474] {\n    margin: 40px auto;\n    font-family: \"Nunito\", sans-serif;\n    font-size: 1.2rem;\n    font-weight: 400;\n    color: #494f54;\n}\n.btn-post[data-v-6aebc474] {\n\n    border-radius: 25px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8021,7 +8039,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.paginate[data-v-7c31058d] {\n    margin: 20px auto;\n    background-color: #c6e0f5;\n}\n.container[data-v-7c31058d] {\n    margin: 30px auto;\n}\n.write[data-v-7c31058d] {\n    background-color: white;\n    border: none;\n    border-bottom: 2px solid darkgray;\n    font-size: 20px;\n}\n.path[data-v-7c31058d] {\n    background-color: white;\n    color: #494f54;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.paginate[data-v-7c31058d] {\n    margin: 20px auto;\n    background-color: #c6e0f5;\n}\n.container[data-v-7c31058d] {\n    margin: 30px auto;\n}\n.write[data-v-7c31058d] {\n    background-color: white;\n    border: none;\n    border-bottom: 2px solid darkgray;\n    font-size: 20px;\n}\n.path[data-v-7c31058d] {\n    background-color: white;\n    color: #494f54;\n}\n.post[data-v-7c31058d] {\n    margin: 20px 20px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8045,7 +8063,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.blogpost[data-v-bdf3a066] {\n    margin: 40px auto;\n    width: 70%;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-bdf3a066] {\n    background-color: #e9ecef;\n    font-family: \"Nunito\", sans-serif;\n    color: #494f54;\n    border-radius: 15px;\n}\n.blogpost[data-v-bdf3a066], .add-comment[data-v-bdf3a066] {\n    margin: 20px auto;\n    width: 70%;\n    background-color: white;\n    padding: 20px;\n    border-radius: 15px;\n}\n.post-details[data-v-bdf3a066] {\n    margin: 20px auto;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -42593,7 +42611,7 @@ var render = function() {
               "router-link",
               {
                 staticClass: "write",
-                attrs: { to: "/communities/" + _vm.category + "/add-post" }
+                attrs: { to: "/communities/" + _vm.category + "/add/post" }
               },
               [_vm._v("Написать в сообществе")]
             )
@@ -42856,7 +42874,36 @@ var render = function() {
           ],
           1
         )
-      ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "add-comment" },
+        [
+          _vm._m(2),
+          _vm._v(" "),
+          _vm._l(_vm.blogPostData.comments, function(comment) {
+            return _c("div", { key: comment, staticClass: "post-details" }, [
+              _c(
+                "div",
+                { staticClass: "post-footer d-flex align-items-center" },
+                [
+                  _vm._m(3, true),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "title" }, [
+                    _vm._v(_vm._s(comment.user_id))
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c("p", { staticClass: "text-muted" }, [
+                _vm._v(_vm._s(comment.text))
+              ])
+            ])
+          })
+        ],
+        2
+      )
     ])
   ])
 }
@@ -42880,6 +42927,41 @@ var staticRenderFns = [
       _c("img", {
         staticClass: "img-fluid",
         attrs: { src: "img/avatar-3.jpg", alt: "..." }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("form", [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "post" } }, [_vm._v("Комментарий:")]),
+        _vm._v(" "),
+        _c("textarea", {
+          staticClass: "form-control",
+          attrs: { id: "post", rows: "4" }
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-secondary btn-post",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("Отправить")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "avatar" }, [
+      _c("img", {
+        staticClass: "img-fluid",
+        attrs: { src: "img/avatar-3.jpg" }
       })
     ])
   }
