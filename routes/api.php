@@ -27,10 +27,10 @@ Route::prefix('/profile-user/child-diary')->group(function () {
 });
 
 Route::prefix('/communities/{category}')->group(function () {
-    Route::get('/', [App\Http\Controllers\PostController::class, 'index']);
-    Route::post('/', [App\Http\Controllers\PostController::class, 'store']);
+    Route::get('/', [App\Http\Controllers\PostController::class, 'index'])->name('communities');
+    Route::post('/add/post', [App\Http\Controllers\PostController::class, 'store']);
     Route::get('/{post}', [App\Http\Controllers\PostController::class, 'show']);
-    Route::patch('/{post}', [App\Http\Controllers\PostController::class, 'update']);
+    Route::patch('/{post}/update', [App\Http\Controllers\PostController::class, 'update']);
     Route::delete('/{post}', [App\Http\Controllers\PostController::class, 'destroy']);
 });
 Route::prefix('/communities')->group(function () {

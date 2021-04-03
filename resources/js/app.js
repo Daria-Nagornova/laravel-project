@@ -20,6 +20,7 @@ import Walk from "./components/NoteCategoties/Walk";
 import Blog from "./components/Blog";
 import BlogPost from "./components/BlogPost";
 import AddPost from "./components/AddPost";
+import UpdatePost from "./components/UpdatePost";
 
 
 
@@ -68,7 +69,8 @@ const app = new Vue({
         Walk,
         Blog,
         BlogPost,
-        AddPost
+        AddPost,
+        UpdatePost
     },
     router
 });

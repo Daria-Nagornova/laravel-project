@@ -10,6 +10,10 @@
         </nav>
         <div class="row">
             <div class="post blogpost">
+                <div class="form-group btn-box">
+                    <router-link :to="'/communities/' + category + '/' + post + '/update'" class="btn btn-outline-secondary btn-blogpost">Редактировать</router-link>
+                    <button class="btn btn-outline-secondary btn-blogpost" @click="deletePost">Удалить</button>
+                </div>
                 <div class="post-thumbnail"><img src="img/blog-post-1.jpeg" class="img-fluid"></div>
                 <div class="post-details">
                     <div class="post-meta d-flex justify-content-between">
@@ -62,6 +66,23 @@ export default {
             axios.get('/api/communities/' + this.$route.params.categories+ '/' + this.$route.params.post)
                 .then(r => this.blogPostData = r.data)
                 .catch(e => console.log(e))
+        },
+        deletePost() {
+            axios.delete('/api/communities/' + this.$route.params.categories+ '/' + this.$route.params.post)
+                .then(r => this.blogPostData = r.data)
+                .catch(e => console.log(e))
+            this.cancel()
+        },
+        cancel () {
+            this.$router.push('/communities/' +  this.$route.params.categories)
+        }
+    },
+    computed: {
+        category: function() {
+            return  this.$route.params.categories;
+        },
+        post: function() {
+            return this.$route.params.post;
         }
     },
     mounted() {
@@ -87,6 +108,15 @@ export default {
 .post-details {
     margin: 20px auto;
 }
-
-
+.btn-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+}
+.btn-blogpost {
+    border: none;
+    border-bottom: 2px solid gray;
+    margin: 0 20px;
+}
 </style>

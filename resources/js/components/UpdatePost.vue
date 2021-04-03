@@ -8,7 +8,7 @@
             </ol>
         </nav>
         <div class="row">
-            <form @submit.prevent="savePost" class="add-post col-8">
+            <form @submit.prevent="updatePost" class="add-post col-8">
                 <div class="form-group">
                     <label for="title">Заголовок</label>
                     <input type="text" class="form-control" id="title" v-model="title">
@@ -39,7 +39,8 @@
 
 <script>
 export default {
-name: "AddPost",
+    name: "AddPost",
+    props: ["post"],
     data() {
         return {
             title: '',
@@ -48,8 +49,8 @@ name: "AddPost",
         }
     },
     methods: {
-        savePost() {
-            axios.post('/api/communities/' +  this.$route.params.categories + '/add/post', {
+        updatePost() {
+            axios.patch('/api/communities/' + this.$route.params.categories + '/' + this.$route.params.post  + '/update', {
                 title: this.title,
                 content: this.content,
                 subcategory_id: this.subcategory,
@@ -60,8 +61,8 @@ name: "AddPost",
                 .catch(e => console.log(e))
             this.cancel()
         },
-        cancel () {
-            this.$router.push('/communities/' +  this.$route.params.categories)
+        cancel() {
+            this.$router.push('/communities/' + this.$route.params.categories)
         }
     }
 }

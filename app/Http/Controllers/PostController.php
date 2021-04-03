@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Post\StoreRequest;
+use App\Http\Requests\Post\UpdateRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Category;
 use App\Models\Post;
@@ -26,15 +28,16 @@ class PostController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function store(Request $request) : JsonResponse
+    public function store(StoreRequest $request) : JsonResponse
     {
         $post = new Post;
         $post->fill($request->validated());
         $post->save();
-
+        //return redirect()->route('communities')->with('success', 'Пост сохранен');
         return response()->json($post, 200);
+
     }
 
     /**
@@ -57,7 +60,7 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Post $post) : JsonResponse
+    public function update(UpdateRequest $request, Category $category, Post $post) : JsonResponse
     {
         $post->update($request->validate());
 
@@ -70,7 +73,7 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Post $post): JsonResponse
+    public function destroy(Category $category, Post $post): JsonResponse
     {
         $post->delete();
 

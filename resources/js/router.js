@@ -16,6 +16,7 @@ import Walk from "./components/NoteCategoties/Walk";
 import Blog from "./components/Blog";
 import BlogPost from "./components/BlogPost";
 import AddPost from "./components/AddPost";
+import UpdatePost from "./components/UpdatePost";
 
 
 
@@ -29,6 +30,7 @@ export default new VueRouter({
         { path: '/communities/:categories', component: Blog },
         { path: '/communities/:categories/:post', component: BlogPost },
         { path: '/communities/:categories/add/post', component: AddPost },
+        { path: '/communities/:categories/:post/update', component: UpdatePost },
         { path: '/consultations', component: Consultations },
         { path: '/profile-user', component: ProfileUser },
         { path: '/profile-user/child-diary', component: ChildDiary },

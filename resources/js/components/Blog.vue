@@ -139,13 +139,14 @@ name: "Blog",
         border: none;
         border-bottom: 2px solid darkgray;
         font-size: 20px;
+        color: #494f54;
     }
     .path {
         background-color: white;
         color: #494f54;
     }
     .post {
-        margin: 20px 20px;
+        margin: 20px 0;
     }
 
 </style>
