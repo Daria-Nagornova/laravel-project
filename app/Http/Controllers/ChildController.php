@@ -59,7 +59,7 @@ class ChildController extends Controller
      */
     public function update(UpdateRequest $request, Child $child) : JsonResponse
     {
-        $child->update($request->validate());
+        $child->update($request->validated());
 
         return response()->json($child, 200);
     }

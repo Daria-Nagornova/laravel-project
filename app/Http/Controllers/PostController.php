@@ -56,13 +56,15 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
+     * @param UpdateRequest $request
+     * @param Category $category
+     * @param \App\Models\Post $post
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(UpdateRequest $request, Category $category, Post $post) : JsonResponse
     {
-        $post->update($request->validate());
+
+        $post->update($request->validated());
 
         return response()->json($post, 200);
     }

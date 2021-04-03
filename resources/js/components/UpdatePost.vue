@@ -4,7 +4,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><router-link to="/">Главная</router-link></li>
                 <li class="breadcrumb-item"><router-link to="/communities">Сообщества</router-link></li>
-                <li class="breadcrumb-item active" aria-current="page">Добавление поста</li>
+                <li class="breadcrumb-item active" aria-current="page">Редактирование поста</li>
             </ol>
         </nav>
         <div class="row">
@@ -50,7 +50,7 @@ export default {
     },
     methods: {
         updatePost() {
-            axios.patch('/api/communities/' + this.$route.params.categories + '/' + this.$route.params.post  + '/update', {
+            axios.patch('/api/communities/' + this.$route.params.categories + '/' + this.$route.params.post  + '/update',  {
                 title: this.title,
                 content: this.content,
                 subcategory_id: this.subcategory,
