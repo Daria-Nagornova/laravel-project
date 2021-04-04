@@ -1,34 +1,139 @@
 <template>
     <div>
-        <h1>Консультации специалистов</h1>
-
         <div class="container">
+            <nav aria-label="breadcrumb" class="path">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><router-link to="/">Главная</router-link></li>
+                    <li class="breadcrumb-item active" aria-current="page">Консультации</li>
+                </ol>
+            </nav>
             <div class="row">
-                <div class="col-9"><p>Тут будут консультации врачей</p></div>
+                <div class="col-9">
+                    <h3>Педиатры</h3>
+                    <div class="specialisation">
+                        <div class="doctor">
+                            <div class="avatar-doctor">
+                                <img src="img/avatar-3.jpg" class="img-fluid">
+                            </div>
+                            <div class="doctor-name">Имя врача</div>
+                            <span class="doctor-info">Описание</span>
+                        </div>
+                        <div class="doctor">
+                            <div class="avatar-doctor">
+                                <img src="img/avatar-3.jpg" class="img-fluid">
+                            </div>
+                            <div class="doctor-name">Имя врача</div>
+                            <span class="doctor-info">Описание</span>
+                        </div>
+                        <div class="doctor">
+                            <div class="avatar-doctor">
+                                <img src="img/avatar-3.jpg" class="img-fluid">
+                            </div>
+                            <div class="doctor-name">Имя врача</div>
+                            <span class="doctor-info">Описание</span>
+                        </div>
+                    </div>
+                    <h3>Неврологи</h3>
+                    <div class="specialisation">
+                        <div class="doctor">
+                            <div class="avatar-doctor">
+                                <img src="img/avatar-3.jpg" class="img-fluid">
+                            </div>
+                            <div class="doctor-name">Имя врача</div>
+                            <span class="doctor-info">Описание</span>
+                        </div>
+                        <div class="doctor">
+                            <div class="avatar-doctor">
+                                <img src="img/avatar-3.jpg" class="img-fluid">
+                            </div>
+                            <div class="doctor-name">Имя врача</div>
+                            <span class="doctor-info">Описание</span>
+                        </div>
+                        <div class="doctor">
+                            <div class="avatar-doctor">
+                                <img src="img/avatar-3.jpg" class="img-fluid">
+                            </div>
+                            <div class="doctor-name">Имя врача</div>
+                            <span class="doctor-info">Описание</span>
+                        </div>
+                    </div>
+                    <h3>Психологи</h3>
+                    <div class="specialisation">
+                        <div class="doctor">
+                            <div class="avatar-doctor">
+                                <img src="img/avatar-3.jpg" class="img-fluid">
+                            </div>
+                            <div class="doctor-name">Имя врача</div>
+                            <span class="doctor-info">Описание</span>
+                        </div>
+                        <div class="doctor">
+                            <div class="avatar-doctor">
+                                <img src="img/avatar-3.jpg" class="img-fluid">
+                            </div>
+                            <div class="doctor-name">Имя врача</div>
+                            <span class="doctor-info">Описание</span>
+                        </div>
+                        <div class="doctor">
+                            <div class="avatar-doctor">
+                                <img src="img/avatar-3.jpg" class="img-fluid">
+                            </div>
+                            <div class="doctor-name">Имя врача</div>
+                            <span class="doctor-info">Описание</span>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-3">
+                    <h3 class="questions-title">Задать вопрос врачу</h3>
                     <form>
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">Email address</label>
-                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                            <label for="name">Ваше имя:</label>
+                            <input type="text" class="form-control" id="name">
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlSelect1">Example select</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
+                            <label for="specialisation">Выберите специализацию:</label>
+                            <select class="form-control" id="specialisation">
                                 <option>1</option>
                                 <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Example textarea</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <label for="doctor">Выберите доктора:</label>
+                            <select class="form-control" id="doctor">
+                                <option>1</option>
+                                <option>2</option>
+                            </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <div class="form-group">
+                            <label for="question">Введите вопрос:</label>
+                            <textarea class="form-control" id="question" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-outline-secondary btn-cons">Отправить</button>
+                        <div>*Врачи отвечают в течении 24 часов. Ответ появится в личном кабинете, на вкладке консультации</div>
                     </form>
 
                 </div>
+            </div>
+            <div class="questions">
+                <div class="questions-form">Ответы специалистов</div>
+                <ul>
+                    <li>
+                        <a href="#">Текст вопроса текст вопроса текст вопроса текст вопроса текст вопроса?</a>
+                        <div class="review">Текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзываТекст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзываТекст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва</div>
+                    </li>
+                    <li>
+                        <div>Текст вопроса текст вопроса текст вопроса текст вопроса текст вопроса?</div>
+                        <button v-on:click="getShow" class="btn-q">Показать ответ</button>
+                        <div v-if="show" class="post-details">
+                            <div class="post-footer d-flex align-items-center">
+                                <div class="avatar">
+                                    <img src="img/avatar-3.jpg" class="img-fluid">
+                                </div>
+                                <div class="title">Имя врача</div>
+                            </div>
+                            <p class="text-muted">Текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст</p>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -36,10 +141,70 @@
 
 <script>
 export default {
-    name: "Consultations"
+    name: "Consultations",
+    data() {
+        return {
+            show: false
+        }
+    },
+    methods: {
+        getShow() {
+
+           return this.show = !this.show
+
+        }
+    }
 }
 </script>
 
 <style scoped>
-
+.specialisation {
+    background-color: #e9ecef;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px auto;
+}
+.doctor {
+    margin: 20px;
+}
+.questions ul li {
+    padding: 15px 0;
+    border-bottom: 1px solid darkgray;
+}
+.questions-title {
+    text-align: center;
+    border-bottom: 2px solid #95999c;
+    margin: 20px 0;
+    font-size: 20px;
+}
+.questions-form {
+    text-align: center;
+    border-bottom: 2px solid #95999c;
+    margin: 20px 0;
+    font-size: 28px;
+}
+.btn-cons {
+    width: 100%;
+    border-radius: 15px !important;
+}
+.avatar {
+    max-width: 40px;
+    min-width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+.avatar-doctor {
+    max-width: 100px;
+    height: 100px;
+    border-radius: 50px;
+}
+.btn-q {
+    background-color: white;
+    border: none;
+    border-bottom: 2px solid #95999c;
+}
+.post-details {
+    padding: 15px;
+}
 </style>
