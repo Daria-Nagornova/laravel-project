@@ -16,7 +16,7 @@
                     <div class="col-lg-8">
                         <h2 class="h3">Добро пожаловать на сайт Mom and Baby</h2>
                         <p class="text-big">Наш сайт предназначет для мам малышей и тех, кто находится в ожидании.
-                            Здесь вы найдете <strong>единомышленников</strong>, получите множество <strong>полезной информации</strong> и возможность <strong>проконсультироваться</strong>
+                            Здесь вы найдете <span>единомышленников</span>, получите множество <span>полезной информации</span> и возможность <span>проконсультироваться</span>
                             с врачами различной специализации.</p>
                     </div>
                 </div>
@@ -30,19 +30,9 @@
                         <div class="text-inner d-flex align-items-center">
                             <div class="content">
                                 <header class="post-header">
-                                    <div class="category">
-                                        <a href="#">Полезные статьи</a>
-                                    </div>
-                                    <router-link to="/communities/pregnant/post1" class="animsition-link"><h2 class="h4">Семь правил лечения ОРВИ</h2></router-link>
+                                    <router-link to="/communities" class="animsition-link"><h2 class="h4">Сообщества</h2></router-link>
                                 </header>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrude consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
-                                <footer class="post-footer d-flex align-items-center">
-                                    <a href="#" class="author d-flex align-items-center flex-wrap">
-                                        <div class="avatar"><img src="img/avatar-1.jpg" class="img-fluid"></div>
-                                        <div class="title"><span>Доктор Комаровский</span></div></a>
-                                    <div class="date">11.10.2020</div>
-                                    <div class="comments">12</div>
-                                </footer>
+                                <div>Каждый этап беременности и развития ребенка имеет свои особенности. Сообщества предназанчены для общения по интересам, обмена полезной информацией, поиска подруг. Делитесь своим опытом, рассказывайте истории и задавайте вопросы.</div>
                             </div>
                         </div>
                     </div>
@@ -54,20 +44,9 @@
                         <div class="text-inner d-flex align-items-center">
                             <div class="content">
                                 <header class="post-header">
-                                    <div class="category">
-                                        <a href="#">Полезные статьи</a>
-                                    </div>
-                                    <router-link to="/communities/pregnant/post2" class="animsition-link"><h2 class="h4">Семь правил лечения ОРВИ</h2></router-link>
+                                    <router-link to="/communities/consultations" class="animsition-link"><h2 class="h4">Консультации</h2></router-link>
                                 </header>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrude consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
-                                <footer class="post-footer d-flex align-items-center">
-                                    <a href="#" class="author d-flex align-items-center flex-wrap">
-                                        <div class="avatar"><img src="img/avatar-1.jpg" class="img-fluid"></div>
-                                        <div class="title"><span>Доктор Комаровский</span></div>
-                                    </a>
-                                    <div class="date">11.10.2020</div>
-                                    <div class="comments">12</div>
-                                </footer>
+                                <div> Предлагаем получить бесплатную онлайн-консультацию педиатра, невролога, психолога. Оставить свой вопрос вы можете в любое время, и наши специалисты на него обязательно ответят. Мы не разглашаем личные данные наших читателей и гарантируем полную анонимность и конфиденциальность.></div>
                             </div>
                         </div>
                     </div>
@@ -77,17 +56,9 @@
                         <div class="text-inner d-flex align-items-center">
                             <div class="content">
                                 <header class="post-header">
-                                    <div class="category"><a href="#">Полезные статьи</a></div>
-                                    <router-link to="/communities/pregnant/post3" class="animsition-link">
-                                    <h2 class="h4">Семь правил лечения ОРВИ</h2></router-link>
+                                    <router-link to="/registration" class="animsition-link"><h2>Дневник ребенка</h2></router-link>
                                 </header>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrude consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
-                                <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
-                                    <div class="avatar"><img src="img/avatar-1.jpg" class="img-fluid"></div>
-                                    <div class="title"><span>Доктор Комаровский</span></div></a>
-                                    <div class="date">11.10.2020</div>
-                                    <div class="comments">12</div>
-                                </footer>
+                                <div>Зарегистрируйтесь на сайте и получите доступ к закрытому разделу - Дневник ребенка. Вы сможете ежедевно делать заметки о прогулках, сне, кормлении, отмечать рост и вес вашего малыша, а также даты прорезывания зубов. Наш дневник поможет наладить режим дня малыша, проследив комфортное для него время сна и приемов пищи.</div>
                             </div>
                         </div>
                     </div>
@@ -148,5 +119,11 @@ name: "HomePage"
 </script>
 
 <style scoped>
+.text-big span {
+    font-weight: bold;
+}
+section {
+   padding: 30px 0 !important;
+}
 
 </style>

@@ -1954,6 +1954,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /*import Walk from '@/components/ChildDiary/Category/Walk'
 import Feeding from '@/components/ChildDiary/Category/Feeding'
@@ -2260,11 +2270,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "BlogPost",
   data: function data() {
     return {
-      blogPostData: {}
+      blogPostData: {},
+      text: ''
     };
   },
   methods: {
@@ -2289,6 +2303,28 @@ __webpack_require__.r(__webpack_exports__);
     },
     cancel: function cancel() {
       this.$router.push('/communities/' + this.$route.params.categories);
+    },
+    saveComment: function saveComment() {
+      axios.post('/api/communities/' + this.$route.params.categories + '/' + this.$route.params.post, {
+        text: this.text,
+        user_id: 5,
+        post_id: this.post
+      }).then(function (r) {
+        return console.log(r);
+      })["catch"](function (e) {
+        return console.log(e);
+      });
+      this.$router.push('/communities/' + this.category + '/' + this.post);
+    },
+    deleteComment: function deleteComment() {
+      var _this3 = this;
+
+      axios["delete"]('/api/communities/' + this.$route.params.categories + '/' + this.$route.params.post + '/' + this.blogPostData.comment_id).then(function (r) {
+        return _this3.blogPostData = r.data;
+      })["catch"](function (e) {
+        return console.log(e);
+      });
+      this.$router.push('/communities/' + this.category + '/' + this.post);
     }
   },
   computed: {
@@ -2347,6 +2383,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ChildDiary",
   data: function data() {
@@ -2368,6 +2410,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.loadChildren();
+  },
+  computed: {
+    todayDate: function todayDate() {
+      return new Date().getDate() + '-0' + (new Date().getMonth() + 1) + '-' + new Date().getFullYear();
+    }
   }
 });
 
@@ -2875,35 +2922,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "HomePage"
 });
@@ -2939,6 +2957,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Feeding",
   data: function data() {
@@ -2949,32 +2984,12 @@ __webpack_require__.r(__webpack_exports__);
       errorProducts: ''
     };
   },
-  created: function created() {
-    this.loadList();
-  },
   methods: {
-    loadList: function loadList() {
-      this.$store.dispatch('load');
-    },
-    save: function save() {
-      if (this.product == '') {
-        this.errorProducts = "Поле должно быть заполнено";
-      }
-
-      if (this.time == '') {
-        this.errorTime = "Выберите время кормления";
-      }
-
-      if (this.time != '' && this.product != '') {
-        this.$store.dispatch('addFeeding', {
-          timeFeeding: this.time,
-          productsFeeding: this.product
-        });
-        this.cancel();
-      }
+    saveFeeding: function saveFeeding() {
+      this.cancel();
     },
     cancel: function cancel() {
-      this.$router.push('/notesToday');
+      this.$router.push('/profile-user/child-diary/add-notes');
     }
   }
 });
@@ -3010,6 +3025,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Height",
   data: function data() {
@@ -3020,40 +3050,15 @@ __webpack_require__.r(__webpack_exports__);
       errorHeight: ''
     };
   },
-  created: function created() {
-    this.loadList();
-  },
   methods: {
     loadList: function loadList() {
       this.$store.dispatch('load');
     },
-    save: function save() {
-      if (this.height == '') {
-        this.errorHeight = "Поле должно быть заполнено";
-      }
-
-      if (this.weight == '') {
-        this.errorWeight = "Поле должно быть заполнено";
-      }
-
-      if (this.weight != '' && isNaN(Number(this.weight))) {
-        this.errorWeight = "В это поле нужно ввести число";
-      }
-
-      if (this.height != '' && isNaN(Number(this.height))) {
-        this.errorHeight = "В это поле нужно ввести число";
-      }
-
-      if (this.height != '' && this.weight != '' && !isNaN(Number(this.height)) && !isNaN(Number(this.weight))) {
-        this.$store.dispatch('addHeight', {
-          childHeight: this.height,
-          childWeight: this.weight
-        });
-        this.cancel();
-      }
+    saveHeight: function saveHeight() {
+      this.cancel();
     },
     cancel: function cancel() {
-      this.$router.push('/profile-user/child-diary');
+      this.$router.push('/profile-user/child-diary/add-notes');
     }
   }
 });
@@ -3071,6 +3076,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3118,46 +3142,12 @@ __webpack_require__.r(__webpack_exports__);
       errorComment: ''
     };
   },
-  created: function created() {
-    this.loadList();
-  },
   methods: {
-    loadList: function loadList() {
-      this.$store.dispatch('load');
-    },
-    save: function save() {
-      if (this.start == '') {
-        this.errorStart = "Укажите время начала сна";
-      }
-
-      if (this.end == '') {
-        this.errorEnd = "Укажите время окончания сна";
-      }
-
-      if (this.duration == '') {
-        this.errorDuration = "Поле должно быть заполнено";
-      }
-
-      if (this.comment == '') {
-        this.errorComment = "Поле должно быть заполнено";
-      }
-
-      if (this.duration != '' && isNaN(Number(this.duration))) {
-        this.errorDuration = "В это поле нужно ввести число";
-      }
-
-      if (this.start != '' && this.end != '' && this.duration != '' && this.comment != '' && !isNaN(Number(this.duration))) {
-        this.$store.dispatch('addSleep', {
-          startSleep: this.start,
-          endSleep: this.end,
-          durationSleep: this.duration,
-          commentSleep: this.comment
-        });
-        this.cancel();
-      }
+    saveSleep: function saveSleep() {
+      this.cancel();
     },
     cancel: function cancel() {
-      this.$router.push('/profile-user/child-diary');
+      this.$router.push('/profile-user/child-diary/add-notes');
     }
   }
 });
@@ -3232,6 +3222,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Teeth",
   data: function data() {
@@ -3242,32 +3245,12 @@ __webpack_require__.r(__webpack_exports__);
       errorTeeth: ''
     };
   },
-  created: function created() {
-    this.loadList();
-  },
   methods: {
-    loadList: function loadList() {
-      this.$store.dispatch('load');
-    },
-    save: function save() {
-      if (this.name == '') {
-        this.errorTeeth = "Нужно выбрать зуб!";
-      }
-
-      if (this.date == '') {
-        this.errorDate = "Выберите дату";
-      }
-
-      if (this.name != '' && this.date != '') {
-        this.$store.dispatch('addTeeth', {
-          nameTeeth: this.name,
-          dateTeeth: this.date
-        });
-        this.cancel();
-      }
+    saveTeeth: function saveTeeth() {
+      this.cancel();
     },
     cancel: function cancel() {
-      this.$router.push('/profile-user/child-diary');
+      this.$router.push('/profile-user/child-diary/add-notes');
     }
   }
 });
@@ -3303,6 +3286,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Vaccination",
   data: function data() {
@@ -3314,32 +3310,12 @@ __webpack_require__.r(__webpack_exports__);
       path: 'vaccination'
     };
   },
-  created: function created() {
-    this.loadList();
-  },
   methods: {
-    loadList: function loadList() {
-      this.$store.dispatch('load');
-    },
-    save: function save() {
-      if (this.name == '') {
-        this.errorName = "Введите наименование вакцины";
-      }
-
-      if (this.comment == '') {
-        this.errorComment = "Заполните поле";
-      }
-
-      if (this.name != '' && this.comment != '') {
-        this.$store.dispatch('addVaccination', {
-          nameVaccination: this.name,
-          commentVaccination: this.comment
-        });
-        this.cancel();
-      }
+    saveVaccination: function saveVaccination() {
+      this.cancel();
     },
     cancel: function cancel() {
-      this.$router.push('/profile-user/child-diary');
+      this.$router.push('/profile-user/child-diary/add-notes');
     }
   }
 });
@@ -3378,6 +3354,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Walk",
   data: function data() {
@@ -3390,41 +3379,12 @@ __webpack_require__.r(__webpack_exports__);
       errorDuration: ''
     };
   },
-  created: function created() {
-    this.loadList();
-  },
   methods: {
-    loadList: function loadList() {
-      this.$store.dispatch('load');
-    },
-    save: function save() {
-      if (this.start == '') {
-        this.errorStart = "Укажите время начала прогулки";
-      }
-
-      if (this.end == '') {
-        this.errorEnd = "Укажите время окончания прогулки";
-      }
-
-      if (this.duration == '') {
-        this.errorDuration = "Поле должно быть заполнено";
-      }
-
-      if (this.duration != '' && isNaN(Number(this.duration))) {
-        this.errorDuration = "В это поле нужно ввести число";
-      }
-
-      if (this.start != '' && this.end != '' && this.duration != '' && !isNaN(Number(this.duration))) {
-        this.$store.dispatch('addWalk', {
-          startWalk: this.start,
-          endWalk: this.end,
-          durationWalk: this.duration
-        });
-        this.cancel();
-      }
+    saveWalk: function saveWalk() {
+      this.cancel();
     },
     cancel: function cancel() {
-      this.$router.push('/profile-user/child-diary');
+      this.$router.push('/profile-user/child-diary/add-notes');
     }
   }
 });
@@ -8330,6 +8290,30 @@ ___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-bdf3a066] {\n    b
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ChildDiary.vue?vue&type=style&index=0&id=00c8a132&scoped=true&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ChildDiary.vue?vue&type=style&index=0&id=00c8a132&scoped=true&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\na[data-v-00c8a132] {\n    text-decoration: none;\n}\n.btn-q[data-v-00c8a132] {\n    background-color: white;\n    border: none;\n    border-bottom: 2px solid #95999c;\n    font-weight: 500;\n    color: #6c757d;\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Communities.vue?vue&type=style&index=0&id=8d01aca8&scoped=true&lang=css&":
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Communities.vue?vue&type=style&index=0&id=8d01aca8&scoped=true&lang=css& ***!
@@ -8402,6 +8386,30 @@ ___CSS_LOADER_EXPORT___.push([module.id, "\n.main-menu[data-v-153bfd55] {\n    f
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/HomePage.vue?vue&type=style&index=0&id=fa44bb0e&scoped=true&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/HomePage.vue?vue&type=style&index=0&id=fa44bb0e&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.text-big span[data-v-fa44bb0e] {\n    font-weight: bold;\n}\nsection[data-v-fa44bb0e] {\n   padding: 50px 0 !important;\n}\n\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/NoteCategoties/Feeding.vue?vue&type=style&index=0&id=4aa8e26c&scoped=true&lang=css&":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/NoteCategoties/Feeding.vue?vue&type=style&index=0&id=4aa8e26c&scoped=true&lang=css& ***!
@@ -8419,7 +8427,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-4aa8e26c] {\n  margin: 10px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.add-post[data-v-4aa8e26c] {\n    margin: 40px auto;\n    font-family: \"Nunito\", sans-serif;\n    font-size: 1rem;\n    font-weight: 400;\n    color: #494f54;\n}\nh2[data-v-4aa8e26c] {\n    text-align: center;\n    color: #494f54;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8443,7 +8451,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-fadf3c22] {\n  margin: 10px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.add-post[data-v-fadf3c22] {\n    margin: 40px auto;\n    font-family: \"Nunito\", sans-serif;\n    font-size: 1rem;\n    font-weight: 400;\n    color: #494f54;\n}\nh2[data-v-fadf3c22] {\n    text-align: center;\n    color: #494f54;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8467,7 +8475,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-6be09e3f] {\n  margin: 10px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.add-post[data-v-6be09e3f] {\n    margin: 40px auto;\n    font-family: \"Nunito\", sans-serif;\n    font-size: 1rem;\n    font-weight: 400;\n    color: #494f54;\n}\nh2[data-v-6be09e3f] {\n    text-align: center;\n    color: #494f54;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8491,7 +8499,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-teeth[data-v-4224c870] {\n  width: 15px;\n  height: 15px;\n}\n.btn11[data-v-4224c870] {\n  margin: 0 2px 0 2px;\n  background: blueviolet;\n}\n.btn1[data-v-4224c870] {\n  margin: -10px 25px 0 25px;\n  background: fuchsia;\n}\n.btn2[data-v-4224c870] {\n  margin: -20px 35px 0 35px;\n  background: gold;\n}\n.btn3[data-v-4224c870] {\n  margin: -30px 45px 0 45px;\n  background: lightsalmon;\n}\n.btn4[data-v-4224c870] {\n  margin: -40px 55px 0 55px;\n  background: crimson;\n}\n.btn16[data-v-4224c870] {\n  margin: 0 55px 0 55px;\n  background: crimson;\n}\n.btn12[data-v-4224c870] {\n  margin: -10px 45px 0 45px;\n  background: lightsalmon;\n}\n.btn13[data-v-4224c870] {\n  margin: -20px 35px 0 35px;\n  background: gold;\n}\n.btn14[data-v-4224c870] {\n  margin: -30px 25px 0 25px;\n  background: fuchsia;\n}\n.btn15[data-v-4224c870] {\n  margin: -40px 2px 0 2px;\n  background: blueviolet;\n}\n.elem-margin[data-v-4224c870] {\n  margin: 10px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.box[data-v-4224c870] {\n /*   position: relative;*/\n}\n.btn-teeth[data-v-4224c870] {\n   /*position: absolute;*/\n  width: 15px;\n  height: 15px;\n}\n.btn11[data-v-4224c870] {\n  margin: 0 2px 0 2px;\n  background: blueviolet;\n}\n.btn1[data-v-4224c870] {\n  margin: -10px 25px 0 25px;\n  background: fuchsia;\n}\n.btn2[data-v-4224c870] {\n  margin: -20px 35px 0 35px;\n  background: gold;\n}\n.btn3[data-v-4224c870] {\n  margin: -30px 45px 0 45px;\n  background: lightsalmon;\n}\n.btn4[data-v-4224c870] {\n  margin: -40px 55px 0 55px;\n  background: crimson;\n}\n.btn16[data-v-4224c870] {\n  margin: 0 55px 0 55px;\n  background: crimson;\n}\n.btn12[data-v-4224c870] {\n  margin: -10px 45px 0 45px;\n  background: lightsalmon;\n}\n.btn13[data-v-4224c870] {\n  margin: -20px 35px 0 35px;\n  background: gold;\n}\n.btn14[data-v-4224c870] {\n  margin: -30px 25px 0 25px;\n  background: fuchsia;\n}\n.btn15[data-v-4224c870] {\n  margin: -40px 2px 0 2px;\n  background: blueviolet;\n}\n.elem-margin[data-v-4224c870] {\n  margin: 10px;\n}\n.add-post[data-v-4224c870] {\n    margin: 40px auto;\n    font-family: \"Nunito\", sans-serif;\n    font-size: 1rem;\n    font-weight: 400;\n    color: #494f54;\n}\nh2[data-v-4224c870] {\n    text-align: center;\n    color: #494f54;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8515,7 +8523,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-d8fe9aa6] {\n  margin: 10px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.add-post[data-v-d8fe9aa6] {\n    margin: 40px auto;\n    font-family: \"Nunito\", sans-serif;\n    font-size: 1rem;\n    font-weight: 400;\n    color: #494f54;\n}\nh2[data-v-d8fe9aa6] {\n    text-align: center;\n    color: #494f54;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8539,7 +8547,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-ca5e24de] {\n  margin: 10px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.add-post[data-v-ca5e24de] {\n    margin: 40px auto;\n    font-family: \"Nunito\", sans-serif;\n    font-size: 1rem;\n    font-weight: 400;\n    color: #494f54;\n}\n.title[data-v-ca5e24de] {\n    text-align: center;\n    color: #494f54;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -40300,6 +40308,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ChildDiary.vue?vue&type=style&index=0&id=00c8a132&scoped=true&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ChildDiary.vue?vue&type=style&index=0&id=00c8a132&scoped=true&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ChildDiary_vue_vue_type_style_index_0_id_00c8a132_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ChildDiary.vue?vue&type=style&index=0&id=00c8a132&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ChildDiary.vue?vue&type=style&index=0&id=00c8a132&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ChildDiary_vue_vue_type_style_index_0_id_00c8a132_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ChildDiary_vue_vue_type_style_index_0_id_00c8a132_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Communities.vue?vue&type=style&index=0&id=8d01aca8&scoped=true&lang=css&":
 /*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Communities.vue?vue&type=style&index=0&id=8d01aca8&scoped=true&lang=css& ***!
@@ -40387,6 +40425,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_HeaderComponent_vue_vue_type_style_index_0_id_153bfd55_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/HomePage.vue?vue&type=style&index=0&id=fa44bb0e&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/HomePage.vue?vue&type=style&index=0&id=fa44bb0e&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_HomePage_vue_vue_type_style_index_0_id_fa44bb0e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./HomePage.vue?vue&type=style&index=0&id=fa44bb0e&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/HomePage.vue?vue&type=style&index=0&id=fa44bb0e&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_HomePage_vue_vue_type_style_index_0_id_fa44bb0e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_HomePage_vue_vue_type_style_index_0_id_fa44bb0e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
@@ -41095,15 +41163,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _ChildDiary_vue_vue_type_template_id_00c8a132_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ChildDiary.vue?vue&type=template&id=00c8a132&scoped=true& */ "./resources/js/components/ChildDiary.vue?vue&type=template&id=00c8a132&scoped=true&");
 /* harmony import */ var _ChildDiary_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChildDiary.vue?vue&type=script&lang=js& */ "./resources/js/components/ChildDiary.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _ChildDiary_vue_vue_type_style_index_0_id_00c8a132_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ChildDiary.vue?vue&type=style&index=0&id=00c8a132&scoped=true&lang=css& */ "./resources/js/components/ChildDiary.vue?vue&type=style&index=0&id=00c8a132&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
   _ChildDiary_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
   _ChildDiary_vue_vue_type_template_id_00c8a132_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
   _ChildDiary_vue_vue_type_template_id_00c8a132_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
@@ -41335,15 +41405,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _HomePage_vue_vue_type_template_id_fa44bb0e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HomePage.vue?vue&type=template&id=fa44bb0e&scoped=true& */ "./resources/js/components/HomePage.vue?vue&type=template&id=fa44bb0e&scoped=true&");
 /* harmony import */ var _HomePage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HomePage.vue?vue&type=script&lang=js& */ "./resources/js/components/HomePage.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _HomePage_vue_vue_type_style_index_0_id_fa44bb0e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./HomePage.vue?vue&type=style&index=0&id=fa44bb0e&scoped=true&lang=css& */ "./resources/js/components/HomePage.vue?vue&type=style&index=0&id=fa44bb0e&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
   _HomePage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
   _HomePage_vue_vue_type_template_id_fa44bb0e_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
   _HomePage_vue_vue_type_template_id_fa44bb0e_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
@@ -42059,6 +42131,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/ChildDiary.vue?vue&type=style&index=0&id=00c8a132&scoped=true&lang=css&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/ChildDiary.vue?vue&type=style&index=0&id=00c8a132&scoped=true&lang=css& ***!
+  \*********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ChildDiary_vue_vue_type_style_index_0_id_00c8a132_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ChildDiary.vue?vue&type=style&index=0&id=00c8a132&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ChildDiary.vue?vue&type=style&index=0&id=00c8a132&scoped=true&lang=css&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Communities.vue?vue&type=style&index=0&id=8d01aca8&scoped=true&lang=css&":
 /*!**********************************************************************************************************!*\
   !*** ./resources/js/components/Communities.vue?vue&type=style&index=0&id=8d01aca8&scoped=true&lang=css& ***!
@@ -42094,6 +42179,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_HeaderComponent_vue_vue_type_style_index_0_id_153bfd55_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./HeaderComponent.vue?vue&type=style&index=0&id=153bfd55&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/HeaderComponent.vue?vue&type=style&index=0&id=153bfd55&scoped=true&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/HomePage.vue?vue&type=style&index=0&id=fa44bb0e&scoped=true&lang=css&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/components/HomePage.vue?vue&type=style&index=0&id=fa44bb0e&scoped=true&lang=css& ***!
+  \*******************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_HomePage_vue_vue_type_style_index_0_id_fa44bb0e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./HomePage.vue?vue&type=style&index=0&id=fa44bb0e&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/HomePage.vue?vue&type=style&index=0&id=fa44bb0e&scoped=true&lang=css&");
 
 
 /***/ }),
@@ -42691,106 +42789,155 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "category" }, [
-    _c("div", { staticClass: "row" }, [
-      _c(
-        "div",
-        { staticClass: "col" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "btn btn-outline-info button-category walk-icon",
-              attrs: { to: "/profile-user/child-diary/add-notes/walk" }
-            },
-            [_vm._v("Прогулка")]
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "btn btn-outline-info button-category sleep-icon",
-              attrs: { to: "/profile-user/child-diary/add-notes/sleep" }
-            },
-            [_vm._v("Сон")]
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "btn btn-outline-info button-category feeding-icon",
-              attrs: { to: "/profile-user/child-diary/add-notes/feeding" }
-            },
-            [_vm._v("Кормление")]
-          )
-        ],
-        1
-      )
+  return _c("div", { staticClass: "container" }, [
+    _c("nav", { staticClass: "path", attrs: { "aria-label": "breadcrumb" } }, [
+      _c("ol", { staticClass: "breadcrumb" }, [
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [_c("router-link", { attrs: { to: "/" } }, [_vm._v("Главная")])],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [
+            _c("router-link", { attrs: { to: "/profile-user" } }, [
+              _vm._v("Профиль")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [
+            _c("router-link", { attrs: { to: "/profile-user/child-diary" } }, [
+              _vm._v("Дневник ребенка")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          {
+            staticClass: "breadcrumb-item active",
+            attrs: { "aria-current": "page" }
+          },
+          [_vm._v("Добавить запись")]
+        )
+      ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c(
-        "div",
-        { staticClass: "col" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "btn btn-outline-info button-category height-icon",
-              attrs: { to: "/profile-user/child-diary/add-notes/height" }
-            },
-            [_vm._v("Рост и вес")]
-          )
-        ],
-        1
-      ),
+    _c("div", { staticClass: "category" }, [
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass:
+                  "btn btn-outline-secondary button-category walk-icon",
+                attrs: { to: "/profile-user/child-diary/add-notes/walk" }
+              },
+              [_vm._v("Прогулка")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass:
+                  "btn btn-outline-secondary button-category sleep-icon",
+                attrs: { to: "/profile-user/child-diary/add-notes/sleep" }
+              },
+              [_vm._v("Сон")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass:
+                  "btn btn-outline-secondary button-category feeding-icon",
+                attrs: { to: "/profile-user/child-diary/add-notes/feeding" }
+              },
+              [_vm._v("Кормление")]
+            )
+          ],
+          1
+        )
+      ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass:
-                "btn btn-outline-info button-category vaccination-icon",
-              attrs: { to: "/profile-user/child-diary/add-notes/vaccination" }
-            },
-            [_vm._v("Прививка")]
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col" },
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "btn btn-outline-info button-category teeth-icon",
-              attrs: { to: "/profile-user/child-diary/add-notes/teeth" }
-            },
-            [_vm._v("Зубы")]
-          )
-        ],
-        1
-      )
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass:
+                  "btn btn-outline-secondary button-category height-icon",
+                attrs: { to: "/profile-user/child-diary/add-notes/height" }
+              },
+              [_vm._v("Рост и вес")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass:
+                  "btn btn-outline-secondary button-category vaccination-icon",
+                attrs: { to: "/profile-user/child-diary/add-notes/vaccination" }
+              },
+              [_vm._v("Прививка")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass:
+                  "btn btn-outline-secondary button-category teeth-icon",
+                attrs: { to: "/profile-user/child-diary/add-notes/teeth" }
+              },
+              [_vm._v("Зубы")]
+            )
+          ],
+          1
+        )
+      ])
     ])
   ])
 }
@@ -43478,7 +43625,55 @@ var render = function() {
         "div",
         { staticClass: "add-comment" },
         [
-          _vm._m(2),
+          _c(
+            "form",
+            {
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.saveComment($event)
+                }
+              }
+            },
+            [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "post" } }, [
+                  _vm._v("Комментарий:")
+                ]),
+                _vm._v(" "),
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.text,
+                      expression: "text"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "post", rows: "4" },
+                  domProps: { value: _vm.text },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.text = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-secondary btn-post",
+                  attrs: { type: "submit" }
+                },
+                [_vm._v("Отправить")]
+              )
+            ]
+          ),
           _vm._v(" "),
           _vm._l(_vm.blogPostData.comments, function(comment) {
             return _c("div", { key: comment, staticClass: "post-details" }, [
@@ -43486,10 +43681,24 @@ var render = function() {
                 "div",
                 { staticClass: "post-footer d-flex align-items-center" },
                 [
-                  _vm._m(3, true),
+                  _vm._m(2, true),
                   _vm._v(" "),
                   _c("div", { staticClass: "title" }, [
                     _vm._v(_vm._s(comment.user_id))
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "ml-2 mb-1 close",
+                  attrs: { type: "button", "aria-label": "Close" },
+                  on: { click: _vm.deleteComment }
+                },
+                [
+                  _c("span", { attrs: { "aria-hidden": "true" } }, [
+                    _vm._v("×")
                   ])
                 ]
               ),
@@ -43532,30 +43741,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("form", [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "post" } }, [_vm._v("Комментарий:")]),
-        _vm._v(" "),
-        _c("textarea", {
-          staticClass: "form-control",
-          attrs: { id: "post", rows: "4" }
-        })
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-outline-secondary btn-post",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("Отправить")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "avatar" }, [
       _c("img", {
         staticClass: "img-fluid",
@@ -43590,103 +43775,127 @@ var render = function() {
     "div",
     { staticClass: "container" },
     [
-      _c("h1", [_vm._v("Дневник ребенка")]),
-      _vm._v(" "),
       _c(
-        "div",
-        { staticClass: "row" },
+        "nav",
+        { staticClass: "path", attrs: { "aria-label": "breadcrumb" } },
         [
-          _c(
-            "div",
-            { staticClass: "col" },
-            [
-              _c(
-                "div",
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { to: "/profile-user/child-diary/add-child" }
-                    },
-                    [_vm._v("Добавить ребенка")]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _vm._l(_vm.childrenData.data, function(child) {
-                return _c("div", { key: child.id, staticClass: "child" }, [
-                  _c("span", [_vm._v(" " + _vm._s(child.name) + " ")]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v(" " + _vm._s(child.date_birth) + " ")]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v(" " + _vm._s(child.gender) + " ")])
-                ])
-              })
-            ],
-            2
-          ),
-          _vm._v(" "),
-          _c(
-            "router-link",
-            {
-              staticClass: "btn btn-primary addNotes",
-              attrs: { to: "/profile-user/child-diary/add-notes" }
-            },
-            [_vm._v("+ Добавить запись")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "col" }, [
-            _c("label", [_vm._v("Выбрать дату")]),
+          _c("ol", { staticClass: "breadcrumb" }, [
+            _c(
+              "li",
+              { staticClass: "breadcrumb-item" },
+              [_c("router-link", { attrs: { to: "/" } }, [_vm._v("Главная")])],
+              1
+            ),
             _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.date,
-                  expression: "date"
-                }
+            _c(
+              "li",
+              { staticClass: "breadcrumb-item" },
+              [
+                _c("router-link", { attrs: { to: "/profile-user" } }, [
+                  _vm._v("Профиль")
+                ])
               ],
-              staticClass: "form-control",
-              attrs: { type: "date" },
-              domProps: { value: _vm.date },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.date = $event.target.value
-                }
-              }
-            })
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "li",
+              {
+                staticClass: "breadcrumb-item active",
+                attrs: { "aria-current": "page" }
+              },
+              [_vm._v("Дневник ребенка")]
+            )
           ])
-        ],
-        1
+        ]
       ),
       _vm._v(" "),
-      _vm._m(0),
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col-8" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass: "btn-q",
+                attrs: { to: "/profile-user/child-diary/add-child" }
+              },
+              [_vm._v("Добавить ребенка")]
+            ),
+            _vm._v(" "),
+            _vm._l(_vm.childrenData.data, function(child) {
+              return _c("div", { key: child.id, staticClass: "child" }, [
+                _c("span", [_vm._v(" " + _vm._s(child.name) + " ")]),
+                _vm._v(" "),
+                _c("span", [_vm._v(" " + _vm._s(child.date_birth) + " ")]),
+                _vm._v(" "),
+                _c("span", [_vm._v(" " + _vm._s(child.gender) + " ")])
+              ])
+            })
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-4" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass: "btn btn-outline-secondary addNotes",
+                attrs: { to: "/profile-user/child-diary/add-notes" }
+              },
+              [_vm._v("+ Добавить запись")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col" }, [
+              _c("label", [_vm._v("Выбрать дату")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.date,
+                    expression: "date"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "date" },
+                domProps: { value: _vm.date },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.date = $event.target.value
+                  }
+                }
+              })
+            ])
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", [_vm._v(_vm._s(_vm.todayDate))]),
+        _vm._v(" "),
+        _c("span", [_vm._v("Прогулка")]),
+        _vm._v(" "),
+        _c("span", [_vm._v(" Начало-конец ")]),
+        _vm._v(" "),
+        _c("span", [_vm._v("Длительность ")])
+      ]),
       _vm._v(" "),
       _c("router-view")
     ],
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("span", [_vm._v("Прогулка")]),
-      _vm._v(" "),
-      _c("span", [_vm._v(" Начало-конец ")]),
-      _vm._v(" "),
-      _c("span", [_vm._v("Длительность ")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -44534,40 +44743,32 @@ var render = function() {
                   "header",
                   { staticClass: "post-header" },
                   [
-                    _vm._m(2),
-                    _vm._v(" "),
                     _c(
                       "router-link",
                       {
                         staticClass: "animsition-link",
-                        attrs: { to: "/communities/pregnant/post1" }
+                        attrs: { to: "/communities" }
                       },
-                      [
-                        _c("h2", { staticClass: "h4" }, [
-                          _vm._v("Семь правил лечения ОРВИ")
-                        ])
-                      ]
+                      [_c("h2", { staticClass: "h4" }, [_vm._v("Сообщества")])]
                     )
                   ],
                   1
                 ),
                 _vm._v(" "),
-                _c("p", [
+                _c("div", [
                   _vm._v(
-                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrude consectetur adipisicing elit, sed do eiusmod tempor incididunt."
+                    "Каждый этап беременности и развития ребенка имеет свои особенности. Сообщества предназанчены для общения по интересам, обмена полезной информацией, поиска подруг. Делитесь своим опытом, рассказывайте истории и задавайте вопросы."
                   )
-                ]),
-                _vm._v(" "),
-                _vm._m(3)
+                ])
               ])
             ])
           ]),
           _vm._v(" "),
-          _vm._m(4)
+          _vm._m(2)
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row d-flex align-items-stretch" }, [
-          _vm._m(5),
+          _vm._m(3),
           _vm._v(" "),
           _c("div", { staticClass: "text col-lg-7" }, [
             _c("div", { staticClass: "text-inner d-flex align-items-center" }, [
@@ -44576,17 +44777,15 @@ var render = function() {
                   "header",
                   { staticClass: "post-header" },
                   [
-                    _vm._m(6),
-                    _vm._v(" "),
                     _c(
                       "router-link",
                       {
                         staticClass: "animsition-link",
-                        attrs: { to: "/communities/pregnant/post2" }
+                        attrs: { to: "/communities/consultations" }
                       },
                       [
                         _c("h2", { staticClass: "h4" }, [
-                          _vm._v("Семь правил лечения ОРВИ")
+                          _vm._v("Консультации")
                         ])
                       ]
                     )
@@ -44594,13 +44793,11 @@ var render = function() {
                   1
                 ),
                 _vm._v(" "),
-                _c("p", [
+                _c("div", [
                   _vm._v(
-                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrude consectetur adipisicing elit, sed do eiusmod tempor incididunt."
+                    " Предлагаем получить бесплатную онлайн-консультацию педиатра, невролога, психолога. Оставить свой вопрос вы можете в любое время, и наши специалисты на него обязательно ответят. Мы не разглашаем личные данные наших читателей и гарантируем полную анонимность и конфиденциальность.>"
                   )
-                ]),
-                _vm._v(" "),
-                _vm._m(7)
+                ])
               ])
             ])
           ])
@@ -44614,41 +44811,33 @@ var render = function() {
                   "header",
                   { staticClass: "post-header" },
                   [
-                    _vm._m(8),
-                    _vm._v(" "),
                     _c(
                       "router-link",
                       {
                         staticClass: "animsition-link",
-                        attrs: { to: "/communities/pregnant/post3" }
+                        attrs: { to: "/registration" }
                       },
-                      [
-                        _c("h2", { staticClass: "h4" }, [
-                          _vm._v("Семь правил лечения ОРВИ")
-                        ])
-                      ]
+                      [_c("h2", [_vm._v("Дневник ребенка")])]
                     )
                   ],
                   1
                 ),
                 _vm._v(" "),
-                _c("p", [
+                _c("div", [
                   _vm._v(
-                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrude consectetur adipisicing elit, sed do eiusmod tempor incididunt."
+                    "Зарегистрируйтесь на сайте и получите доступ к закрытому разделу - Дневник ребенка. Вы сможете ежедевно делать заметки о прогулках, сне, кормлении, отмечать рост и вес вашего малыша, а также даты прорезывания зубов. Наш дневник поможет наладить режим дня малыша, проследив комфортное для него время сна и приемов пищи."
                   )
-                ]),
-                _vm._v(" "),
-                _vm._m(9)
+                ])
               ])
             ])
           ]),
           _vm._v(" "),
-          _vm._m(10)
+          _vm._m(4)
         ])
       ])
     ]),
     _vm._v(" "),
-    _vm._m(11)
+    _vm._m(5)
   ])
 }
 var staticRenderFns = [
@@ -44685,11 +44874,11 @@ var staticRenderFns = [
               _vm._v(
                 "Наш сайт предназначет для мам малышей и тех, кто находится в ожидании.\n                        Здесь вы найдете "
               ),
-              _c("strong", [_vm._v("единомышленников")]),
+              _c("span", [_vm._v("единомышленников")]),
               _vm._v(", получите множество "),
-              _c("strong", [_vm._v("полезной информации")]),
+              _c("span", [_vm._v("полезной информации")]),
               _vm._v(" и возможность "),
-              _c("strong", [_vm._v("проконсультироваться")]),
+              _c("span", [_vm._v("проконсультироваться")]),
               _vm._v(
                 "\n                        с врачами различной специализации."
               )
@@ -44698,48 +44887,6 @@ var staticRenderFns = [
         ])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "category" }, [
-      _c("a", { attrs: { href: "#" } }, [_vm._v("Полезные статьи")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "footer",
-      { staticClass: "post-footer d-flex align-items-center" },
-      [
-        _c(
-          "a",
-          {
-            staticClass: "author d-flex align-items-center flex-wrap",
-            attrs: { href: "#" }
-          },
-          [
-            _c("div", { staticClass: "avatar" }, [
-              _c("img", {
-                staticClass: "img-fluid",
-                attrs: { src: "img/avatar-1.jpg" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "title" }, [
-              _c("span", [_vm._v("Доктор Комаровский")])
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "date" }, [_vm._v("11.10.2020")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "comments" }, [_vm._v("12")])
-      ]
-    )
   },
   function() {
     var _vm = this
@@ -44756,90 +44903,6 @@ var staticRenderFns = [
     return _c("div", { staticClass: "image col-lg-5 img-fluid" }, [
       _c("img", { attrs: { src: "img/49.jpg" } })
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "category" }, [
-      _c("a", { attrs: { href: "#" } }, [_vm._v("Полезные статьи")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "footer",
-      { staticClass: "post-footer d-flex align-items-center" },
-      [
-        _c(
-          "a",
-          {
-            staticClass: "author d-flex align-items-center flex-wrap",
-            attrs: { href: "#" }
-          },
-          [
-            _c("div", { staticClass: "avatar" }, [
-              _c("img", {
-                staticClass: "img-fluid",
-                attrs: { src: "img/avatar-1.jpg" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "title" }, [
-              _c("span", [_vm._v("Доктор Комаровский")])
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "date" }, [_vm._v("11.10.2020")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "comments" }, [_vm._v("12")])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "category" }, [
-      _c("a", { attrs: { href: "#" } }, [_vm._v("Полезные статьи")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "footer",
-      { staticClass: "post-footer d-flex align-items-center" },
-      [
-        _c(
-          "a",
-          {
-            staticClass: "author d-flex align-items-center flex-wrap",
-            attrs: { href: "#" }
-          },
-          [
-            _c("div", { staticClass: "avatar" }, [
-              _c("img", {
-                staticClass: "img-fluid",
-                attrs: { src: "img/avatar-1.jpg" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "title" }, [
-              _c("span", [_vm._v("Доктор Комаровский")])
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "date" }, [_vm._v("11.10.2020")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "comments" }, [_vm._v("12")])
-      ]
-    )
   },
   function() {
     var _vm = this
@@ -45036,76 +45099,163 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", [
-      _c("p", { staticClass: "title" }, [_vm._v("Кормление")]),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "timeFeeding" } }, [
-        _vm._v("Время приема пищи")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
+  return _c("div", { staticClass: "container" }, [
+    _c("nav", { staticClass: "path", attrs: { "aria-label": "breadcrumb" } }, [
+      _c("ol", { staticClass: "breadcrumb" }, [
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [_c("router-link", { attrs: { to: "/" } }, [_vm._v("Главная")])],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [
+            _c("router-link", { attrs: { to: "/profile-user" } }, [
+              _vm._v("Профиль")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [
+            _c("router-link", { attrs: { to: "/profile-user/child-diary" } }, [
+              _vm._v("Дневник ребенка")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [
+            _c(
+              "router-link",
+              { attrs: { to: "/profile-user/child-diary/add-notes" } },
+              [_vm._v("Добавить запись")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
           {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.time,
-            expression: "time"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "time" },
-        domProps: { value: _vm.time },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.time = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "error" }, [_vm._v(_vm._s(_vm.errorTime))]),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "productsFeeding" } }, [_vm._v("Продукты")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.product,
-            expression: "product"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text" },
-        domProps: { value: _vm.product },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.product = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "error" }, [_vm._v(_vm._s(_vm.errorProducts))])
+            staticClass: "breadcrumb-item active",
+            attrs: { "aria-current": "page" }
+          },
+          [_vm._v("Кормление")]
+        )
+      ])
     ]),
     _vm._v(" "),
-    _c("div", [
+    _c("h2", { staticClass: "title" }, [_vm._v("Кормление")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
       _c(
-        "button",
-        { staticClass: "btn btn-primary", on: { click: _vm.save } },
-        [_vm._v("Сохранить")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", on: { click: _vm.cancel } },
-        [_vm._v("Отменить")]
+        "form",
+        {
+          staticClass: "add-post col-8",
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.saveFeeding($event)
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "timeFeeding" } }, [
+              _vm._v("Время приема пищи")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.time,
+                  expression: "time"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "time" },
+              domProps: { value: _vm.time },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.time = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("div", { staticClass: "error" }, [
+              _vm._v(_vm._s(_vm.errorTime))
+            ]),
+            _vm._v(" "),
+            _c("label", { attrs: { for: "productsFeeding" } }, [
+              _vm._v("Продукты")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.product,
+                  expression: "product"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text" },
+              domProps: { value: _vm.product },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.product = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "error" }, [
+              _vm._v(_vm._s(_vm.errorProducts))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-secondary",
+                attrs: { type: "submit" }
+              },
+              [_vm._v("Сохранить")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-secondary",
+                on: { click: _vm.cancel }
+              },
+              [_vm._v("Отменить")]
+            )
+          ])
+        ]
       )
     ])
   ])
@@ -45133,78 +45283,161 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", [
-      _c("p", { staticClass: "title" }, [_vm._v("Рост и вес")]),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "childHeight" } }, [
-        _vm._v("Рост ребенка, см")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
+  return _c("div", { staticClass: "container" }, [
+    _c("nav", { staticClass: "path", attrs: { "aria-label": "breadcrumb" } }, [
+      _c("ol", { staticClass: "breadcrumb" }, [
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [_c("router-link", { attrs: { to: "/" } }, [_vm._v("Главная")])],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [
+            _c("router-link", { attrs: { to: "/profile-user" } }, [
+              _vm._v("Профиль")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [
+            _c("router-link", { attrs: { to: "/profile-user/child-diary" } }, [
+              _vm._v("Дневник ребенка")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [
+            _c(
+              "router-link",
+              { attrs: { to: "/profile-user/child-diary/add-notes" } },
+              [_vm._v("Добавить запись")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
           {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.height,
-            expression: "height"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text" },
-        domProps: { value: _vm.height },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.height = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "error" }, [_vm._v(_vm._s(_vm.errorHeight))]),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "childWeight" } }, [
-        _vm._v("Вес ребенка, кг")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.weight,
-            expression: "weight"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text" },
-        domProps: { value: _vm.weight },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.weight = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "error" }, [_vm._v(_vm._s(_vm.errorWeight))])
+            staticClass: "breadcrumb-item active",
+            attrs: { "aria-current": "page" }
+          },
+          [_vm._v("Рост и вес")]
+        )
+      ])
     ]),
     _vm._v(" "),
-    _c("div", [
+    _c("h2", { staticClass: "title" }, [_vm._v("Рост и вес")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
       _c(
-        "button",
-        { staticClass: "btn btn-primary", on: { click: _vm.save } },
-        [_vm._v("Сохранить")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", on: { click: _vm.cancel } },
-        [_vm._v("Отменить")]
+        "form",
+        {
+          staticClass: "add-post col-8",
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.saveHeight($event)
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "childHeight" } }, [
+              _vm._v("Рост ребенка, см")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.height,
+                  expression: "height"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text" },
+              domProps: { value: _vm.height },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.height = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "error" }, [
+              _vm._v(_vm._s(_vm.errorHeight))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "childWeight" } }, [
+              _vm._v("Вес ребенка, кг")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.weight,
+                  expression: "weight"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text" },
+              domProps: { value: _vm.weight },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.weight = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "error" }, [
+              _vm._v(_vm._s(_vm.errorWeight))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-secondary",
+                attrs: { type: "submit" }
+              },
+              [_vm._v("Сохранить")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-secondary",
+                on: { click: _vm.cancel }
+              },
+              [_vm._v("Отменить")]
+            )
+          ])
+        ]
       )
     ])
   ])
@@ -45232,135 +45465,228 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", [
-      _c("p", { staticClass: "title" }, [_vm._v("Сон")]),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "startSleep" } }, [_vm._v("Начало сна")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
+  return _c("div", { staticClass: "container" }, [
+    _c("nav", { staticClass: "path", attrs: { "aria-label": "breadcrumb" } }, [
+      _c("ol", { staticClass: "breadcrumb" }, [
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [_c("router-link", { attrs: { to: "/" } }, [_vm._v("Главная")])],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [
+            _c("router-link", { attrs: { to: "/profile-user" } }, [
+              _vm._v("Профиль")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [
+            _c("router-link", { attrs: { to: "/profile-user/child-diary" } }, [
+              _vm._v("Дневник ребенка")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [
+            _c(
+              "router-link",
+              { attrs: { to: "/profile-user/child-diary/add-notes" } },
+              [_vm._v("Добавить запись")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
           {
-            name: "onclick",
-            rawName: "v-onclick:[direction]",
-            value: { background: _vm.comment },
-            expression: "{background: comment}",
-            arg: _vm.direction
+            staticClass: "breadcrumb-item active",
+            attrs: { "aria-current": "page" }
           },
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.start,
-            expression: "start"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "time" },
-        domProps: { value: _vm.start },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.start = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "error" }, [_vm._v(_vm._s(_vm.errorStart))]),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "endSleep" } }, [_vm._v("Конец сна")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.end,
-            expression: "end"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "time" },
-        domProps: { value: _vm.end },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.end = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "error" }, [_vm._v(_vm._s(_vm.errorEnd))]),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "durationSleep" } }, [
-        _vm._v("Длительность сна, минут")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.duration,
-            expression: "duration"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text" },
-        domProps: { value: _vm.duration },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.duration = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "error" }, [_vm._v(_vm._s(_vm.errorDuration))]),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "commentSleep" } }, [_vm._v("Комментарий")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.comment,
-            expression: "comment"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text" },
-        domProps: { value: _vm.comment },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.comment = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "error" }, [_vm._v(_vm._s(_vm.errorComment))])
+          [_vm._v("Сон")]
+        )
+      ])
     ]),
     _vm._v(" "),
-    _c("div", [
+    _c("h2", { staticClass: "title" }, [_vm._v("Сон")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
       _c(
-        "button",
-        { staticClass: "btn btn-primary", on: { click: _vm.save } },
-        [_vm._v("Сохранить")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", on: { click: _vm.cancel } },
-        [_vm._v("Отменить")]
+        "form",
+        {
+          staticClass: "add-post col-8",
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.saveSleep($event)
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "startSleep" } }, [
+              _vm._v("Начало сна")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "onclick",
+                  rawName: "v-onclick:[direction]",
+                  value: { background: _vm.comment },
+                  expression: "{background: comment}",
+                  arg: _vm.direction
+                },
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.start,
+                  expression: "start"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "time" },
+              domProps: { value: _vm.start },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.start = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "error" }, [
+              _vm._v(_vm._s(_vm.errorStart))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "endSleep" } }, [_vm._v("Конец сна")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.end,
+                  expression: "end"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "time" },
+              domProps: { value: _vm.end },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.end = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "error" }, [_vm._v(_vm._s(_vm.errorEnd))])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "durationSleep" } }, [
+              _vm._v("Длительность сна, минут")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.duration,
+                  expression: "duration"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text" },
+              domProps: { value: _vm.duration },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.duration = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "error" }, [
+              _vm._v(_vm._s(_vm.errorDuration))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "commentSleep" } }, [
+              _vm._v("Комментарий")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.comment,
+                  expression: "comment"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text" },
+              domProps: { value: _vm.comment },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.comment = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "error" }, [
+              _vm._v(_vm._s(_vm.errorComment))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-secondary",
+                attrs: { type: "submit" }
+              },
+              [_vm._v("Сохранить")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-secondary",
+                on: { click: _vm.cancel }
+              },
+              [_vm._v("Отменить")]
+            )
+          ])
+        ]
       )
     ])
   ])
@@ -45388,255 +45714,329 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("p", { staticClass: "title" }, [_vm._v("Прорезывание зубов")]),
-    _vm._v(" "),
-    _c("div", [
-      _c("button", {
-        staticClass: "btn btn-primary btn-teeth btn11",
-        on: {
-          click: function($event) {
-            _vm.name = "Центральный верхний резец"
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("button", {
-        staticClass: "btn btn-primary btn-teeth btn11",
-        on: {
-          click: function($event) {
-            _vm.name = "Центральный верхний резец"
-          }
-        }
-      })
+  return _c("div", { staticClass: "container" }, [
+    _c("nav", { staticClass: "path", attrs: { "aria-label": "breadcrumb" } }, [
+      _c("ol", { staticClass: "breadcrumb" }, [
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [_c("router-link", { attrs: { to: "/" } }, [_vm._v("Главная")])],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [
+            _c("router-link", { attrs: { to: "/profile-user" } }, [
+              _vm._v("Профиль")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [
+            _c("router-link", { attrs: { to: "/profile-user/child-diary" } }, [
+              _vm._v("Дневник ребенка")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [
+            _c(
+              "router-link",
+              { attrs: { to: "/profile-user/child-diary/add-notes" } },
+              [_vm._v("Добавить запись")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          {
+            staticClass: "breadcrumb-item active",
+            attrs: { "aria-current": "page" }
+          },
+          [_vm._v("Прорезывание зубов")]
+        )
+      ])
     ]),
     _vm._v(" "),
-    _c("div", [
-      _c("button", {
-        staticClass: "btn btn-primary btn-teeth btn1",
-        on: {
-          click: function($event) {
-            _vm.name = "Боковой верхний резец"
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("button", {
-        staticClass: "btn btn-primary btn-teeth btn1",
-        on: {
-          click: function($event) {
-            _vm.name = "Боковой верхний резец"
-          }
-        }
-      })
-    ]),
+    _c("h2", { staticClass: "title" }, [_vm._v("Прорезывание зубов")]),
     _vm._v(" "),
-    _c("div", [
-      _c("button", {
-        staticClass: "btn btn-primary btn-teeth btn2",
-        on: {
-          click: function($event) {
-            _vm.name = "Верхний клык"
+    _c("div", { staticClass: "box" }, [
+      _c("div", [
+        _c("button", {
+          staticClass: "btn btn-primary btn-teeth btn11",
+          on: {
+            click: function($event) {
+              _vm.name = "Центральный верхний резец"
+            }
           }
-        }
-      }),
-      _vm._v(" "),
-      _c("button", {
-        staticClass: "btn btn-primary btn-teeth btn2",
-        on: {
-          click: function($event) {
-            _vm.name = "Верхний клык"
+        }),
+        _vm._v(" "),
+        _c("button", {
+          staticClass: "btn btn-primary btn-teeth btn11",
+          on: {
+            click: function($event) {
+              _vm.name = "Центральный верхний резец"
+            }
           }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", [
-      _c("button", {
-        staticClass: "btn btn-primary btn-teeth btn3",
-        on: {
-          click: function($event) {
-            _vm.name = "Верхний первый моляр"
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("button", {
-        staticClass: "btn btn-primary btn-teeth btn3",
-        on: {
-          click: function($event) {
-            _vm.name = "Верхний первый моляр"
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", [
-      _c("button", {
-        staticClass: "btn btn-primary btn-teeth btn4",
-        on: {
-          click: function($event) {
-            _vm.name = "Верхний второй моляр"
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("button", {
-        staticClass: "btn btn-primary btn-teeth btn4",
-        on: {
-          click: function($event) {
-            _vm.name = "Верхний второй моляр"
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", [
-      _c("button", {
-        staticClass: "btn btn-primary btn-teeth btn16",
-        on: {
-          click: function($event) {
-            _vm.name = "Нижний второй моляр"
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("button", {
-        staticClass: "btn btn-primary btn-teeth btn16",
-        on: {
-          click: function($event) {
-            _vm.name = "Нижний второй моляр"
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", [
-      _c("button", {
-        staticClass: "btn btn-primary btn-teeth btn12",
-        on: {
-          click: function($event) {
-            _vm.name = "Нижний первый моляр"
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("button", {
-        staticClass: "btn btn-primary btn-teeth btn12",
-        on: {
-          click: function($event) {
-            _vm.name = "Нижний первый моляр"
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", [
-      _c("button", {
-        staticClass: "btn btn-primary btn-teeth btn13",
-        on: {
-          click: function($event) {
-            _vm.name = "Нижний клык"
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("button", {
-        staticClass: "btn btn-primary btn-teeth btn13",
-        on: {
-          click: function($event) {
-            _vm.name = "Нижний клык"
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", [
-      _c("button", {
-        staticClass: "btn btn-primary btn-teeth btn14",
-        on: {
-          click: function($event) {
-            _vm.name = "Боковой нижний резец"
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("button", {
-        staticClass: "btn btn-primary btn-teeth btn14",
-        on: {
-          click: function($event) {
-            _vm.name = "Боковой нижний резец"
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", [
-      _c("button", {
-        staticClass: "btn btn-primary btn-teeth btn15",
-        on: {
-          click: function($event) {
-            _vm.name = "Центральный нижний резец"
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("button", {
-        staticClass: "btn btn-primary btn-teeth btn15",
-        on: {
-          click: function($event) {
-            _vm.name = "Центральный нижний резец"
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "error" }, [_vm._v(_vm._s(_vm.errorTeeth))]),
-    _vm._v(" "),
-    _c("div", [
-      _c("label", { staticClass: "elem-margin" }, [
-        _vm._v(_vm._s(_vm.name) + " прорезался:")
+        })
       ]),
       _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.date,
-            expression: "date"
-          }
-        ],
-        staticClass: "form-control elem-margin",
-        attrs: { type: "date" },
-        domProps: { value: _vm.date },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+      _c("div", [
+        _c("button", {
+          staticClass: "btn btn-primary btn-teeth btn1",
+          on: {
+            click: function($event) {
+              _vm.name = "Боковой верхний резец"
             }
-            _vm.date = $event.target.value
           }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "error" }, [_vm._v(_vm._s(_vm.errorDate))]),
-    _vm._v(" "),
-    _c("div", [
-      _c(
-        "button",
-        { staticClass: "btn btn-primary elem-margin", on: { click: _vm.save } },
-        [_vm._v("Сохранить")]
-      ),
+        }),
+        _vm._v(" "),
+        _c("button", {
+          staticClass: "btn btn-primary btn-teeth btn1",
+          on: {
+            click: function($event) {
+              _vm.name = "Боковой верхний резец"
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _c("button", {
+          staticClass: "btn btn-primary btn-teeth btn2",
+          on: {
+            click: function($event) {
+              _vm.name = "Верхний клык"
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("button", {
+          staticClass: "btn btn-primary btn-teeth btn2",
+          on: {
+            click: function($event) {
+              _vm.name = "Верхний клык"
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _c("button", {
+          staticClass: "btn btn-primary btn-teeth btn3",
+          on: {
+            click: function($event) {
+              _vm.name = "Верхний первый моляр"
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("button", {
+          staticClass: "btn btn-primary btn-teeth btn3",
+          on: {
+            click: function($event) {
+              _vm.name = "Верхний первый моляр"
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _c("button", {
+          staticClass: "btn btn-primary btn-teeth btn4",
+          on: {
+            click: function($event) {
+              _vm.name = "Верхний второй моляр"
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("button", {
+          staticClass: "btn btn-primary btn-teeth btn4",
+          on: {
+            click: function($event) {
+              _vm.name = "Верхний второй моляр"
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _c("button", {
+          staticClass: "btn btn-primary btn-teeth btn16",
+          on: {
+            click: function($event) {
+              _vm.name = "Нижний второй моляр"
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("button", {
+          staticClass: "btn btn-primary btn-teeth btn16",
+          on: {
+            click: function($event) {
+              _vm.name = "Нижний второй моляр"
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _c("button", {
+          staticClass: "btn btn-primary btn-teeth btn12",
+          on: {
+            click: function($event) {
+              _vm.name = "Нижний первый моляр"
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("button", {
+          staticClass: "btn btn-primary btn-teeth btn12",
+          on: {
+            click: function($event) {
+              _vm.name = "Нижний первый моляр"
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _c("button", {
+          staticClass: "btn btn-primary btn-teeth btn13",
+          on: {
+            click: function($event) {
+              _vm.name = "Нижний клык"
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("button", {
+          staticClass: "btn btn-primary btn-teeth btn13",
+          on: {
+            click: function($event) {
+              _vm.name = "Нижний клык"
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _c("button", {
+          staticClass: "btn btn-primary btn-teeth btn14",
+          on: {
+            click: function($event) {
+              _vm.name = "Боковой нижний резец"
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("button", {
+          staticClass: "btn btn-primary btn-teeth btn14",
+          on: {
+            click: function($event) {
+              _vm.name = "Боковой нижний резец"
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _c("button", {
+          staticClass: "btn btn-primary btn-teeth btn15",
+          on: {
+            click: function($event) {
+              _vm.name = "Центральный нижний резец"
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("button", {
+          staticClass: "btn btn-primary btn-teeth btn15",
+          on: {
+            click: function($event) {
+              _vm.name = "Центральный нижний резец"
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "error" }, [_vm._v(_vm._s(_vm.errorTeeth))]),
       _vm._v(" "),
       _c(
-        "button",
+        "form",
         {
-          staticClass: "btn btn-primary elem-margin",
-          on: { click: _vm.cancel }
+          staticClass: "add-post col-8",
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.saveTeeth($event)
+            }
+          }
         },
-        [_vm._v("Отменить")]
+        [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { staticClass: "elem-margin" }, [
+              _vm._v(_vm._s(_vm.name) + " прорезался:")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.date,
+                  expression: "date"
+                }
+              ],
+              staticClass: "form-control elem-margin",
+              attrs: { type: "date" },
+              domProps: { value: _vm.date },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.date = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "error" }, [_vm._v(_vm._s(_vm.errorDate))]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-secondary elem-margin",
+                attrs: { type: "submit" }
+              },
+              [_vm._v("Сохранить")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-secondary elem-margin",
+                on: { click: _vm.cancel }
+              },
+              [_vm._v("Отменить")]
+            )
+          ])
+        ]
       )
     ])
   ])
@@ -45664,78 +46064,159 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", [
-      _c("p", { staticClass: "title" }, [_vm._v("Прививки")]),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "timeFeeding" } }, [
-        _vm._v("Название вакцины")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
+  return _c("div", { staticClass: "container" }, [
+    _c("nav", { staticClass: "path", attrs: { "aria-label": "breadcrumb" } }, [
+      _c("ol", { staticClass: "breadcrumb" }, [
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [_c("router-link", { attrs: { to: "/" } }, [_vm._v("Главная")])],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [
+            _c("router-link", { attrs: { to: "/profile-user" } }, [
+              _vm._v("Профиль")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [
+            _c("router-link", { attrs: { to: "/profile-user/child-diary" } }, [
+              _vm._v("Дневник ребенка")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [
+            _c(
+              "router-link",
+              { attrs: { to: "/profile-user/child-diary/add-notes" } },
+              [_vm._v("Добавить запись")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
           {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.name,
-            expression: "name"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text" },
-        domProps: { value: _vm.name },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.name = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "error" }, [_vm._v(_vm._s(_vm.errorName))]),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "productsFeeding" } }, [
-        _vm._v("Комментарий(как перенес ребенок)")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.comment,
-            expression: "comment"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text" },
-        domProps: { value: _vm.comment },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.comment = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "error" }, [_vm._v(_vm._s(_vm.errorComment))])
+            staticClass: "breadcrumb-item active",
+            attrs: { "aria-current": "page" }
+          },
+          [_vm._v("Прививки")]
+        )
+      ])
     ]),
     _vm._v(" "),
-    _c("div", [
+    _c("h2", { staticClass: "title" }, [_vm._v("Прививки")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
       _c(
-        "button",
-        { staticClass: "btn btn-primary", on: { click: _vm.save } },
-        [_vm._v("Сохранить")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", on: { click: _vm.cancel } },
-        [_vm._v("Отменить")]
+        "form",
+        {
+          staticClass: "add-post col-8",
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.saveVaccination($event)
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "timeFeeding" } }, [
+              _vm._v("Название вакцины")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.name,
+                  expression: "name"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text" },
+              domProps: { value: _vm.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.name = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "error" }, [
+              _vm._v(_vm._s(_vm.errorName))
+            ]),
+            _vm._v(" "),
+            _c("label", { attrs: { for: "productsFeeding" } }, [
+              _vm._v("Комментарий(как перенес ребенок)")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.comment,
+                  expression: "comment"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text" },
+              domProps: { value: _vm.comment },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.comment = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "error" }, [
+              _vm._v(_vm._s(_vm.errorComment))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-secondary",
+                attrs: { type: "submit" }
+              },
+              [_vm._v("Сохранить")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-secondary",
+                on: { click: _vm.cancel }
+              },
+              [_vm._v("Отменить")]
+            )
+          ])
+        ]
       )
     ])
   ])
@@ -45763,102 +46244,187 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", [
-      _c("p", { staticClass: "title" }, [_vm._v("Прогулка")]),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "startWalk" } }, [_vm._v("Начало прогулки")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
+  return _c("div", { staticClass: "container" }, [
+    _c("nav", { staticClass: "path", attrs: { "aria-label": "breadcrumb" } }, [
+      _c("ol", { staticClass: "breadcrumb" }, [
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [_c("router-link", { attrs: { to: "/" } }, [_vm._v("Главная")])],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [
+            _c("router-link", { attrs: { to: "/profile-user" } }, [
+              _vm._v("Профиль")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [
+            _c("router-link", { attrs: { to: "/profile-user/child-diary" } }, [
+              _vm._v("Дневник ребенка")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [
+            _c(
+              "router-link",
+              { attrs: { to: "/profile-user/child-diary/add-notes" } },
+              [_vm._v("Добавить запись")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
           {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.start,
-            expression: "start"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "time" },
-        domProps: { value: _vm.start },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.start = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "error" }, [_vm._v(_vm._s(_vm.errorStart))]),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "endWalk" } }, [_vm._v("Конец прогулки")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.end,
-            expression: "end"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "time" },
-        domProps: { value: _vm.end },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.end = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "error" }, [_vm._v(_vm._s(_vm.errorEnd))]),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "durationWalk" } }, [
-        _vm._v("Длительность прогулки, минут")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.duration,
-            expression: "duration"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text" },
-        domProps: { value: _vm.duration },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.duration = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "error" }, [_vm._v(_vm._s(_vm.errorDuration))])
+            staticClass: "breadcrumb-item active",
+            attrs: { "aria-current": "page" }
+          },
+          [_vm._v("Прогулка")]
+        )
+      ])
     ]),
     _vm._v(" "),
-    _c("div", [
+    _c("h2", { staticClass: "title" }, [_vm._v("Прогулка")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
       _c(
-        "button",
-        { staticClass: "btn btn-primary", on: { click: _vm.save } },
-        [_vm._v("Сохранить")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", on: { click: _vm.cancel } },
-        [_vm._v("Отменить")]
+        "form",
+        {
+          staticClass: "add-post col-8",
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.saveWalk($event)
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "startWalk" } }, [
+              _vm._v("Начало прогулки")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.start,
+                  expression: "start"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "time" },
+              domProps: { value: _vm.start },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.start = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "error" }, [
+              _vm._v(_vm._s(_vm.errorStart))
+            ]),
+            _vm._v(" "),
+            _c("label", { attrs: { for: "endWalk" } }, [
+              _vm._v("Конец прогулки")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.end,
+                  expression: "end"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "time" },
+              domProps: { value: _vm.end },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.end = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "error" }, [_vm._v(_vm._s(_vm.errorEnd))]),
+            _vm._v(" "),
+            _c("label", { attrs: { for: "durationWalk" } }, [
+              _vm._v("Длительность прогулки, минут")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.duration,
+                  expression: "duration"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text" },
+              domProps: { value: _vm.duration },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.duration = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "error" }, [
+              _vm._v(_vm._s(_vm.errorDuration))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-secondary",
+                attrs: { type: "submit" }
+              },
+              [_vm._v("Сохранить")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-secondary",
+                on: { click: _vm.cancel }
+              },
+              [_vm._v("Отменить")]
+            )
+          ])
+        ]
       )
     ])
   ])

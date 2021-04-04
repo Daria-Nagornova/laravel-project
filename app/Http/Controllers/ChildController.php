@@ -19,7 +19,7 @@ class ChildController extends Controller
     public function index(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
        $children = Child::paginate(10);
-        return ChildResource::collection($children);
+       return ChildResource::collection($children);
     }
 
 

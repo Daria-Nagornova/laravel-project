@@ -32,10 +32,10 @@
                 </div>
             </div>
             <div class="add-comment">
-                <form>
+                <form @submit.prevent="saveComment">
                     <div class="form-group">
                         <label for="post">Комментарий:</label>
-                        <textarea class="form-control" id="post" rows="4"></textarea>
+                        <textarea class="form-control" id="post" rows="4" v-model="text"></textarea>
                     </div>
                     <button type="submit" class="btn btn-outline-secondary btn-post">Отправить</button>
                 </form>
@@ -46,6 +46,9 @@
                         </div>
                         <div class="title">{{ comment.user_id }}</div>
                     </div>
+                    <button type="button" class="ml-2 mb-1 close" aria-label="Close" @click="deleteComment">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                     <p class="text-muted">{{ comment.text }}</p>
                 </div>
             </div>
@@ -59,6 +62,7 @@ export default {
     data() {
         return {
             blogPostData: {},
+            text: ''
         }
     },
     methods: {
@@ -75,7 +79,24 @@ export default {
         },
         cancel () {
             this.$router.push('/communities/' +  this.$route.params.categories)
-        }
+        },
+        saveComment() {
+            axios.post('/api/communities/' + this.$route.params.categories + '/' + this.$route.params.post,
+                {
+                        text: this.text,
+                        user_id: 5,
+                        post_id: this.post
+                    })
+                .then(r => console.log(r))
+                .catch(e => console.log(e))
+            this.$router.push('/communities/' +  this.category+ '/' + this.post)
+        },
+        deleteComment() {
+            axios.delete('/api/communities/' + this.$route.params.categories+ '/' + this.$route.params.post + '/' + this.blogPostData.comment_id)
+                .then(r => this.blogPostData = r.data)
+                .catch(e => console.log(e))
+            this.$router.push('/communities/' +  this.category+ '/' + this.post)
+        },
     },
     computed: {
         category: function() {

@@ -1,20 +1,33 @@
 <template>
-  <div>
-      <div>
-          <p class="title">Прогулка</p>
-          <label for="startWalk">Начало прогулки</label>
-          <input class="form-control" type="time" v-model="start">
-          <div class="error">{{ errorStart }}</div>
-          <label for="endWalk">Конец прогулки</label>
-          <input class="form-control" type="time" v-model="end">
-          <div class="error">{{ errorEnd }}</div>
-          <label for="durationWalk">Длительность прогулки, минут</label>
-          <input class="form-control" type="text" v-model="duration">
-          <div class="error">{{ errorDuration }}</div>
-      </div>
-      <div>
-          <button class="btn btn-primary" @click="save">Сохранить</button>
-          <button class="btn btn-primary" @click="cancel">Отменить</button>
+  <div class="container">
+      <nav aria-label="breadcrumb" class="path">
+          <ol class="breadcrumb">
+              <li class="breadcrumb-item"><router-link to="/">Главная</router-link></li>
+              <li class="breadcrumb-item"><router-link to="/profile-user">Профиль</router-link></li>
+              <li class="breadcrumb-item"><router-link to="/profile-user/child-diary">Дневник ребенка</router-link></li>
+              <li class="breadcrumb-item"><router-link to="/profile-user/child-diary/add-notes">Добавить запись</router-link></li>
+              <li class="breadcrumb-item active" aria-current="page">Прогулка</li>
+          </ol>
+      </nav>
+      <h2 class="title">Прогулка</h2>
+      <div class="row">
+          <form @submit.prevent="saveWalk" class="add-post col-8">
+              <div class="form-group">
+                  <label for="startWalk">Начало прогулки</label>
+                  <input class="form-control" type="time" v-model="start">
+                  <div class="error">{{ errorStart }}</div>
+                  <label for="endWalk">Конец прогулки</label>
+                  <input class="form-control" type="time" v-model="end">
+                  <div class="error">{{ errorEnd }}</div>
+                  <label for="durationWalk">Длительность прогулки, минут</label>
+                  <input class="form-control" type="text" v-model="duration">
+                  <div class="error">{{ errorDuration }}</div>
+              </div>
+              <div class="form-group">
+                  <button type="submit" class="btn btn-outline-secondary">Сохранить</button>
+                  <button class="btn btn-outline-secondary" @click="cancel">Отменить</button>
+              </div>
+          </form>
       </div>
   </div>
 </template>
@@ -32,40 +45,29 @@ export default {
       errorDuration: '',
     }
   },
-  created() {
-    this.loadList()
-  },
   methods: {
-    loadList() {
-      this.$store.dispatch('load')
-    },
-    save () {
-      if(this.start == '') {
-        this.errorStart = "Укажите время начала прогулки"
-      }
-      if(this.end == '') {
-        this.errorEnd = "Укажите время окончания прогулки"
-      }
-      if(this.duration == '') {
-        this.errorDuration = "Поле должно быть заполнено"
-      }
-      if(this.duration != '' && isNaN(Number(this.duration))) {
-        this.errorDuration = "В это поле нужно ввести число"
-      }
-      if(this.start != '' && this.end != '' && this.duration != '' && !isNaN(Number(this.duration))) {
-        this.$store.dispatch('addWalk', {startWalk: this.start, endWalk: this.end, durationWalk: this.duration})
+    saveWalk () {
+
         this.cancel()
-      }
+
     },
     cancel () {
-      this.$router.push('/profile-user/child-diary')
+      this.$router.push('/profile-user/child-diary/add-notes')
     }
   }
 }
 </script>
 
 <style scoped>
-* {
-  margin: 10px;
+.add-post {
+    margin: 40px auto;
+    font-family: "Nunito", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #494f54;
+}
+.title {
+    text-align: center;
+    color: #494f54;
 }
 </style>

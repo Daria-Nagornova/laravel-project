@@ -27,7 +27,7 @@ Route::prefix('/profile-user/child-diary')->group(function () {
 });
 
 Route::prefix('/communities/{category}')->group(function () {
-    Route::get('/', [App\Http\Controllers\PostController::class, 'index'])->name('communities');
+    Route::get('/', [App\Http\Controllers\PostController::class, 'index']);
     Route::post('/add/post', [App\Http\Controllers\PostController::class, 'store']);
     Route::get('/{post}', [App\Http\Controllers\PostController::class, 'show']);
     Route::patch('/{post}/update', [App\Http\Controllers\PostController::class, 'update']);
@@ -38,5 +38,9 @@ Route::prefix('/communities')->group(function () {
     Route::post('/', [App\Http\Controllers\CategoryController::class, 'store']);
     Route::patch('/{category}', [App\Http\Controllers\CategoryController::class, 'update']);
     Route::delete('/{category}', [App\Http\Controllers\CategoryController::class, 'destroy']);
+});
+Route::prefix('/communities/{category}/{post}')->group(function () {
+    Route::post('/', [App\Http\Controllers\CommentController::class, 'store']);
+    Route::delete('/{comment}', [App\Http\Controllers\PostController::class, 'destroy']);
 });
 
