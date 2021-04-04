@@ -14,18 +14,13 @@
           <form @submit.prevent="saveSleep" class="add-post col-8">
               <div class="form-group">
                   <label for="startSleep">Начало сна</label>
-                  <input v-onclick:[direction]="{background: comment}" class="form-control" type="time" v-model="start">
+                  <input class="form-control" type="time" v-model="start">
                   <div class="error">{{ errorStart }}</div>
               </div>
               <div class="form-group">
                   <label for="endSleep">Конец сна</label>
                   <input class="form-control" type="time" v-model="end">
                   <div class="error">{{ errorEnd }}</div>
-              </div>
-              <div class="form-group">
-                  <label for="durationSleep">Длительность сна, минут</label>
-                  <input class="form-control" type="text" v-model="duration">
-                  <div class="error">{{ errorDuration }}</div>
               </div>
               <div class="form-group">
                   <label for="commentSleep">Комментарий</label>
@@ -44,35 +39,31 @@
 <script>
 export default {
   name: "Sleep",
-  directives: {
-    onclick: {
-      updated(elem, binding) {
-        const s = binding.arg
-        elem.style[s] = binding.value.background;
-      }
-    }
-  },
   data () {
     return {
-      direction: 'background',
       start: '',
       end: '',
-      duration: '',
       comment: '',
       errorStart: '',
       errorEnd: '',
-      errorDuration: '',
       errorComment: ''
     }
   },
   methods: {
       saveSleep() {
-        this.cancel()
-
-    },
-    cancel () {
-      this.$router.push('/profile-user/child-diary/add-notes')
-    }
+          axios.post('/api/profile-user/child-diary/add-notes/sleep', {
+              start: this.start,
+              end: this.end,
+              comment: this.comment,
+              child_id: 3,
+          })
+              .then(r => console.log(r))
+              .catch(e => console.log(e))
+          this.cancel()
+      },
+      cancel () {
+          this.$router.push('/profile-user/child-diary')
+      }
   }
 }
 </script>

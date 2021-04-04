@@ -37,18 +37,6 @@
                 <div class="widget search">
                     <router-link :to="'/communities/' + category + '/add/post'" class="write">Написать в сообществе</router-link>
                 </div>
-                <!-- Widget [Search Bar Widget]
-                <div class="widget search">
-                    <header>
-                        <h3 class="h6">Поиск в сообществе</h3>
-                    </header>
-                    <form action="#" class="search-form">
-                        <div class="form-group">
-                            <input type="search" placeholder="Что вы ищете?">
-                            <button type="submit" class="submit search-icon"></button>
-                        </div>
-                    </form>
-                </div>-->
                 <!-- Widget [Latest Posts Widget]        -->
                 <div class="widget latest-posts">
                     <header>

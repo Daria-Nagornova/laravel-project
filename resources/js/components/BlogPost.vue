@@ -89,6 +89,7 @@ export default {
                     })
                 .then(r => console.log(r))
                 .catch(e => console.log(e))
+            this.text = ''
             this.$router.push('/communities/' +  this.category+ '/' + this.post)
         },
         deleteComment() {

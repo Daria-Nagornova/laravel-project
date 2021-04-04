@@ -41,6 +41,41 @@ Route::prefix('/communities')->group(function () {
 });
 Route::prefix('/communities/{category}/{post}')->group(function () {
     Route::post('/', [App\Http\Controllers\CommentController::class, 'store']);
-    Route::delete('/{comment}', [App\Http\Controllers\PostController::class, 'destroy']);
+    Route::delete('/{comment}', [App\Http\Controllers\CommentController::class, 'destroy']);
 });
-
+Route::prefix('/consultations')->group(function () {
+    Route::get('/', [App\Http\Controllers\ConsultationController::class, 'index']);
+    Route::post('/', [App\Http\Controllers\ConsultationController::class, 'store']);
+    Route::get('/{consultation}', [App\Http\Controllers\ConsultationController::class, 'show']);
+    Route::delete('/{consultation}', [App\Http\Controllers\ConsultationController::class, 'destroy']);
+});
+Route::prefix('/profile-user/child-diary')->group(function () {
+  //  Route::get('/', [App\Http\Controllers\WalkController::class, 'index']);
+    Route::post('/add-notes/walk', [App\Http\Controllers\WalkController::class, 'store']);
+  //  Route::delete('/{notes}', [App\Http\Controllers\WalkController::class, 'destroy']);
+});
+Route::prefix('/profile-user/child-diary')->group(function () {
+    //  Route::get('/', [App\Http\Controllers\SleepController::class, 'index']);
+    Route::post('/add-notes/sleep', [App\Http\Controllers\SleepController::class, 'store']);
+    //  Route::delete('/{notes}', [App\Http\Controllers\SleepController::class, 'destroy']);
+});
+Route::prefix('/profile-user/child-diary')->group(function () {
+    //  Route::get('/', [App\Http\Controllers\TeethController::class, 'index']);
+    Route::post('/add-notes/teeth', [App\Http\Controllers\TeethController::class, 'store']);
+    //  Route::delete('/{notes}', [App\Http\Controllers\TeethController::class, 'destroy']);
+});
+Route::prefix('/profile-user/child-diary')->group(function () {
+    //  Route::get('/', [App\Http\Controllers\VaccinationController::class, 'index']);
+    Route::post('/add-notes/vaccination', [App\Http\Controllers\VaccinationController::class, 'store']);
+    //  Route::delete('/{notes}', [App\Http\Controllers\VaccinationController::class, 'destroy']);
+});
+Route::prefix('/profile-user/child-diary')->group(function () {
+    //  Route::get('/', [App\Http\Controllers\HeighthController::class, 'index']);
+    Route::post('/add-notes/height', [App\Http\Controllers\HeighthController::class, 'store']);
+    //  Route::delete('/{notes}', [App\Http\Controllers\HeighthController::class, 'destroy']);
+});
+Route::prefix('/profile-user/child-diary')->group(function () {
+    //  Route::get('/', [App\Http\Controllers\FeedingController::class, 'index']);
+    Route::post('/add-notes/feeding', [App\Http\Controllers\FeedingController::class, 'store']);
+    //  Route::delete('/{notes}', [App\Http\Controllers\FeedingController::class, 'destroy']);
+});

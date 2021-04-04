@@ -14,7 +14,7 @@ class Consultation extends Model
     const HELD = 'Проведена';
     const NO_HELD = 'Не проведена';
 
-    protected $fillable = ['id', 'text', 'user_id', 'doctor_id'];
+    protected $fillable = ['id', 'text', 'user_id', 'doctor_id', 'email', 'status'];
 
     public function user() : belongsTo
     {

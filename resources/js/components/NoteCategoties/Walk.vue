@@ -19,9 +19,6 @@
                   <label for="endWalk">Конец прогулки</label>
                   <input class="form-control" type="time" v-model="end">
                   <div class="error">{{ errorEnd }}</div>
-                  <label for="durationWalk">Длительность прогулки, минут</label>
-                  <input class="form-control" type="text" v-model="duration">
-                  <div class="error">{{ errorDuration }}</div>
               </div>
               <div class="form-group">
                   <button type="submit" class="btn btn-outline-secondary">Сохранить</button>
@@ -36,25 +33,28 @@
 export default {
   name: "Walk",
   data() {
-    return {
-      start: '',
-      end: '',
-      duration: '',
-      errorStart: '',
-      errorEnd: '',
-      errorDuration: '',
-    }
+      return {
+          start: '',
+          end: '',
+          errorStart: '',
+          errorEnd: '',
+      }
   },
   methods: {
-    saveWalk () {
-
-        this.cancel()
-
-    },
-    cancel () {
-      this.$router.push('/profile-user/child-diary/add-notes')
+        saveWalk() {
+            axios.post('/api/profile-user/child-diary/add-notes/walk', {
+                start: this.start,
+                end: this.end,
+                child_id: 3,
+            })
+                .then(r => console.log(r))
+                .catch(e => console.log(e))
+            this.cancel()
+        },
+        cancel () {
+            this.$router.push('/profile-user/child-diary')
+        }
     }
-  }
 }
 </script>
 

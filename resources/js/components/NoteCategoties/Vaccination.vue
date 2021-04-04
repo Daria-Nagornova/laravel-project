@@ -43,14 +43,19 @@ export default {
     }
   },
   methods: {
-    saveVaccination () {
-
-        this.cancel()
-
-    },
-    cancel () {
-      this.$router.push('/profile-user/child-diary/add-notes')
-    }
+      saveVaccination() {
+          axios.post('/api/profile-user/child-diary/add-notes/vaccination', {
+              name: this.name,
+              comment: this.comment,
+              child_id: 3,
+          })
+              .then(r => console.log(r))
+              .catch(e => console.log(e))
+          this.cancel()
+      },
+      cancel () {
+          this.$router.push('/profile-user/child-diary')
+      }
   }
 }
 </script>

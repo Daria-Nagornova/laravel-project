@@ -80,21 +80,26 @@ export default {
     }
   },
   methods: {
-    saveTeeth () {
-
-        this.cancel()
-
-    },
-    cancel () {
-      this.$router.push('/profile-user/child-diary/add-notes')
-    }
+      saveTeeth() {
+          axios.post('/api/profile-user/child-diary/add-notes/teeth', {
+              name: this.name,
+              date: this.date,
+              child_id: 3,
+          })
+              .then(r => console.log(r))
+              .catch(e => console.log(e))
+          this.cancel()
+      },
+      cancel () {
+          this.$router.push('/profile-user/child-diary')
+      }
   }
 }
 </script>
 
 <style scoped>
 .box {
- /*   position: relative;*/
+
 }
 .btn-teeth {
    /*position: absolute;*/
