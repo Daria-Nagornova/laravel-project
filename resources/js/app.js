@@ -21,6 +21,7 @@ import Blog from "./components/Blog";
 import BlogPost from "./components/BlogPost";
 import AddPost from "./components/AddPost";
 import UpdatePost from "./components/UpdatePost";
+import UserPost from "./components/UserPost";
 
 
 
@@ -70,7 +71,8 @@ const app = new Vue({
         Blog,
         BlogPost,
         AddPost,
-        UpdatePost
+        UpdatePost,
+        UserPost
     },
     router
 });

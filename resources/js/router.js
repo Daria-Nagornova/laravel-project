@@ -17,6 +17,7 @@ import Blog from "./components/Blog";
 import BlogPost from "./components/BlogPost";
 import AddPost from "./components/AddPost";
 import UpdatePost from "./components/UpdatePost";
+import UserPost from "./components/UserPost";
 
 
 
@@ -42,6 +43,7 @@ export default new VueRouter({
         { path: '/profile-user/child-diary/add-notes/teeth', component: Teeth },
         { path: '/profile-user/child-diary/add-notes/vaccination', component: Vaccination },
         { path: '/profile-user/child-diary/add-notes/walk', component: Walk },
+        { path: '/profile-user/user-posts', component: UserPost },
 
 
     ],

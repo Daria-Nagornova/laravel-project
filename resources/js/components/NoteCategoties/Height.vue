@@ -43,17 +43,19 @@ export default {
     }
   },
   methods: {
-    loadList() {
-      this.$store.dispatch('load')
-    },
-    saveHeight () {
-
-        this.cancel()
-
-    },
-    cancel () {
-      this.$router.push('/profile-user/child-diary/add-notes')
-    }
+      saveHeight() {
+          axios.post('/api/profile-user/child-diary/add-notes/height', {
+              height: this.height,
+              weight: this.weight,
+              child_id: 3,
+          })
+              .then(r => console.log(r))
+              .catch(e => console.log(e))
+          this.cancel()
+      },
+      cancel () {
+          this.$router.push('/profile-user/child-diary')
+      }
   }
 }
 </script>

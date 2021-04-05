@@ -18,6 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//Route::middleware('auth')->get('/', [App\Http\Controllers\ChildController::class, 'index']);
+
 Route::prefix('/profile-user/child-diary')->group(function () {
     Route::get('/', [App\Http\Controllers\ChildController::class, 'index']);
     Route::post('/add-child', [App\Http\Controllers\ChildController::    class, 'store']);
@@ -79,3 +81,4 @@ Route::prefix('/profile-user/child-diary')->group(function () {
     Route::post('/add-notes/feeding', [App\Http\Controllers\FeedingController::class, 'store']);
     //  Route::delete('/{notes}', [App\Http\Controllers\FeedingController::class, 'destroy']);
 });
+Route::get('/profile-user/user-posts', [App\Http\Controllers\PostController::class, 'userPost']);

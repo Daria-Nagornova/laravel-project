@@ -26,7 +26,7 @@
                 </div>
                 <div class="form-group">
                     <label for="file">Прикрепите изображение:</label>
-                    <input type="file" class="form-control-file" id="file">
+                    <input type="file" class="form-control-file" id="file" @change="selectFile">
                 </div>
                 <div class="form-group btn-box">
                     <button type="submit" class="btn btn-outline-secondary btn-post">Опубликовать</button>
@@ -45,18 +45,34 @@ name: "AddPost",
             title: '',
             content: '',
             subcategory: '',
+            image: ''
         }
     },
     methods: {
+        selectFile(event) {
+            this.image = event.target.files[0]
+            console.log(this.image)
+        },
         savePost() {
-            axios.post('/api/communities/' +  this.$route.params.categories + '/add/post', {
+            console.log(this.image, this.title)
+            let form = new FormData()
+            form.append('image', this.image)
+            form.append('title', this.title)
+            form.append('content', this.content)
+            form.append('subcategory_id', this.subcategory)
+            form.append('category_id', this.$route.params.categories)
+            form.append('user_id', '5')
+
+           /* axios.post('/api/communities/' +  this.$route.params.categories + '/add/post', {
                 title: this.title,
                 content: this.content,
                 subcategory_id: this.subcategory,
                 category_id: this.$route.params.categories,
                 user_id: 5,
-            })
-                .then(r => console.log(r))
+                image: this.image
+            })*/
+            axios.post('/api/communities/' +  this.$route.params.categories + '/add/post', form)
+                .then(r => console.log(r.data))
                 .catch(e => console.log(e))
             this.cancel()
         },

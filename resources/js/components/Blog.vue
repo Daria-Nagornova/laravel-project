@@ -13,7 +13,11 @@
                     <div class="row">
                         <!-- post -->
                         <div v-for="post in postData.data" :key="post" class="post col-xl-6">
-                            <div class="post-thumbnail"><router-link to="'/communities/' + category + '/' + post.id" class="animsition-link"><img src="img/blog-post-1.jpeg" alt="..." class="img-fluid"></router-link></div>
+                            <div class="post-thumbnail">
+                                <router-link :to="'/communities/' + category + '/' + post.id" class="animsition-link">
+                                    <img src="img/blog-post-1.jpeg" class="img-fluid">
+                                </router-link>
+                            </div>
                             <div class="post-details">
                                 <div class="post-meta d-flex justify-content-between">
                                     <div class="date meta-last">{{ post.created_at }}</div>

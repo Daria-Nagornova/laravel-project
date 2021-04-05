@@ -6,9 +6,11 @@ use App\Http\Requests\Post\StoreRequest;
 use App\Http\Requests\Post\UpdateRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\Post;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+
 
 class PostController extends Controller
 {
@@ -28,14 +30,19 @@ class PostController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return JsonResponse
+     * @return JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function store(StoreRequest $request) : JsonResponse
+    public function store(StoreRequest $request)
     {
         $post = new Post;
         $post->fill($request->validated());
         $post->save();
-        //return redirect()->route('communities')->with('success', 'Пост сохранен');
+
+        if($request->hasFile('image')) {
+            $image = Image::saveForPost($request->file('image'), $post);
+            return response()->json($image, 201);
+        }
+        // redirect()->route('/communities')->with('success', 'Пост сохранен');
         return response()->json($post, 200);
 
     }
@@ -48,7 +55,7 @@ class PostController extends Controller
      */
     public function show(Category $category, Post $post) : JsonResponse
     {
-        $blog = $post->load('user', 'subcategory', 'category', 'comments');
+        $blog = $post->load('user', 'subcategory', 'category', 'comments', 'image');
         return response()->json($blog, 200);
     }
 
@@ -81,4 +88,18 @@ class PostController extends Controller
 
         return response()->json($post, 200);
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function userPost(Request $request): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    {
+
+        $posts = $request->user()->posts()->paginate(6);
+        return PostResource::collection($posts);
+    }
+
 }

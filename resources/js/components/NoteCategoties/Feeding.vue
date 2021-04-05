@@ -46,14 +46,19 @@ export default {
     }
   },
   methods: {
-    saveFeeding () {
-
-        this.cancel()
-
-    },
-    cancel () {
-      this.$router.push('/profile-user/child-diary/add-notes')
-    }
+      saveFeeding() {
+          axios.post('/api/profile-user/child-diary/add-notes/feeding', {
+              time: this.time,
+              products: this.product,
+              child_id: 3,
+          })
+              .then(r => console.log(r))
+              .catch(e => console.log(e))
+          this.cancel()
+      },
+      cancel () {
+          this.$router.push('/profile-user/child-diary')
+      }
   }
 }
 </script>
