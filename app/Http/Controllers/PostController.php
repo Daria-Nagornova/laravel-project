@@ -97,9 +97,10 @@ class PostController extends Controller
      */
     public function userPost(Request $request): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-
-        $posts = $request->user()->posts()->paginate(6);
-        return PostResource::collection($posts);
+        $posts = $request->user();
+dd($posts);
+       // $posts = $request->user()->posts()->paginate(6);
+        //return PostResource::collection($posts);
     }
 
 }

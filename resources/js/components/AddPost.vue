@@ -61,7 +61,7 @@ name: "AddPost",
             form.append('content', this.content)
             form.append('subcategory_id', this.subcategory)
             form.append('category_id', this.$route.params.categories)
-            form.append('user_id', '5')
+            form.append('user_id', '61')
 
            /* axios.post('/api/communities/' +  this.$route.params.categories + '/add/post', {
                 title: this.title,
