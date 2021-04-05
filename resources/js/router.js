@@ -18,15 +18,18 @@ import BlogPost from "./components/BlogPost";
 import AddPost from "./components/AddPost";
 import UpdatePost from "./components/UpdatePost";
 import UserPost from "./components/UserPost";
+import Login from "./components/Auth/Login";
+import Register from "./components/Auth/Register";
 
 
 
 Vue.use(VueRouter);
 
 export default new VueRouter({
-    //history: createWebHistory(),
     routes: [
         { path: '/', component: HomePage },
+        { path: '/login', component: Login },
+        { path: '/register', component: Register },
         { path: '/communities', component: Communities },
         { path: '/communities/:categories', component: Blog },
         { path: '/communities/:categories/:post', component: BlogPost },

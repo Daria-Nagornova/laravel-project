@@ -29,8 +29,12 @@
                             </ul>
                         </div>
                     <ul class="navbar-nav ml-auto align-items-center main-menu">
-                        <li class="nav-item"><a href="/login" class="nav-link animsition-link">Вход</a></li>
-                        <li class="nav-item"><a href="/register" class="nav-link animsition-link">Регистрация</a></li>
+                        <li class="nav-item">
+                            <router-link to="/login" class="nav-link animsition-link">Вход</router-link>
+                        </li>
+                        <li class="nav-item">
+                            <router-link to="/register" class="nav-link animsition-link">Регистрация</router-link>
+                        </li>
                     </ul>
                 </div>
             </nav>

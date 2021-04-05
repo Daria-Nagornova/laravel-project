@@ -5,6 +5,7 @@
  */
 import Vue from 'vue'
 import router from './router'
+//import store from './store'
 import ProfileUser from "./components/ProfileUser";
 import Consultations from "./components/Consultations";
 import ChildDiary from "./components/ChildDiary";
@@ -22,6 +23,8 @@ import BlogPost from "./components/BlogPost";
 import AddPost from "./components/AddPost";
 import UpdatePost from "./components/UpdatePost";
 import UserPost from "./components/UserPost";
+import Login from "./components/Auth/Login";
+import Register from "./components/Auth/Register";
 
 
 
@@ -72,7 +75,10 @@ const app = new Vue({
         BlogPost,
         AddPost,
         UpdatePost,
-        UserPost
+        UserPost,
+        Login,
+        Register
     },
-    router
+    router,
+   // store
 });
