@@ -8,8 +8,10 @@ use App\Http\Resources\PostResource;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Post;
+use App\Policies\Ability;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 
 class PostController extends Controller
@@ -55,6 +57,7 @@ class PostController extends Controller
      */
     public function show(Category $category, Post $post) : JsonResponse
     {
+
         $blog = $post->load('user', 'subcategory', 'category', 'comments', 'image');
         return response()->json($blog, 200);
     }
@@ -70,6 +73,10 @@ class PostController extends Controller
      */
     public function update(UpdateRequest $request, Category $category, Post $post) : JsonResponse
     {
+        /*if (! Gate::allows('update-post', $post)) {
+            abort(403);
+        }*/
+        //$this->authorize(Ability::VIEW, $post);
 
         $post->update($request->validated());
 
@@ -97,10 +104,10 @@ class PostController extends Controller
      */
     public function userPost(Request $request): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-        $posts = $request->user();
-dd($posts);
-       // $posts = $request->user()->posts()->paginate(6);
-        //return PostResource::collection($posts);
+       // $posts = $request->user();
+       // dd($posts);
+        $posts = $request->user()->posts()->paginate(6);
+        return PostResource::collection($posts);
     }
 
 }

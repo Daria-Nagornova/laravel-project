@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Route::middleware('auth')->get('/', [App\Http\Controllers\ChildController::class, 'index']);
+//Route::middleware('auth:api')->get('/', [App\Http\Controllers\ChildController::class, 'index']);
 
 Route::prefix('/profile-user/child-diary')->group(function () {
     Route::get('/', [App\Http\Controllers\ChildController::class, 'index']);
