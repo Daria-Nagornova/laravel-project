@@ -21,6 +21,8 @@ Route::post('login', [App\Http\Controllers\Api\AuthController::class, 'login']);
 Route::post('register', [App\Http\Controllers\Api\AuthController::class, 'register']);
 //Route::middleware('auth:api')->get('/', [App\Http\Controllers\ChildController::class, 'index']);
 
+Route::get('/', [App\Http\Controllers\PostController::class, 'postForHome']);
+
 Route::prefix('/profile-user/child-diary')->group(function () {
     Route::get('/', [App\Http\Controllers\ChildController::class, 'index']);
     Route::post('/add-child', [App\Http\Controllers\ChildController::    class, 'store']);
@@ -42,6 +44,7 @@ Route::prefix('/communities')->group(function () {
     Route::patch('/{category}', [App\Http\Controllers\CategoryController::class, 'update']);
     Route::delete('/{category}', [App\Http\Controllers\CategoryController::class, 'destroy']);
 });
+Route::get('/popular', [App\Http\Controllers\PostController::class, 'popularPost']);
 Route::prefix('/communities/{category}/{post}')->group(function () {
     Route::post('/', [App\Http\Controllers\CommentController::class, 'store']);
     Route::delete('/{comment}', [App\Http\Controllers\CommentController::class, 'destroy']);

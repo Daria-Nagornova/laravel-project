@@ -2065,8 +2065,7 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(r.data);
       })["catch"](function (e) {
         return console.log(e);
-      });
-      this.cancel();
+      }); //this.cancel()
     },
     cancel: function cancel() {
       this.$router.push('/communities/' + this.$route.params.categories);
@@ -2136,8 +2135,25 @@ __webpack_require__.r(__webpack_exports__);
   name: "Login",
   data: function data() {
     return {
-      message: ''
+      message: '',
+      password: '',
+      email: ''
     };
+  },
+  methods: {
+    authUser: function authUser() {
+      var form = new FormData();
+      form.append('email', this.email);
+      form.append('password', this.password);
+      axios.post('/api/login', form).then(function (r) {
+        return console.log(r.data);
+      })["catch"](function (e) {
+        return console.log(e);
+      }); //this.cancel()
+    },
+    cancel: function cancel() {
+      this.$router.push('/');
+    }
   }
 });
 
@@ -2225,8 +2241,29 @@ __webpack_require__.r(__webpack_exports__);
   name: "Register",
   data: function data() {
     return {
-      message: ''
+      message: '',
+      name: '',
+      email: '',
+      password: '',
+      c_password: ''
     };
+  },
+  methods: {
+    saveUser: function saveUser() {
+      var form = new FormData();
+      form.append('name', this.name);
+      form.append('email', this.email);
+      form.append('password', this.password);
+      form.append('c_password', this.c_password);
+      axios.post('/api/register', form).then(function (r) {
+        return console.log(r.data);
+      })["catch"](function (e) {
+        return console.log(e);
+      }); //this.cancel()
+    },
+    cancel: function cancel() {
+      this.$router.push('/');
+    }
   }
 });
 
@@ -3097,24 +3134,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "HomePage"
+  name: "HomePage",
+  data: function data() {
+    return {
+      postData: {}
+    };
+  },
+  methods: {
+    loadLastPost: function loadLastPost() {
+      var _this = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      axios.get('/api/').then(function (r) {
+        return _this.postData = r.data;
+      })["catch"](function (e) {
+        return console.log(e);
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.loadLastPost();
+  }
 });
 
 /***/ }),
@@ -8720,7 +8761,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.text-big span[data-v-fa44bb0e] {\n    font-weight: bold;\n}\nsection[data-v-fa44bb0e] {\n   padding: 30px 0 !important;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.text-big span[data-v-fa44bb0e] {\n    font-weight: bold;\n}\nsection[data-v-fa44bb0e] {\n   padding: 30px 0 !important;\n}\n.category[data-v-fa44bb0e] {\n    color: #796AEE;\n    font-weight: 700;\n    text-transform: uppercase;\n}\nh2[data-v-fa44bb0e] {\n    font-size: 1.35rem;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43773,76 +43814,121 @@ var render = function() {
           _c("div", { staticClass: "card-header" }, [_vm._v("Авторизация")]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
-            _c("form", [
-              _c("div", { staticClass: "form-group row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-md-4 col-form-label text-md-right",
-                    attrs: { for: "email" }
-                  },
-                  [_vm._v("Введите email:")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-6" }, [
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: {
-                      id: "email",
-                      type: "email",
-                      name: "email",
-                      required: "",
-                      autocomplete: "email",
-                      autofocus: ""
-                    }
-                  }),
-                  _vm._v(" "),
+            _c(
+              "form",
+              {
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.authUser($event)
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "form-group row" }, [
                   _c(
-                    "span",
+                    "label",
                     {
-                      staticClass: "invalid-feedback",
-                      attrs: { role: "alert" }
+                      staticClass: "col-md-4 col-form-label text-md-right",
+                      attrs: { for: "email" }
                     },
-                    [_c("strong", [_vm._v(_vm._s(_vm.message))])]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-md-4 col-form-label text-md-right",
-                    attrs: { for: "password" }
-                  },
-                  [_vm._v("Введите пароль:")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-6" }, [
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: {
-                      id: "password",
-                      type: "password",
-                      name: "password",
-                      required: "",
-                      autocomplete: "current-password"
-                    }
-                  }),
+                    [_vm._v("Введите email:")]
+                  ),
                   _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.email,
+                          expression: "email"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "email",
+                        type: "email",
+                        name: "email",
+                        required: "",
+                        autocomplete: "email",
+                        autofocus: ""
+                      },
+                      domProps: { value: _vm.email },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.email = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        staticClass: "invalid-feedback",
+                        attrs: { role: "alert" }
+                      },
+                      [_c("strong", [_vm._v(_vm._s(_vm.message))])]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
                   _c(
-                    "span",
+                    "label",
                     {
-                      staticClass: "invalid-feedback",
-                      attrs: { role: "alert" }
+                      staticClass: "col-md-4 col-form-label text-md-right",
+                      attrs: { for: "password" }
                     },
-                    [_c("strong", [_vm._v(_vm._s(_vm.message))])]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._m(0)
-            ])
+                    [_vm._v("Введите пароль:")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.password,
+                          expression: "password"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "password",
+                        type: "password",
+                        name: "password",
+                        required: "",
+                        autocomplete: "current-password"
+                      },
+                      domProps: { value: _vm.password },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.password = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        staticClass: "invalid-feedback",
+                        attrs: { role: "alert" }
+                      },
+                      [_c("strong", [_vm._v(_vm._s(_vm.message))])]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(0)
+              ]
+            )
           ])
         ])
       ])
@@ -43901,105 +43987,206 @@ var render = function() {
           _c("div", { staticClass: "card-header" }, [_vm._v("Регистрация")]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
-            _c("form", [
-              _c("div", { staticClass: "form-group row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-md-4 col-form-label text-md-right",
-                    attrs: { for: "name" }
-                  },
-                  [_vm._v("Введите имя")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-6" }, [
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: {
-                      id: "name",
-                      type: "text",
-                      name: "name",
-                      required: "",
-                      autocomplete: "name",
-                      autofocus: ""
-                    }
-                  }),
-                  _vm._v(" "),
+            _c(
+              "form",
+              {
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.saveUser($event)
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "form-group row" }, [
                   _c(
-                    "span",
+                    "label",
                     {
-                      staticClass: "invalid-feedback",
-                      attrs: { role: "alert" }
+                      staticClass: "col-md-4 col-form-label text-md-right",
+                      attrs: { for: "name" }
                     },
-                    [_c("strong", [_vm._v(_vm._s(_vm.message))])]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-md-4 col-form-label text-md-right",
-                    attrs: { for: "email" }
-                  },
-                  [_vm._v("Введите email:")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-6" }, [
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: { id: "email", type: "email", name: "email" }
-                  }),
+                    [_vm._v("Введите имя")]
+                  ),
                   _vm._v(" "),
-                  _c(
-                    "span",
-                    {
-                      staticClass: "invalid-feedback",
-                      attrs: { role: "alert" }
-                    },
-                    [_c("strong", [_vm._v(_vm._s(_vm.message))])]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-md-4 col-form-label text-md-right",
-                    attrs: { for: "password" }
-                  },
-                  [_vm._v("Введите пароль:")]
-                ),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.name,
+                          expression: "name"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "name",
+                        type: "text",
+                        name: "name",
+                        required: "",
+                        autocomplete: "name",
+                        autofocus: ""
+                      },
+                      domProps: { value: _vm.name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.name = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        staticClass: "invalid-feedback",
+                        attrs: { role: "alert" }
+                      },
+                      [_c("strong", [_vm._v(_vm._s(_vm.message))])]
+                    )
+                  ])
+                ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-6" }, [
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: {
-                      id: "password",
-                      type: "password",
-                      name: "password",
-                      required: "",
-                      autocomplete: "new-password"
-                    }
-                  }),
-                  _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
                   _c(
-                    "span",
+                    "label",
                     {
-                      staticClass: "invalid-feedback",
-                      attrs: { role: "alert" }
+                      staticClass: "col-md-4 col-form-label text-md-right",
+                      attrs: { for: "email" }
                     },
-                    [_c("strong", [_vm._v(_vm._s(_vm.message))])]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._m(0),
-              _vm._v(" "),
-              _vm._m(1)
-            ])
+                    [_vm._v("Введите email:")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.email,
+                          expression: "email"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "email", type: "email", name: "email" },
+                      domProps: { value: _vm.email },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.email = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        staticClass: "invalid-feedback",
+                        attrs: { role: "alert" }
+                      },
+                      [_c("strong", [_vm._v(_vm._s(_vm.message))])]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-4 col-form-label text-md-right",
+                      attrs: { for: "password" }
+                    },
+                    [_vm._v("Введите пароль:")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.password,
+                          expression: "password"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "password",
+                        type: "password",
+                        name: "password",
+                        required: "",
+                        autocomplete: "new-password"
+                      },
+                      domProps: { value: _vm.password },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.password = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        staticClass: "invalid-feedback",
+                        attrs: { role: "alert" }
+                      },
+                      [_c("strong", [_vm._v(_vm._s(_vm.message))])]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-4 col-form-label text-md-right",
+                      attrs: { for: "password-confirm" }
+                    },
+                    [_vm._v("Подтвердите пароль:")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.c_password,
+                          expression: "c_password"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "password-confirm",
+                        type: "password",
+                        name: "password_confirmation",
+                        required: "",
+                        autocomplete: "new-password"
+                      },
+                      domProps: { value: _vm.c_password },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.c_password = $event.target.value
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(0)
+              ]
+            )
           ])
         ])
       ])
@@ -44007,34 +44194,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group row" }, [
-      _c(
-        "label",
-        {
-          staticClass: "col-md-4 col-form-label text-md-right",
-          attrs: { for: "password-confirm" }
-        },
-        [_vm._v("Подтвердите пароль:")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            id: "password-confirm",
-            type: "password",
-            name: "password_confirmation",
-            required: "",
-            autocomplete: "new-password"
-          }
-        })
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -45802,7 +45961,83 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(5)
+    _c("section", { staticClass: "latest-posts no-padding-top" }, [
+      _c("div", { staticClass: "container" }, [
+        _vm._m(5),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "row" },
+          _vm._l(_vm.postData.data, function(post) {
+            return _c("div", { key: post.id, staticClass: "post col-md-4" }, [
+              _c(
+                "div",
+                { staticClass: "post-thumbnail" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "animsition-link",
+                      attrs: {
+                        to: "/communities/" + post.category_id + "/" + post.id
+                      }
+                    },
+                    [
+                      _c("img", {
+                        staticClass: "img-fluid",
+                        attrs: { src: "img/67.jpg" }
+                      })
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "post-details" },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "post-meta d-flex justify-content-between" },
+                    [
+                      _c("div", { staticClass: "date" }, [
+                        _vm._v(_vm._s(post.created_at))
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "category" }, [
+                        _vm._v(_vm._s(post.subcategory_name))
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "animsition-link",
+                      attrs: {
+                        to: "/communities/" + post.category_id + "/" + post.id
+                      }
+                    },
+                    [
+                      _c("h3", { staticClass: "h4" }, [
+                        _vm._v(_vm._s(post.title))
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-muted" }, [
+                    _vm._v(_vm._s(post.content))
+                  ])
+                ],
+                1
+              )
+            ])
+          }),
+          0
+        )
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
@@ -45881,165 +46116,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "latest-posts no-padding-top" }, [
-      _c("div", { staticClass: "container" }, [
-        _c("header", [_c("h2", [_vm._v("Последние посты блога")])]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "post col-md-4" }, [
-            _c("div", { staticClass: "post-thumbnail" }, [
-              _c(
-                "a",
-                {
-                  staticClass: "animsition-link",
-                  attrs: { href: "post.html" }
-                },
-                [
-                  _c("img", {
-                    staticClass: "img-fluid",
-                    attrs: { src: "img/67.jpg", alt: "..." }
-                  })
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "post-details" }, [
-              _c(
-                "div",
-                { staticClass: "post-meta d-flex justify-content-between" },
-                [
-                  _c("div", { staticClass: "date" }, [_vm._v("20 мая | 2020")]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "category" }, [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _vm._v("Здоровье будущей мамы")
-                    ])
-                  ])
-                ]
-              ),
-              _c(
-                "a",
-                {
-                  staticClass: "animsition-link",
-                  attrs: { href: "post.html" }
-                },
-                [
-                  _c("h3", { staticClass: "h4" }, [
-                    _vm._v("Здоровье будущей мамы")
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c("p", { staticClass: "text-muted" }, [
-                _vm._v(
-                  "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore."
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "post col-md-4" }, [
-            _c("div", { staticClass: "post-thumbnail" }, [
-              _c(
-                "a",
-                {
-                  staticClass: "animsition-link",
-                  attrs: { href: "post.html" }
-                },
-                [
-                  _c("img", {
-                    staticClass: "img-fluid",
-                    attrs: { src: "img/19.jpg", alt: "..." }
-                  })
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "post-details" }, [
-              _c(
-                "div",
-                { staticClass: "post-meta d-flex justify-content-between" },
-                [
-                  _c("div", { staticClass: "date" }, [_vm._v("20 мая | 2020")]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "category" }, [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _vm._v("Развивающие занятия")
-                    ])
-                  ])
-                ]
-              ),
-              _c(
-                "a",
-                {
-                  staticClass: "animsition-link",
-                  attrs: { href: "post.html" }
-                },
-                [
-                  _c("h3", { staticClass: "h4" }, [
-                    _vm._v("Развивающие занятия")
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c("p", { staticClass: "text-muted" }, [
-                _vm._v(
-                  "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore."
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "post col-md-4" }, [
-            _c("div", { staticClass: "post-thumbnail" }, [
-              _c(
-                "a",
-                {
-                  staticClass: "animsition-link",
-                  attrs: { href: "post.html" }
-                },
-                [
-                  _c("img", {
-                    staticClass: "img-fluid",
-                    attrs: { src: "img/75.jpg" }
-                  })
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "post-details" }, [
-              _c(
-                "div",
-                { staticClass: "post-meta d-flex justify-content-between" },
-                [
-                  _c("div", { staticClass: "date" }, [_vm._v("20 мая | 2020")]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "category" }, [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _vm._v("Здоровье малыша")
-                    ])
-                  ])
-                ]
-              ),
-              _c(
-                "a",
-                {
-                  staticClass: "animsition-link",
-                  attrs: { href: "post.html" }
-                },
-                [_c("h3", { staticClass: "h4" }, [_vm._v("Здоровье малыша")])]
-              ),
-              _vm._v(" "),
-              _c("p", { staticClass: "text-muted" }, [
-                _vm._v(
-                  "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore."
-                )
-              ])
-            ])
-          ])
-        ])
-      ])
-    ])
+    return _c("header", [_c("h2", [_vm._v("Последние посты блога")])])
   }
 ]
 render._withStripped = true

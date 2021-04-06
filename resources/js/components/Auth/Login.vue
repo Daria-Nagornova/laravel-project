@@ -5,12 +5,12 @@
                 <div class="card">
                     <div class="card-header">Авторизация</div>
                     <div class="card-body">
-                        <form>
+                        <form @submit.prevent="authUser">
                             <div class="form-group row">
                                 <label for="email" class="col-md-4 col-form-label text-md-right">Введите email:</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" name="email" required autocomplete="email" autofocus>
+                                    <input id="email" type="email" class="form-control" name="email" required autocomplete="email" autofocus v-model="email">
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ message }}</strong>
                                     </span>
@@ -21,7 +21,7 @@
                                 <label for="password" class="col-md-4 col-form-label text-md-right">Введите пароль:</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="password" required autocomplete="current-password">
+                                    <input id="password" type="password" class="form-control" name="password" required autocomplete="current-password" v-model="password">
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ message }}</strong>
                                     </span>
@@ -48,7 +48,24 @@ export default {
 name: "Login",
     data() {
         return {
-            message: ''
+            message: '',
+            password: '',
+            email: '',
+        }
+    },
+    methods: {
+        authUser() {
+            let form = new FormData()
+            form.append('email', this.email)
+            form.append('password', this.password)
+
+            axios.post('/api/login', form)
+                .then(r => console.log(r.data))
+                .catch(e => console.log(e))
+            //this.cancel()
+        },
+        cancel () {
+            this.$router.push('/')
         }
     }
 }

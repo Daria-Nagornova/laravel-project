@@ -73,37 +73,21 @@
                     <h2>Последние посты блога</h2>
                 </header>
                 <div class="row">
-                    <div class="post col-md-4">
-                        <div class="post-thumbnail"><a href="post.html" class="animsition-link"><img src="img/67.jpg" alt="..." class="img-fluid"></a></div>
-                        <div class="post-details">
-                            <div class="post-meta d-flex justify-content-between">
-                                <div class="date">20 мая | 2020</div>
-                                <div class="category"><a href="#">Здоровье будущей мамы</a></div>
-                            </div><a href="post.html" class="animsition-link">
-                            <h3 class="h4">Здоровье будущей мамы</h3></a>
-                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                    <div v-for="post in postData.data" :key="post.id" class="post col-md-4">
+                        <div class="post-thumbnail">
+                            <router-link :to="'/communities/' + post.category_id + '/' + post.id" class="animsition-link">
+                                <img src="img/67.jpg" class="img-fluid">
+                            </router-link>
                         </div>
-                    </div>
-                    <div class="post col-md-4">
-                        <div class="post-thumbnail"><a href="post.html" class="animsition-link"><img src="img/19.jpg" alt="..." class="img-fluid"></a></div>
                         <div class="post-details">
                             <div class="post-meta d-flex justify-content-between">
-                                <div class="date">20 мая | 2020</div>
-                                <div class="category"><a href="#">Развивающие занятия</a></div>
-                            </div><a href="post.html" class="animsition-link">
-                            <h3 class="h4">Развивающие занятия</h3></a>
-                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                        </div>
-                    </div>
-                    <div class="post col-md-4">
-                        <div class="post-thumbnail"><a href="post.html" class="animsition-link"><img src="img/75.jpg" class="img-fluid"></a></div>
-                        <div class="post-details">
-                            <div class="post-meta d-flex justify-content-between">
-                                <div class="date">20 мая | 2020</div>
-                                <div class="category"><a href="#">Здоровье малыша</a></div>
-                            </div><a href="post.html" class="animsition-link">
-                            <h3 class="h4">Здоровье малыша</h3></a>
-                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                                <div class="date">{{ post.created_at }}</div>
+                                <div class="category">{{ post.subcategory_name }}</div>
+                            </div>
+                            <router-link :to="'/communities/' + post.category_id + '/' + post.id" class="animsition-link">
+                                <h3 class="h4">{{ post.title }}</h3>
+                            </router-link>
+                            <p class="text-muted">{{ post.content }}</p>
                         </div>
                     </div>
                 </div>
@@ -114,7 +98,22 @@
 
 <script>
 export default {
-name: "HomePage"
+name: "HomePage",
+    data() {
+        return {
+            postData: {},
+        }
+    },
+    methods: {
+        loadLastPost(page = 1) {
+            axios.get('/api/')
+                .then(r => this.postData = r.data)
+                .catch(e => console.log(e))
+        }
+    },
+    mounted() {
+        this.loadLastPost()
+    }
 }
 </script>
 
@@ -125,5 +124,13 @@ name: "HomePage"
 section {
    padding: 30px 0 !important;
 }
-
+.category {
+    color: #796AEE;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+h2 {
+    font-size: 1.35rem;
+    font-weight: 600;
+}
 </style>

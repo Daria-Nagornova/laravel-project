@@ -74,7 +74,7 @@ name: "AddPost",
             axios.post('/api/communities/' +  this.$route.params.categories + '/add/post', form)
                 .then(r => console.log(r.data))
                 .catch(e => console.log(e))
-            this.cancel()
+            //this.cancel()
         },
         cancel () {
             this.$router.push('/communities/' +  this.$route.params.categories)
