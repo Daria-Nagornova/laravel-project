@@ -72,7 +72,7 @@ name: "AddPost",
                 image: this.image
             })*/
             axios.post('/api/communities/' +  this.$route.params.categories + '/add/post', form)
-                .then(r => console.log(r.data))
+                .then(r => this.cancel())
                 .catch(e => console.log(e))
             //this.cancel()
         },

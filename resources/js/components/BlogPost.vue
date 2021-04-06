@@ -14,7 +14,9 @@
                     <router-link :to="'/communities/' + category + '/' + post + '/update'" class="btn btn-outline-secondary btn-blogpost">Редактировать</router-link>
                     <button class="btn btn-outline-secondary btn-blogpost" @click="deletePost">Удалить</button>
                 </div>
-                <div class="post-thumbnail"><img src="img/blog-post-1.jpeg" class="img-fluid"></div>
+                <div class="post-thumbnail">
+                    <img :src="$store.state.site + blogPostData.image.path" class="img-fluid">
+                </div>
                 <div class="post-details">
                     <div class="post-meta d-flex justify-content-between">
                         <div class="date meta-last">20 мая | 2020</div>
@@ -39,14 +41,14 @@
                     </div>
                     <button type="submit" class="btn btn-outline-secondary btn-post">Отправить</button>
                 </form>
-                <div v-for="comment in blogPostData.comments" :key="comment" class="post-details">
+                <div v-for="comment in blogPostData.comments" :key="comment.id" class="post-details">
                     <div class="post-footer d-flex align-items-center">
                         <div class="avatar">
                             <img src="img/avatar-3.jpg" class="img-fluid">
                         </div>
-                        <div class="title">{{ comment.user_id }}</div>
+                        <div class="title">{{ comment.user.name }}</div>
                     </div>
-                    <button type="button" class="ml-2 mb-1 close" aria-label="Close" @click="deleteComment">
+                    <button type="button" class="ml-2 mb-1 close" aria-label="Close" @click="deleteComment(comment.id)">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <p class="text-muted">{{ comment.text }}</p>
@@ -62,7 +64,8 @@ export default {
     data() {
         return {
             blogPostData: {},
-            text: ''
+            text: '',
+            newComment: ''
         }
     },
     methods: {
@@ -87,16 +90,14 @@ export default {
                         user_id: 5,
                         post_id: this.post
                     })
-                .then(r => console.log(r))
+                .then(r => this.loadBlogPost())
                 .catch(e => console.log(e))
-            this.text = ''
-            this.$router.push('/communities/' +  this.category+ '/' + this.post)
+                this.text = ''
         },
-        deleteComment() {
-            axios.delete('/api/communities/' + this.$route.params.categories+ '/' + this.$route.params.post + '/' + this.blogPostData.comment_id)
-                .then(r => this.blogPostData = r.data)
+        deleteComment(id) {
+            axios.delete('/api/comments/' + id)
+                .then(r => this.loadBlogPost())
                 .catch(e => console.log(e))
-            this.$router.push('/communities/' +  this.category+ '/' + this.post)
         },
     },
     computed: {
@@ -140,5 +141,9 @@ export default {
     border: none;
     border-bottom: 2px solid gray;
     margin: 0 20px;
+}
+.post-thumbnail img {
+    display: block;
+    margin: 0 auto;
 }
 </style>

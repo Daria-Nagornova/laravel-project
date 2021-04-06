@@ -5,7 +5,7 @@
  */
 import Vue from 'vue'
 import router from './router'
-//import store from './store'
+import store from './store'
 import ProfileUser from "./components/ProfileUser";
 import Consultations from "./components/Consultations";
 import ChildDiary from "./components/ChildDiary";
@@ -80,5 +80,5 @@ const app = new Vue({
         Register
     },
     router,
-   // store
+    store
 });

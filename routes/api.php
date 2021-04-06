@@ -47,8 +47,9 @@ Route::prefix('/communities')->group(function () {
 Route::get('/popular', [App\Http\Controllers\PostController::class, 'popularPost']);
 Route::prefix('/communities/{category}/{post}')->group(function () {
     Route::post('/', [App\Http\Controllers\CommentController::class, 'store']);
-    Route::delete('/{comment}', [App\Http\Controllers\CommentController::class, 'destroy']);
+
 });
+Route::delete('/comments/{comment}', [App\Http\Controllers\CommentController::class, 'destroy']);
 Route::prefix('/consultations')->group(function () {
     Route::get('/', [App\Http\Controllers\ConsultationController::class, 'index']);
     Route::post('/', [App\Http\Controllers\ConsultationController::class, 'store']);

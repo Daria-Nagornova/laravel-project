@@ -36,8 +36,8 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
-    public function image() : belongsTo
+    public function image() : \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->belongsTo(Image::class);
+        return $this->hasOne(Image::class);
     }
 }

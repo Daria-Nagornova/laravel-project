@@ -11,18 +11,18 @@
             <form @submit.prevent="updatePost" class="add-post col-8">
                 <div class="form-group">
                     <label for="title">Заголовок</label>
-                    <input type="text" class="form-control" id="title" v-model="title">
+                    <input type="text" class="form-control" id="title" v-model="blogPostData.title">
                 </div>
                 <div class="form-group">
                     <label for="subcategory">Выберите подкатегорию:</label>
-                    <select class="form-control" id="subcategory" v-model="subcategory">
+                    <select class="form-control" id="subcategory" v-model="blogPostData.subcategory_id">
                         <option value="1">Питание</option>
                         <option value="2">Занятия</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="post">Текст публикации</label>
-                    <textarea class="form-control" id="post" rows="6" v-model="content"></textarea>
+                    <textarea class="form-control" id="post" rows="6" v-model="blogPostData.content"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="file">Прикрепите изображение:</label>
@@ -45,25 +45,34 @@ export default {
         return {
             title: '',
             content: '',
-            subcategory: '',
+            subcategory: 1,
+            blogPostData: {}
         }
     },
     methods: {
+        loadBlogPost() {
+            axios.get('/api/communities/' + this.$route.params.categories+ '/' + this.$route.params.post)
+                .then(r => this.blogPostData = r.data)
+                .catch(e => console.log(e))
+        },
         updatePost() {
             axios.patch('/api/communities/' + this.$route.params.categories + '/' + this.$route.params.post  + '/update',  {
-                title: this.title,
-                content: this.content,
-                subcategory_id: this.subcategory,
+                title: this.blogPostData.title,
+                content: this.blogPostData.content,
+                subcategory_id: this.blogPostData.subcategory_id,
                 category_id: this.$route.params.categories,
                 user_id: 5,
             })
-                .then(r => console.log(r))
+                .then(r => this.cancel())
                 .catch(e => console.log(e))
             this.cancel()
         },
         cancel() {
             this.$router.push('/communities/' + this.$route.params.categories)
         }
+    },
+    mounted() {
+        this.loadBlogPost()
     }
 }
 </script>
