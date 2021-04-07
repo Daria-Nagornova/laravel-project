@@ -26,8 +26,18 @@
                                 <li class="nav-item">
                                     <router-link to="/profile-user" class="nav-link animsition-link">Профиль</router-link>
                                 </li>
+                                <li class="nav-item">
+                                    <router-link to="/profile-doctor" class="nav-link animsition-link">Врач</router-link>
+                                </li>
+                                <li class="nav-item">
+                                    <router-link to="/profile-admin" class="nav-link animsition-link">Админ</router-link>
+                                </li>
                             </ul>
                         </div>
+                    <div>
+                        <span>Авторизованный пользователь</span>
+                        <button class="btn btn-outline-secondary">Выход</button>
+                    </div>
                     <ul class="navbar-nav ml-auto align-items-center main-menu">
                         <li class="nav-item">
                             <router-link to="/login" class="nav-link animsition-link">Вход</router-link>

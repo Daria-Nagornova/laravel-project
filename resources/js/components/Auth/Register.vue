@@ -74,7 +74,8 @@ export default {
             name: '',
             email: '',
             password: '',
-            c_password: ''
+            c_password: '',
+            role: ''
         }
     },
     methods: {
@@ -84,11 +85,12 @@ export default {
             form.append('email', this.email)
             form.append('password', this.password)
             form.append('c_password', this.c_password)
+            form.append('role', 'пользователь')
 
             axios.post('/api/register', form)
-                .then(r => console.log(r.data))
+                .then(r => this.cancel())
                 .catch(e => console.log(e))
-            //this.cancel()
+
         },
         cancel () {
             this.$router.push('/')

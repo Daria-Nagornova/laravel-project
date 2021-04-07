@@ -25,6 +25,9 @@ import UpdatePost from "./components/UpdatePost";
 import UserPost from "./components/UserPost";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
+import MainAdmin from "./components/Admin/MainAdmin";
+import DoctorProfile from "./components/Doctor/DoctorProfile";
+import ErrorPage from "./components/NoteCategoties/ErrorPage";
 
 
 
@@ -77,7 +80,10 @@ const app = new Vue({
         UpdatePost,
         UserPost,
         Login,
-        Register
+        Register,
+        MainAdmin,
+        DoctorProfile,
+        ErrorPage
     },
     router,
     store

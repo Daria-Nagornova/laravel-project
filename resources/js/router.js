@@ -20,6 +20,9 @@ import UpdatePost from "./components/UpdatePost";
 import UserPost from "./components/UserPost";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
+import DoctorProfile from "./components/Doctor/DoctorProfile";
+import MainAdmin from "./components/Admin/MainAdmin";
+import ErrorPage from "./components/NoteCategoties/ErrorPage";
 
 
 
@@ -47,8 +50,10 @@ export default new VueRouter({
         { path: '/profile-user/child-diary/add-notes/vaccination', component: Vaccination },
         { path: '/profile-user/child-diary/add-notes/walk', component: Walk },
         { path: '/profile-user/user-posts', component: UserPost },
+        { path: '/doctor', component: DoctorProfile },
+        { path: '/admin', component: MainAdmin },
 
-
+        { path: '/:notFound(.*)', component: ErrorPage }
     ],
     mode: 'history'
 })

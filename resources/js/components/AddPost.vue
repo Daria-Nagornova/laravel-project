@@ -11,23 +11,27 @@
             <form @submit.prevent="savePost" class="add-post col-8">
                 <div class="form-group">
                     <label for="title">Заголовок</label>
-                    <input type="text" class="form-control" id="title" v-model="title">
+                    <input type="text" class="form-control" :class="{ 'is-invalid': active }" id="title" v-model="title">
                 </div>
+                <div class="error">{{ errTitle }}</div>
                 <div class="form-group">
                     <label for="subcategory">Выберите подкатегорию:</label>
-                    <select class="form-control" id="subcategory" v-model="subcategory">
+                    <select class="form-control" :class="{ 'is-invalid': activeSub }" id="subcategory" v-model="subcategory">
                         <option value="1">Питание</option>
                         <option value="2">Занятия</option>
                     </select>
                 </div>
+                <div class="error">{{ errSub }}</div>
                 <div class="form-group">
                     <label for="post">Текст публикации</label>
-                    <textarea class="form-control" id="post" rows="6" v-model="content"></textarea>
+                    <textarea class="form-control" :class="{ 'is-invalid': activeContent }" id="post" rows="6" v-model="content"></textarea>
                 </div>
+                <div class="error">{{ errContent }}</div>
                 <div class="form-group">
                     <label for="file">Прикрепите изображение:</label>
-                    <input type="file" class="form-control-file" id="file" @change="selectFile">
+                    <input type="file" class="form-control-file" :class="{ 'is-invalid': activeFile }" id="file" @change="selectFile">
                 </div>
+                <div class="error">{{ errFile }}</div>
                 <div class="form-group btn-box">
                     <button type="submit" class="btn btn-outline-secondary btn-post">Опубликовать</button>
                     <button class="btn btn-outline-secondary btn-post" @click="cancel">Отменить</button>
@@ -59,7 +63,15 @@ name: "AddPost",
             subcategory: '',
             image: '',
             massage: '',
-            show: true
+            show: true,
+            active: false,
+            activeSub: false,
+            activeContent: false,
+            activeFile: false,
+            errTitle: '',
+            errSub: '',
+            errContent: '',
+            errFile: '',
         }
     },
     methods: {
@@ -67,6 +79,10 @@ name: "AddPost",
             this.image = event.target.files[0]
         },
         savePost() {
+            this.active = false
+                this.activeSub = false
+                this.activeContent = false
+                this.activeFile = false
 
             let form = new FormData()
             form.append('image', this.image)
@@ -78,11 +94,42 @@ name: "AddPost",
 
             axios.post('/api/communities/' +  this.$route.params.categories + '/add/post', form)
                 .then(r => this.success())
-                .catch(e => console.log(e))
+                .catch(e => this.error(e))
 
         },
         success() {
             $('#myModal').modal('toggle')
+        },
+        error(e) {
+            this.massage = e.response.data.errors
+            this.errTitle = this.massage.title[0]
+            this.errSub = this.massage.subcategory_id[0]
+            this.errContent = this.massage.content[0]
+            this.errFile = this.massage.image[0]
+
+            /*this.errTitle = ''
+            this.errSub = ''
+            this.errContent = ''
+            this.errFile = ''*/
+            for(let key in this.massage) {
+
+                if(key === 'title') {
+                    this.active = true
+                }
+
+                if(key === 'subcategory_id') {
+                    this.activeSub = true
+                }
+
+                if(key === 'content') {
+                    this.activeContent = !this.activeContent
+                }
+
+                if(key === 'file') {
+                    this.activeFile = true
+                }
+
+            }
         },
         cancel () {
             this.$router.push('/communities/' +  this.$route.params.categories)
@@ -92,9 +139,6 @@ name: "AddPost",
 </script>
 
 <style scoped>
-* {
-    margin: 10 auto;
-}
 
 .add-post {
     margin: 40px auto;
@@ -112,6 +156,9 @@ name: "AddPost",
     border-radius: 15px !important;
     margin: 0 20px;
     max-width: 150px;
+}
+.error {
+    color: red;
 }
 
 </style>
