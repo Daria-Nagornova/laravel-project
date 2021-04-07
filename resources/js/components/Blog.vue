@@ -22,8 +22,10 @@
                                 <div class="post-meta d-flex justify-content-between">
                                     <div class="date meta-last">{{ post.created_at }}</div>
                                     <div class="category"><a href="#">{{ post.subcategory_name }}</a></div>
-                                </div><router-link :to="'/communities/' + category + '/' + post.id" class="animsition-link">
-                                <h3 class="h4">{{ post.title }}</h3></router-link>
+                                </div>
+                                <router-link :to="'/communities/' + category + '/' + post.id" class="animsition-link">
+                                    <h3 class="h4">{{ post.title }}</h3>
+                                </router-link>
                                 <p class="text-muted">{{ post.content }}</p>
                                 <footer class="post-footer d-flex align-items-center">
                                     <div class="avatar"><img src="img/avatar-3.jpg" class="img-fluid"></div>

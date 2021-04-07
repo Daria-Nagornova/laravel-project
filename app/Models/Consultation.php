@@ -11,10 +11,10 @@ class Consultation extends Model
 {
     use HasFactory;
 
-    const HELD = 'Проведена';
-    const NO_HELD = 'Не проведена';
+    const DONE = 'выполнена';
+    const NOT_DONE = 'не выполнена';
 
-    protected $fillable = ['id', 'text', 'user_id', 'doctor_id', 'email', 'status'];
+    protected $fillable = ['text', 'user_id', 'doctor_id', 'email', 'status'];
 
     public function user() : belongsTo
     {
@@ -29,5 +29,13 @@ class Consultation extends Model
     public function answer() : hasOne
     {
         return $this->hasOne(Answer::class);
+    }
+
+    public static function allStatuses(): array
+    {
+        return [
+            self::DONE,
+            self::NOT_DONE,
+        ];
     }
 }

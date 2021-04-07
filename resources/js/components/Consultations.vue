@@ -123,6 +123,18 @@
                 </li>
             </ul>
         </div>
+        <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Данные отправлены!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <pagination :data="consultationData" @pagination-change-page="loadConsultation" class="paginate"></pagination>
     </div>
 </template>
@@ -159,13 +171,16 @@ export default {
                     doctor_id: this.doctor,
                     status: 'не выполнена'
                 })
-                .then(r => console.log(r))
+                .then(r => this.success())
                 .catch(e => console.log(e))
             this.email = ''
             this.question = ''
             this.doctor = ''
             this.$router.push('/consultations/')
-        }
+        },
+        success() {
+            $('#myModal').modal('toggle')
+        },
     },
     mounted() {
         this.loadConsultation()

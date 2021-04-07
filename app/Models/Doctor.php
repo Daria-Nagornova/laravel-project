@@ -11,7 +11,7 @@ class Doctor extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id', 'name', 'description', 'specialisation_id'];
+    protected $fillable = ['name', 'description', 'specialisation_id', 'user_id', 'image'];
 
     public function specialisation() : belongsTo
     {

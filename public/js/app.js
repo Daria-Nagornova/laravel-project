@@ -2028,6 +2028,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AddPost",
   data: function data() {
@@ -2035,18 +2047,18 @@ __webpack_require__.r(__webpack_exports__);
       title: '',
       content: '',
       subcategory: '',
-      image: ''
+      image: '',
+      massage: '',
+      show: true
     };
   },
   methods: {
     selectFile: function selectFile(event) {
       this.image = event.target.files[0];
-      console.log(this.image);
     },
     savePost: function savePost() {
       var _this = this;
 
-      console.log(this.image, this.title);
       var form = new FormData();
       form.append('image', this.image);
       form.append('title', this.title);
@@ -2054,20 +2066,14 @@ __webpack_require__.r(__webpack_exports__);
       form.append('subcategory_id', this.subcategory);
       form.append('category_id', this.$route.params.categories);
       form.append('user_id', '61');
-      /* axios.post('/api/communities/' +  this.$route.params.categories + '/add/post', {
-           title: this.title,
-           content: this.content,
-           subcategory_id: this.subcategory,
-           category_id: this.$route.params.categories,
-           user_id: 5,
-           image: this.image
-       })*/
-
       axios.post('/api/communities/' + this.$route.params.categories + '/add/post', form).then(function (r) {
-        return _this.cancel();
+        return _this.success();
       })["catch"](function (e) {
         return console.log(e);
-      }); //this.cancel()
+      });
+    },
+    success: function success() {
+      $('#myModal').modal('toggle');
     },
     cancel: function cancel() {
       this.$router.push('/communities/' + this.$route.params.categories);
@@ -2282,6 +2288,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
 //
 //
 //
@@ -2830,6 +2838,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Consultations",
   data: function data() {
@@ -2856,6 +2876,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     saveConsultation: function saveConsultation() {
+      var _this2 = this;
+
       axios.post('/api/consultations/', {
         email: this.email,
         text: this.question,
@@ -2863,7 +2885,7 @@ __webpack_require__.r(__webpack_exports__);
         doctor_id: this.doctor,
         status: 'не выполнена'
       }).then(function (r) {
-        return console.log(r);
+        return _this2.success();
       })["catch"](function (e) {
         return console.log(e);
       });
@@ -2871,6 +2893,9 @@ __webpack_require__.r(__webpack_exports__);
       this.question = '';
       this.doctor = '';
       this.$router.push('/consultations/');
+    },
+    success: function success() {
+      $('#myModal').modal('toggle');
     }
   },
   mounted: function mounted() {
@@ -4151,7 +4176,7 @@ vue__WEBPACK_IMPORTED_MODULE_0__.default.use(vuex__WEBPACK_IMPORTED_MODULE_1__.d
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_1__.default.Store({
   state: function state() {
     return {
-      site: 'http://example-app/storage/'
+      site: 'http://mombaby/storage/'
     };
   },
   mutations: {},
@@ -43831,7 +43856,53 @@ var render = function() {
           ])
         ]
       )
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: { id: "myModal", tabindex: "-1", role: "dialog" }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c(
+                  "h5",
+                  {
+                    staticClass: "modal-title",
+                    attrs: { id: "exampleModalLabel" }
+                  },
+                  [_vm._v("Данные успешно сохранены. Пост добавлен!")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close"
+                    },
+                    on: { click: _vm.cancel }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = []
@@ -44382,6 +44453,7 @@ var render = function() {
                           ])
                         ]
                       ),
+                      _vm._v(" "),
                       _c(
                         "router-link",
                         {
@@ -45359,6 +45431,8 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
+      _vm._m(2),
+      _vm._v(" "),
       _c("pagination", {
         staticClass: "paginate",
         attrs: { data: _vm.consultationData },
@@ -45518,6 +45592,55 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "title" }, [_vm._v("Имя врача")])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: { id: "myModal", tabindex: "-1", role: "dialog" }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c(
+                  "h5",
+                  {
+                    staticClass: "modal-title",
+                    attrs: { id: "exampleModalLabel" }
+                  },
+                  [_vm._v("Данные отправлены!")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close"
+                    }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -46033,7 +46156,7 @@ var render = function() {
                     [
                       _c("img", {
                         staticClass: "img-fluid",
-                        attrs: { src: _vm.$store.state.site + post.image.path }
+                        attrs: { src: _vm.$store.state.site + post.image }
                       })
                     ]
                   )

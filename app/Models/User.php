@@ -13,6 +13,11 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasApiTokens;
 
+    const USER = 'пользователь';
+    const DOCTOR = 'врач';
+    const ADMIN = 'администратор';
+    const GUEST = 'гость';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -22,7 +27,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role_id'
+        'role'
     ];
 
     /**
@@ -56,6 +61,16 @@ class User extends Authenticatable
     public function consultations() : hasMany
     {
         return $this->hasMany(Consultation::class);
+    }
+
+    public static function allRoles(): array
+    {
+        return [
+            self::USER,
+            self::ADMIN,
+            self::DOCTOR,
+            self::GUEST,
+        ];
     }
 
     public function isAdmin(): bool

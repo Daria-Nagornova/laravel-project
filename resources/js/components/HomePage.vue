@@ -76,7 +76,7 @@
                     <div v-for="post in postData.data" :key="post.id" class="post col-md-4">
                         <div class="post-thumbnail">
                             <router-link :to="'/communities/' + post.category_id + '/' + post.id" class="animsition-link">
-                                <img :src="$store.state.site + post.image.path" class="img-fluid">
+                                <img :src="$store.state.site + post.image" class="img-fluid">
                             </router-link>
                         </div>
                         <div class="post-details">

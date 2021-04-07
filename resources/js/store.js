@@ -7,7 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state() {
         return {
-            site: 'http://example-app/storage/'
+            site: 'http://mombaby/storage/'
         }
     },
     mutations: {

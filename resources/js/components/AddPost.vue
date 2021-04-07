@@ -34,6 +34,18 @@
                 </div>
             </form>
         </div>
+        <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Данные успешно сохранены. Пост добавлен!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="cancel">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -45,16 +57,17 @@ name: "AddPost",
             title: '',
             content: '',
             subcategory: '',
-            image: ''
+            image: '',
+            massage: '',
+            show: true
         }
     },
     methods: {
         selectFile(event) {
             this.image = event.target.files[0]
-            console.log(this.image)
         },
         savePost() {
-            console.log(this.image, this.title)
+
             let form = new FormData()
             form.append('image', this.image)
             form.append('title', this.title)
@@ -63,18 +76,13 @@ name: "AddPost",
             form.append('category_id', this.$route.params.categories)
             form.append('user_id', '61')
 
-           /* axios.post('/api/communities/' +  this.$route.params.categories + '/add/post', {
-                title: this.title,
-                content: this.content,
-                subcategory_id: this.subcategory,
-                category_id: this.$route.params.categories,
-                user_id: 5,
-                image: this.image
-            })*/
             axios.post('/api/communities/' +  this.$route.params.categories + '/add/post', form)
-                .then(r => this.cancel())
+                .then(r => this.success())
                 .catch(e => console.log(e))
-            //this.cancel()
+
+        },
+        success() {
+            $('#myModal').modal('toggle')
         },
         cancel () {
             this.$router.push('/communities/' +  this.$route.params.categories)
