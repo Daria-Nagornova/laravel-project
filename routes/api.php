@@ -44,11 +44,14 @@ Route::prefix('/communities')->group(function () {
     Route::patch('/{category}', [App\Http\Controllers\CategoryController::class, 'update']);
     Route::delete('/{category}', [App\Http\Controllers\CategoryController::class, 'destroy']);
 });
-Route::get('/popular', [App\Http\Controllers\PostController::class, 'popularPost']);
+Route::get('/popular/{category}', [App\Http\Controllers\CommentController::class, 'popular']);
+Route::get('/count/{post}', [App\Http\Controllers\CommentController::class, 'postComments']);
 Route::prefix('/communities/{category}/{post}')->group(function () {
     Route::post('/', [App\Http\Controllers\CommentController::class, 'store']);
 
 });
+Route::get('/sub/{category}', [App\Http\Controllers\CategoryController::class, 'getSubcategory']);
+
 Route::delete('/comments/{comment}', [App\Http\Controllers\CommentController::class, 'destroy']);
 Route::prefix('/consultations')->group(function () {
     Route::get('/', [App\Http\Controllers\ConsultationController::class, 'index']);
@@ -56,6 +59,10 @@ Route::prefix('/consultations')->group(function () {
     Route::get('/{consultation}', [App\Http\Controllers\ConsultationController::class, 'show']);
     Route::delete('/{consultation}', [App\Http\Controllers\ConsultationController::class, 'destroy']);
 });
+
+
+
+
 Route::prefix('/profile-user/child-diary')->group(function () {
   //  Route::get('/', [App\Http\Controllers\WalkController::class, 'index']);
     Route::post('/add-notes/walk', [App\Http\Controllers\WalkController::class, 'store']);

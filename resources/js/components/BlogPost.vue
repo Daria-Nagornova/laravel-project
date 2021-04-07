@@ -19,17 +19,14 @@
                 </div>
                 <div class="post-details">
                     <div class="post-meta d-flex justify-content-between">
-                        <div class="date meta-last">20 мая | 2020</div>
+                        <div class="date meta-last"> {{ blogPostData.created_at.slice(0, 10) }}</div>
                         <div class="category"><a href="#">{{ blogPostData.subcategory.name }}</a></div>
                     </div><router-link to="/communities/pregnant/post1" class="animsition-link">
                     <h3 class="h4">{{ blogPostData.title }}</h3></router-link>
                     <p class="text-muted">{{ blogPostData.content }}</p>
                     <footer class="post-footer d-flex align-items-center">
-                        <div class="avatar">
-                            <img src="img/avatar-3.jpg" alt="..." class="img-fluid">
-                        </div>
                         <div class="title">{{ blogPostData.user.name }}</div>
-                        <div class="comments meta-last comments-icon">12</div>
+                        <div v-if="count !== 0" class="comments meta-last comments-icon">{{ count }}</div>
                     </footer>
                 </div>
             </div>
@@ -37,15 +34,13 @@
                 <form @submit.prevent="saveComment">
                     <div class="form-group">
                         <label for="post">Комментарий:</label>
-                        <textarea class="form-control" id="post" rows="4" v-model="text"></textarea>
+                        <textarea class="form-control" :class="{ 'is-invalid': active }" id="post" rows="4" v-model="text"></textarea>
                     </div>
+                    <div class="error">{{ errText }}</div>
                     <button type="submit" class="btn btn-outline-secondary btn-post">Отправить</button>
                 </form>
                 <div v-for="comment in blogPostData.comments" :key="comment.id" class="post-details">
                     <div class="post-footer d-flex align-items-center">
-                        <div class="avatar">
-                            <img src="img/avatar-3.jpg" class="img-fluid">
-                        </div>
                         <div class="title">{{ comment.user.name }}</div>
                     </div>
                     <button type="button" class="ml-2 mb-1 close" aria-label="Close" @click="deleteComment(comment.id)">
@@ -65,13 +60,20 @@ export default {
         return {
             blogPostData: {},
             text: '',
-            newComment: ''
+            newComment: '',
+            active: false,
+            arrText: '',
+            massage: '',
+            count: 0
         }
     },
     methods: {
         loadBlogPost() {
             axios.get('/api/communities/' + this.$route.params.categories+ '/' + this.$route.params.post)
                 .then(r => this.blogPostData = r.data)
+                .catch(e => console.log(e))
+            axios.get('/api/count/' + this.$route.params.post)
+                .then(r => this.count = r.data)
                 .catch(e => console.log(e))
         },
         deletePost() {
@@ -84,6 +86,9 @@ export default {
             this.$router.push('/communities/' +  this.$route.params.categories)
         },
         saveComment() {
+            this.active = false
+            this.errText = ''
+
             axios.post('/api/communities/' + this.$route.params.categories + '/' + this.$route.params.post,
                 {
                         text: this.text,
@@ -91,7 +96,7 @@ export default {
                         post_id: this.post
                     })
                 .then(r => this.loadBlogPost())
-                .catch(e => console.log(e))
+                .catch(e => this.error(e))
                 this.text = ''
         },
         deleteComment(id) {
@@ -99,6 +104,18 @@ export default {
                 .then(r => this.loadBlogPost())
                 .catch(e => console.log(e))
         },
+        error(e) {
+            this.massage = e.response.data.errors
+
+            for (let key in this.massage) {
+
+                if (key === 'text') {
+                    this.active = true
+                    this.errText = this.massage[key][0]
+                }
+
+            }
+        }
     },
     computed: {
         category: function() {
@@ -120,6 +137,9 @@ export default {
     font-family: "Nunito", sans-serif;
     color: #494f54;
     border-radius: 15px;
+}
+.comments-icon {
+    background: url(../../../storage/content/massage.png) 0 50% no-repeat;
 }
 .blogpost, .add-comment {
     margin: 20px auto;
@@ -145,5 +165,9 @@ export default {
 .post-thumbnail img {
     display: block;
     margin: 0 auto;
+}
+.error {
+    color: red;
+    margin-bottom: 10px;
 }
 </style>

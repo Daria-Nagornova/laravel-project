@@ -12,7 +12,7 @@
                 <div class="container">
                     <div class="row">
                         <!-- post -->
-                        <div v-for="post in postData.data" :key="post" class="post col-xl-6">
+                        <div v-for="post in postData.data" :key="post.id" class="post col-xl-6">
                             <div class="post-thumbnail">
                                 <router-link :to="'/communities/' + category + '/' + post.id" class="animsition-link">
                                     <img :src="$store.state.site + post.image" class="img-fluid">
@@ -28,9 +28,8 @@
                                 </router-link>
                                 <p class="text-muted">{{ post.content }}</p>
                                 <footer class="post-footer d-flex align-items-center">
-                                    <div class="avatar"><img src="img/avatar-3.jpg" class="img-fluid"></div>
                                     <div class="title">{{ post.user_name }}</div>
-                                    <div class="comments meta-last comments-icon">12</div>
+                                    <div v-if="count !== 0" class="comments meta-last comments-icon">{{ count }}</div>
                                 </footer>
                             </div>
                         </div>
@@ -48,45 +47,28 @@
                     <header>
                         <h3 class="h6 write">Самые интересные посты</h3>
                     </header>
-                    <div class="blog-posts"><a href="#">
-                        <div class="item d-flex align-items-center">
-                            <div class="image"><img src="img/small-thumbnail-1.jpg" alt="..." class="img-fluid"></div>
-                            <div class="title"><strong>Какие продукты помогают повысить гемоглобин?</strong>
-                                <div class="d-flex align-items-center">
-
-                                    <div class="comments">12</div>
+                    <div class="blog-posts">
+                        <div v-for="item in popular" :key="item.id" class="item d-flex align-items-center">
+                            <div class="image"><img src="img/small-thumbnail-1.jpg" class="img-fluid"></div>
+                            <router-link :to="'/communities/' + category + '/' + item.post.id">
+                                <div class="title"><strong>{{ item.post.title }}</strong>
+                                    <div class="d-flex align-items-center">
+                                        <div class="comments comments-icon">{{ item.copies }}</div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div></a><a href="#">
-                        <div class="item d-flex align-items-center">
-                            <div class="image"><img src="img/small-thumbnail-2.jpg" alt="..." class="img-fluid"></div>
-                            <div class="title"><strong>Какие продукты помогают повысить гемоглобин?</strong>
-                                <div class="d-flex align-items-center">
-
-                                    <div class="comments">12</div>
-                                </div>
-                            </div>
-                        </div></a><a href="#">
-                        <div class="item d-flex align-items-center">
-                            <div class="image"><img src="img/small-thumbnail-3.jpg" alt="..." class="img-fluid"></div>
-                            <div class="title"><strong>Какие продукты помогают повысить гемоглобин?</strong>
-                                <div class="d-flex align-items-center">
-
-                                    <div class="comments">12</div>
-                                </div>
-                            </div>
-                        </div></a></div>
+                            </router-link>
+                        </div>
+                    </div>
                 </div>
                 <!-- Widget [Categories Widget]-->
                 <div class="widget categories">
                     <header>
                         <h3 class="h6 write">Подкатегории</h3>
                     </header>
-                    <div class="item d-flex justify-content-between"><a href="#">Питание</a><span>12</span></div>
-                    <div class="item d-flex justify-content-between"><a href="#">Спорт</a><span>25</span></div>
-                    <div class="item d-flex justify-content-between"><a href="#">Анализы</a><span>8</span></div>
-                    <div class="item d-flex justify-content-between"><a href="#">Покупки</a><span>17</span></div>
-                    <div class="item d-flex justify-content-between"><a href="#">Выплаты, пособия</a><span>25</span></div>
+                    <div v-for="item in arr" :key="item.id" class="item d-flex justify-content-between">
+                        <a href="#">{{ item.name }}</a>
+                        <span>{{ item.posts.length }}</span>
+                    </div>
                 </div>
 
             </aside>
@@ -100,12 +82,31 @@ name: "Blog",
     data() {
         return {
             postData: {},
+            count: 0,
+            arr: '',
+            comments: '',
+            popular: ''
         }
     },
     methods: {
         loadPost(page = 1) {
             axios.get('/api/communities/' + this.$route.params.categories + '?page=' + page)
                 .then(r => this.postData = r.data)
+                .catch(e => console.log(e))
+        },
+        loadCount(id) {
+            axios.get('/api/count/' + id)
+                .then(r => this.count = r.data)
+                .catch(e => console.log(e))
+        },
+        loadSub() {
+            axios.get('/api/sub/' + this.$route.params.categories)
+                .then(r => this.arr = r.data)
+                .catch(e => console.log(e))
+        },
+        loadPopular() {
+            axios.get('/api/popular/' + this.$route.params.categories)
+                .then(r => this.popular = r.data)
                 .catch(e => console.log(e))
         }
     },
@@ -116,6 +117,8 @@ name: "Blog",
     },
     created() {
         this.loadPost()
+        this.loadSub()
+        this.loadPopular()
     }
 }
 </script>
@@ -142,5 +145,13 @@ name: "Blog",
     .post {
         margin: 20px 0;
     }
-
+    .comments-icon {
+        background: url(../../../storage/content/massage.png) 0 50% no-repeat;
+    }
+    main {
+        padding-top: 0 !important;
+    }
+    aside {
+        margin-top: 50px;
+    }
 </style>

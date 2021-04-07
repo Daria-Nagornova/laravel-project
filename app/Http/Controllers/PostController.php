@@ -128,18 +128,5 @@ class PostController extends Controller
         return PostResource::collection($posts);
     }
 
-    public function popularPost(Request $request): JsonResponse
-    {
-
-        $posts = Post::with('comments')->get();
-        /*SELECT post_id, COUNT(*) AS commentsCount
-            FROM comments
-            GROUP BY post_id
-            ORDER BY commentsCount DESC
-            LIMIT 3
-            */
-        //->count('post_id')->groupBy('post_id')->orderBy('post_id', 'desc')->take(3)
-        return response()->json($posts, 200);
-    }
 }
 

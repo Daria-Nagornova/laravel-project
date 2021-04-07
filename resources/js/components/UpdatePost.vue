@@ -11,28 +11,43 @@
             <form @submit.prevent="updatePost" class="add-post col-8">
                 <div class="form-group">
                     <label for="title">Заголовок</label>
-                    <input type="text" class="form-control" id="title" v-model="blogPostData.title">
+                    <input type="text" class="form-control" :class="{ 'is-invalid': active }" id="title" v-model="blogPostData.title">
                 </div>
+                <div class="error">{{ errTitle }}</div>
                 <div class="form-group">
                     <label for="subcategory">Выберите подкатегорию:</label>
-                    <select class="form-control" id="subcategory" v-model="blogPostData.subcategory_id">
-                        <option value="1">Питание</option>
-                        <option value="2">Занятия</option>
+                    <select class="form-control" :class="{ 'is-invalid': activeSub }" id="subcategory" v-model="blogPostData.subcategory.id">
+                        <option v-for="item in arr" :key="item.id" :value="item.id">{{ item.name }}</option>
                     </select>
                 </div>
+                <div class="error">{{ errSub }}</div>
                 <div class="form-group">
                     <label for="post">Текст публикации</label>
-                    <textarea class="form-control" id="post" rows="6" v-model="blogPostData.content"></textarea>
+                    <textarea class="form-control" :class="{ 'is-invalid': activeContent }" id="post" rows="6" v-model="blogPostData.content"></textarea>
                 </div>
-                <div class="form-group">
+                <div class="error">{{ errContent }}</div>
+                <div class="form-group" :class="{ 'is-invalid': activeFile }">
                     <label for="file">Прикрепите изображение:</label>
-                    <input type="file" class="form-control-file" id="file">
+                    <input type="file" class="form-control-file" id="file" @change="selectFile">
                 </div>
+                <div class="error">{{ errFile }}</div>
                 <div class="form-group btn-box">
                     <button type="submit" class="btn btn-outline-secondary btn-post">Опубликовать</button>
                     <button class="btn btn-outline-secondary btn-post" @click="cancel">Отменить</button>
                 </div>
             </form>
+        </div>
+        <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Данные успешно сохранены. Пост добавлен!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="cancel">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -46,33 +61,102 @@ export default {
             title: '',
             content: '',
             subcategory: 1,
-            blogPostData: {}
+            blogPostData: {},
+            massage: '',
+            arr: '',
+            show: true,
+            active: false,
+            activeSub: false,
+            activeContent: false,
+            activeFile: false,
+            errTitle: '',
+            errSub: '',
+            errContent: '',
+            errFile: '',
         }
     },
     methods: {
+        selectFile(event) {
+            this.image = event.target.files[0]
+        },
         loadBlogPost() {
             axios.get('/api/communities/' + this.$route.params.categories+ '/' + this.$route.params.post)
                 .then(r => this.blogPostData = r.data)
                 .catch(e => console.log(e))
         },
         updatePost() {
+            this.active = false
+            this.activeSub = false
+            this.activeContent = false
+            this.activeFile = false
+
+            this.errTitle = ''
+            this.errSub = ''
+            this.errContent = ''
+            this.errFile = ''
+
+            /*let form = new FormData()
+            //form.append('image', this.image)
+            form.append('title', this.blogPostData.title)
+            form.append('content', this.blogPostData.content)
+            form.append('subcategory_id', this.blogPostData.subcategory_id)
+            form.append('category_id', this.$route.params.categories)
+            form.append('user_id', '61')*/
+
             axios.patch('/api/communities/' + this.$route.params.categories + '/' + this.$route.params.post  + '/update',  {
                 title: this.blogPostData.title,
                 content: this.blogPostData.content,
                 subcategory_id: this.blogPostData.subcategory_id,
                 category_id: this.$route.params.categories,
                 user_id: 5,
+                //image: this.image
             })
-                .then(r => this.cancel())
-                .catch(e => console.log(e))
-            this.cancel()
+            //axios.patch('/api/communities/' + this.$route.params.categories + '/' + this.$route.params.post  + '/update', form)
+                .then(r => this.success())
+                .catch(e => this.error(e))
         },
         cancel() {
             this.$router.push('/communities/' + this.$route.params.categories)
+        },
+        success() {
+            $('#myModal').modal('toggle')
+        },
+        error(e) {
+            this.massage = e.response.data.errors
+
+            for(let key in this.massage) {
+
+                if(key === 'title') {
+                    this.active = true
+                    this.errTitle = this.massage[key][0]
+                }
+
+                if(key === 'subcategory_id') {
+                    this.activeSub = true
+                    this.errSub = this.massage[key][0]
+                }
+
+                if(key === 'content') {
+                    this.activeContent = true
+                    this.errContent = this.massage[key][0]
+                }
+
+                if(key === 'image') {
+                    this.activeFile = true
+                    this.errFile = this.massage[key][0]
+                }
+
+            }
+        },
+        loadSub() {
+            axios.get('/api/sub/' + this.$route.params.categories)
+                .then(r => this.arr = r.data)
+                .catch(e => console.log(e))
         }
     },
     mounted() {
         this.loadBlogPost()
+        this.loadSub()
     }
 }
 </script>
@@ -99,5 +183,8 @@ export default {
     margin: 0 20px;
     max-width: 150px;
 }
-
+.error {
+    color: red;
+    margin-bottom: 10px;
+}
 </style>

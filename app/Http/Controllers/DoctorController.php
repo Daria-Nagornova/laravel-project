@@ -82,4 +82,13 @@ class DoctorController extends Controller
     {
         //
     }
+    public function pediatr(Request $request): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    {
+        $posts = $request->user();
+        dd($posts);
+        //$posts = $request->user()->posts()->paginate(6);
+        //return PostResource::collection($posts);
+
+    }
+
 }

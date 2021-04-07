@@ -17,8 +17,7 @@
                 <div class="form-group">
                     <label for="subcategory">Выберите подкатегорию:</label>
                     <select class="form-control" :class="{ 'is-invalid': activeSub }" id="subcategory" v-model="subcategory">
-                        <option value="1">Питание</option>
-                        <option value="2">Занятия</option>
+                        <option v-for="item in arr" :key="item.id" :value="item.id">{{ item.name }}</option>
                     </select>
                 </div>
                 <div class="error">{{ errSub }}</div>
@@ -63,6 +62,7 @@ name: "AddPost",
             subcategory: '',
             image: '',
             massage: '',
+            arr: '',
             show: true,
             active: false,
             activeSub: false,
@@ -80,9 +80,14 @@ name: "AddPost",
         },
         savePost() {
             this.active = false
-                this.activeSub = false
-                this.activeContent = false
-                this.activeFile = false
+            this.activeSub = false
+            this.activeContent = false
+            this.activeFile = false
+
+            this.errTitle = ''
+            this.errSub = ''
+            this.errContent = ''
+            this.errFile = ''
 
             let form = new FormData()
             form.append('image', this.image)
@@ -102,38 +107,42 @@ name: "AddPost",
         },
         error(e) {
             this.massage = e.response.data.errors
-            this.errTitle = this.massage.title[0]
-            this.errSub = this.massage.subcategory_id[0]
-            this.errContent = this.massage.content[0]
-            this.errFile = this.massage.image[0]
 
-            /*this.errTitle = ''
-            this.errSub = ''
-            this.errContent = ''
-            this.errFile = ''*/
             for(let key in this.massage) {
 
                 if(key === 'title') {
                     this.active = true
+                    this.errTitle = this.massage[key][0]
                 }
 
                 if(key === 'subcategory_id') {
                     this.activeSub = true
+                    this.errSub = this.massage[key][0]
                 }
 
                 if(key === 'content') {
-                    this.activeContent = !this.activeContent
+                    this.activeContent = true
+                    this.errContent = this.massage[key][0]
                 }
 
-                if(key === 'file') {
+                if(key === 'image') {
                     this.activeFile = true
+                    this.errFile = this.massage[key][0]
                 }
 
             }
         },
         cancel () {
             this.$router.push('/communities/' +  this.$route.params.categories)
+        },
+        loadSub() {
+            axios.get('/api/sub/' + this.$route.params.categories)
+                .then(r => this.arr = r.data)
+                .catch(e => console.log(e))
         }
+    },
+    created() {
+        this.loadSub()
     }
 }
 </script>
@@ -159,6 +168,7 @@ name: "AddPost",
 }
 .error {
     color: red;
+    margin-bottom: 10px;
 }
 
 </style>
