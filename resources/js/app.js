@@ -29,6 +29,8 @@ import MainAdmin from "./components/Admin/MainAdmin";
 import DoctorProfile from "./components/Doctor/DoctorProfile";
 import ErrorPage from "./components/NoteCategoties/ErrorPage";
 import Logout from "./components/Auth/Logout";
+import Answer from "./components/Answer";
+import UserConsultations from "./components/UserConsultations";
 
 
 
@@ -85,7 +87,10 @@ const app = new Vue({
         MainAdmin,
         DoctorProfile,
         ErrorPage,
-        Logout
+        Logout,
+        Answer,
+        UserConsultations
+
     },
     router,
     store

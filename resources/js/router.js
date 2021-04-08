@@ -24,6 +24,7 @@ import DoctorProfile from "./components/Doctor/DoctorProfile";
 import MainAdmin from "./components/Admin/MainAdmin";
 import ErrorPage from "./components/NoteCategoties/ErrorPage";
 import Logout from "./components/Auth/Logout";
+import UserConsultations from "./components/UserConsultations";
 
 
 
@@ -51,6 +52,7 @@ export default new VueRouter({
         { path: '/profile-user/child-diary/add-notes/vaccination', component: Vaccination },
         { path: '/profile-user/child-diary/add-notes/walk', component: Walk },
         { path: '/profile-user/user-posts', component: UserPost },
+        { path: '/profile-user/user-consultations', component: UserConsultations },
         { path: '/doctor', component: DoctorProfile },
         { path: '/admin', component: MainAdmin },
         { path: '/logout', component: Logout },

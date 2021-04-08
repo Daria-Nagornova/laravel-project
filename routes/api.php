@@ -56,7 +56,7 @@ Route::get('/sub/{category}', [App\Http\Controllers\CategoryController::class, '
 Route::delete('/comments/{comment}', [App\Http\Controllers\CommentController::class, 'destroy']);
 Route::prefix('/consultations')->group(function () {
     Route::get('/', [App\Http\Controllers\ConsultationController::class, 'index']);
-    Route::post('/', [App\Http\Controllers\ConsultationController::class, 'store']);
+    Route::middleware('auth:api')->post('/', [App\Http\Controllers\ConsultationController::class, 'store']);
     Route::get('/{consultation}', [App\Http\Controllers\ConsultationController::class, 'show']);
     Route::delete('/{consultation}', [App\Http\Controllers\ConsultationController::class, 'destroy']);
 });

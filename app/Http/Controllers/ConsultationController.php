@@ -17,7 +17,7 @@ class ConsultationController extends Controller
      */
     public function index(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-        $consultation = Consultation::where('status', 'не выполнена')->paginate(10);
+        $consultation = Consultation::where('status', 'не выполнена')->with('answer', 'doctor')->paginate(10);
         return ConsultationResource::collection($consultation);
     }
 
@@ -31,9 +31,7 @@ class ConsultationController extends Controller
      */
     public function store(StoreRequest $request): JsonResponse
     {
-        $consultation = new Consultation;
-        $consultation->fill($request->validated());
-        $consultation->save();
+        $consultation = Consultation::saveConsultation($request->validated(), $request->user());
 
         return response()->json($consultation, 200);
     }

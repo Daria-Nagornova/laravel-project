@@ -31,6 +31,16 @@ class Consultation extends Model
         return $this->hasOne(Answer::class);
     }
 
+    public static function saveConsultation(array $data, User $user) {
+
+        $consultation = new Consultation;
+        $consultation->fill($data);
+        $consultation->user_id = $user->id;
+        $consultation->save();
+
+        return $consultation;
+    }
+
     public static function allStatuses(): array
     {
         return [

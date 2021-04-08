@@ -49,7 +49,7 @@
                     </header>
                     <div class="blog-posts">
                         <div v-for="item in popular" :key="item.id" class="item d-flex align-items-center">
-                            <div class="image"><img src="img/small-thumbnail-1.jpg" class="img-fluid"></div>
+                            <div class="image"><img :src="$store.state.site + item.post.image.path" class="img-fluid"></div>
                             <router-link :to="'/communities/' + category + '/' + item.post.id">
                                 <div class="title"><strong>{{ item.post.title }}</strong>
                                     <div class="d-flex align-items-center">

@@ -1,5 +1,12 @@
 <template>
     <div class="container">
+        <nav aria-label="breadcrumb" class="path">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><router-link to="/">Главная</router-link></li>
+                <li class="breadcrumb-item"><router-link to="/profile-user">Профиль</router-link></li>
+                <li class="breadcrumb-item active" aria-current="page">Опубликованные посты</li>
+            </ol>
+        </nav>
         <div class="row">
             <div v-for="post in postData.posts" :key="post" class="post col-xl-6">
                 <div class="post-thumbnail">
@@ -15,7 +22,6 @@
                     <p class="text-muted">{{ post.content }}</p>
                     <footer class="post-footer d-flex align-items-center">
                         <div class="title">{{ postData.name }}</div>
-                        <div class="comments meta-last comments-icon">12</div>
                     </footer>
                 </div>
             </div>
