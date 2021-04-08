@@ -10,6 +10,7 @@ use App\Models\Image;
 use App\Models\Post;
 use App\Policies\Ability;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -33,19 +34,17 @@ class PostController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return JsonResponse|\Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request) : JsonResponse
     {
-        $post = new Post;
-        $post->fill($request->validated());
-        $post->save();
+        $post = Post::savePost($request->validated(), $request->user());
 
         if ($request->hasFile('image')) {
             $image = Image::saveForPost($request->file('image'), $post);
             return response()->json($image, 201);
         }
-        //redirect()->route('/communities')->with('success', 'Пост сохранен');
+
         return response()->json($post, 200);
 
     }
@@ -102,14 +101,16 @@ class PostController extends Controller
      * Display a listing of the resource.
      *
      * @param Request $request
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @return JsonResponse
      */
-    public function userPost(Request $request): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    public function userPost(Request $request): JsonResponse
     {
-        $posts = $request->user();
-         dd($posts);
-        //$posts = $request->user()->posts()->paginate(6);
-        //return PostResource::collection($posts);
+        $user = $request->user();
+
+        $posts = $user->load('posts.image');
+    //dd($posts);
+        return response()->json($posts, 200);
+       // return PostResource::collection($posts);
 
     }
 

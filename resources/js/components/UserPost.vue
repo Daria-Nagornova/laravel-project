@@ -1,27 +1,25 @@
 <template>
     <div class="container">
         <div class="row">
-            <div v-for="post in postData.data" :key="post" class="post col-xl-6">
+            <div v-for="post in postData.posts" :key="post" class="post col-xl-6">
                 <div class="post-thumbnail">
                     <router-link :to="'/communities/' + category + '/' + post.id" class="animsition-link">
-                        <img src="img/blog-post-1.jpeg" class="img-fluid">
+                        <img :src="$store.state.site + post.image.path" class="img-fluid">
                     </router-link>
                 </div>
                 <div class="post-details">
                     <div class="post-meta d-flex justify-content-between">
-                        <div class="date meta-last">{{ post.created_at }}</div>
-                        <div class="category"><a href="#">{{ post.subcategory_name }}</a></div>
-                    </div><router-link :to="'/communities/' + category + '/' + post.id" class="animsition-link">
+                        <div class="date meta-last">{{ post.created_at.slice(0, 10) }}</div>
+                    </div><router-link :to="'/communities/' + post.category_id + '/' + post.id" class="animsition-link">
                     <h3 class="h4">{{ post.title }}</h3></router-link>
                     <p class="text-muted">{{ post.content }}</p>
                     <footer class="post-footer d-flex align-items-center">
-                        <div class="avatar"><img src="img/avatar-3.jpg" class="img-fluid"></div>
-                        <div class="title">{{ post.user_name }}</div>
+                        <div class="title">{{ postData.name }}</div>
                         <div class="comments meta-last comments-icon">12</div>
                     </footer>
                 </div>
             </div>
-            <pagination :data="postData" @pagination-change-page="loadPost" class="paginate"></pagination>
+            <pagination :data="postData" @pagination-change-page="loadUserPost" class="paginate"></pagination>
         </div>
     </div>
 </template>
@@ -32,11 +30,14 @@ name: "UserPost",
     data() {
         return {
             postData: {},
+            form: {}
         }
     },
     methods: {
         loadUserPost(page = 1) {
-            axios.get('/api/profile-user/user-posts?page=' + page)
+            axios.get('/api/profile-user/user-posts?page=' + page, { headers: {
+                'Authorization': 'Bearer ' + this.$store.state.token }
+            })
                 .then(r => this.postData = r.data)
                 .catch(e => console.log(e))
         }

@@ -90,6 +90,7 @@ name: "Blog",
     },
     methods: {
         loadPost(page = 1) {
+            //axios.defaults.headers.common['Authorization'] = 'Bearer ' + context.state.token
             axios.get('/api/communities/' + this.$route.params.categories + '?page=' + page)
                 .then(r => this.postData = r.data)
                 .catch(e => console.log(e))

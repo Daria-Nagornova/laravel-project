@@ -23,6 +23,7 @@ import Register from "./components/Auth/Register";
 import DoctorProfile from "./components/Doctor/DoctorProfile";
 import MainAdmin from "./components/Admin/MainAdmin";
 import ErrorPage from "./components/NoteCategoties/ErrorPage";
+import Logout from "./components/Auth/Logout";
 
 
 
@@ -52,7 +53,7 @@ export default new VueRouter({
         { path: '/profile-user/user-posts', component: UserPost },
         { path: '/doctor', component: DoctorProfile },
         { path: '/admin', component: MainAdmin },
-
+        { path: '/logout', component: Logout },
         { path: '/:notFound(.*)', component: ErrorPage }
     ],
     mode: 'history'
