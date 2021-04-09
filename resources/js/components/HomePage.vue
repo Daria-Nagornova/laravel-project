@@ -9,7 +9,6 @@
                 </div>
             </div>
         </section>
-        <!-- Intro Section-->
         <section id="intro">
             <div class="container">
                 <div class="row">

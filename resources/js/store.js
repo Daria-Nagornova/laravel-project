@@ -40,8 +40,6 @@ export default new Vuex.Store({
                         localStorage.setItem('access_token', token)
                         context.commit('retrieveToken', token)
                         resolve(response)
-                        // console.log(response);
-                        // context.commit('addTodo', response.data)
                     })
                     .catch(error => {
                         reject(error)
@@ -53,13 +51,11 @@ export default new Vuex.Store({
 
             if (context.getters.loggedIn) {
                 return new Promise((resolve, reject) => {
-                    axios.post('/api/logout')
+                    axios.post('/logout')
                         .then(response => {
                             localStorage.removeItem('access_token')
                             context.commit('destroyToken')
                             resolve(response)
-                            // console.log(response);
-                            // context.commit('addTodo', response.data)
                         })
                         .catch(error => {
                             localStorage.removeItem('access_token')
@@ -82,8 +78,6 @@ export default new Vuex.Store({
                         localStorage.setItem('access_token', token)
                         context.commit('retrieveToken', token)
                         resolve(response)
-                        // console.log(response);
-                        // context.commit('addTodo', response.data)
                     })
                     .catch(error => {
                         console.log(error)

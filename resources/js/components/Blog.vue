@@ -33,13 +33,12 @@
                                 </footer>
                             </div>
                         </div>
-                        <pagination :data="postData" @pagination-change-page="loadPost" class="paginate"></pagination>
                     </div>
-
+                    <pagination :data="postData" @pagination-change-page="loadPost" class="paginate"></pagination>
                 </div>
             </main>
             <aside class="col-lg-4">
-                <div class="widget search">
+                <div v-if="loggedIn" class="widget search">
                     <router-link :to="'/communities/' + category + '/add/post'" class="write">Написать в сообществе</router-link>
                 </div>
                 <!-- Widget [Latest Posts Widget]        -->
@@ -90,7 +89,6 @@ name: "Blog",
     },
     methods: {
         loadPost(page = 1) {
-            //axios.defaults.headers.common['Authorization'] = 'Bearer ' + context.state.token
             axios.get('/api/communities/' + this.$route.params.categories + '?page=' + page)
                 .then(r => this.postData = r.data)
                 .catch(e => console.log(e))
@@ -113,7 +111,10 @@ name: "Blog",
     },
     computed: {
         category: function() {
-            return  this.$route.params.categories;
+            return  this.$route.params.categories
+        },
+        loggedIn() {
+            return this.$store.getters.loggedIn
         }
     },
     created() {

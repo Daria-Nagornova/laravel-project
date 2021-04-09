@@ -81,6 +81,11 @@ class PostController extends Controller
 
         $post->update($request->validated());
 
+        if ($request->hasFile('image')) {
+            $image = Image::saveForPost($request->file('image'), $post);
+            return response()->json($image, 201);
+        }
+
         return response()->json($post, 200);
     }
 
@@ -106,11 +111,9 @@ class PostController extends Controller
     public function userPost(Request $request): JsonResponse
     {
         $user = $request->user();
-
         $posts = $user->load('posts.image');
-    //dd($posts);
+
         return response()->json($posts, 200);
-       // return PostResource::collection($posts);
 
     }
 

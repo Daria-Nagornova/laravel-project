@@ -10,7 +10,7 @@
         </nav>
         <div class="row">
             <div class="post blogpost">
-                <div class="form-group btn-box">
+                <div v-if="blogPostData.user_id === userData.id" class="form-group btn-box">
                     <router-link :to="'/communities/' + category + '/' + post + '/update'" class="btn btn-outline-secondary btn-blogpost">Редактировать</router-link>
                     <button class="btn btn-outline-secondary btn-blogpost" @click="deletePost">Удалить</button>
                 </div>
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="add-comment">
-                <form @submit.prevent="saveComment">
+                <form v-if="loggedIn" @submit.prevent="saveComment">
                     <div class="form-group">
                         <label for="post">Комментарий:</label>
                         <textarea class="form-control" :class="{ 'is-invalid': active }" id="post" rows="4" v-model="text"></textarea>
@@ -43,7 +43,7 @@
                     <div class="post-footer d-flex align-items-center">
                         <div class="title">{{ comment.user.name }}</div>
                     </div>
-                    <button type="button" class="ml-2 mb-1 close" aria-label="Close" @click="deleteComment(comment.id)">
+                    <button v-if="comment.user_id === userData.id" type="button" class="ml-2 mb-1 close" aria-label="Close" @click="deleteComment(comment.id)">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <p class="text-muted">{{ comment.text }}</p>
@@ -59,6 +59,7 @@ export default {
     data() {
         return {
             blogPostData: {},
+            userData: {},
             text: '',
             newComment: '',
             active: false,
@@ -92,9 +93,11 @@ export default {
             axios.post('/api/communities/' + this.$route.params.categories + '/' + this.$route.params.post,
                 {
                         text: this.text,
-                        user_id: 5,
                         post_id: this.post
-                    })
+                    },
+                { headers: {
+                    'Authorization': 'Bearer ' + this.$store.state.token }
+                })
                 .then(r => this.loadBlogPost())
                 .catch(e => this.error(e))
                 this.text = ''
@@ -102,6 +105,13 @@ export default {
         deleteComment(id) {
             axios.delete('/api/comments/' + id)
                 .then(r => this.loadBlogPost())
+                .catch(e => console.log(e))
+        },
+        loadUser() {
+            axios.get('/api/user', { headers: {
+                    'Authorization': 'Bearer ' + this.$store.state.token }
+            })
+                .then(r => this.userData = r.data)
                 .catch(e => console.log(e))
         },
         error(e) {
@@ -123,10 +133,14 @@ export default {
         },
         post: function() {
             return this.$route.params.post;
+        },
+        loggedIn() {
+            return this.$store.getters.loggedIn
         }
     },
     mounted() {
         this.loadBlogPost()
+        this.loadUser()
     }
 }
 </script>

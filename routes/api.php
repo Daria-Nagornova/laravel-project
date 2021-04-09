@@ -36,7 +36,7 @@ Route::prefix('/communities/{category}')->group(function () {
     Route::get('/', [App\Http\Controllers\PostController::class, 'index']);
     Route::middleware('auth:api')->post('/add/post', [App\Http\Controllers\PostController::class, 'store']);
     Route::get('/{post}', [App\Http\Controllers\PostController::class, 'show']);
-    Route::patch('/{post}/update', [App\Http\Controllers\PostController::class, 'update']);
+    Route::post('/{post}/update', [App\Http\Controllers\PostController::class, 'update']);
     Route::delete('/{post}', [App\Http\Controllers\PostController::class, 'destroy']);
 });
 Route::prefix('/communities')->group(function () {
@@ -47,10 +47,8 @@ Route::prefix('/communities')->group(function () {
 });
 Route::get('/popular/{category}', [App\Http\Controllers\CommentController::class, 'popular']);
 Route::get('/count/{post}', [App\Http\Controllers\CommentController::class, 'postComments']);
-Route::prefix('/communities/{category}/{post}')->group(function () {
-    Route::post('/', [App\Http\Controllers\CommentController::class, 'store']);
+Route::middleware('auth:api')->post('/communities/{category}/{post}', [App\Http\Controllers\CommentController::class, 'store']);
 
-});
 Route::get('/sub/{category}', [App\Http\Controllers\CategoryController::class, 'getSubcategory']);
 
 Route::delete('/comments/{comment}', [App\Http\Controllers\CommentController::class, 'destroy']);
@@ -95,3 +93,5 @@ Route::prefix('/profile-user/child-diary')->group(function () {
     //  Route::delete('/{notes}', [App\Http\Controllers\FeedingController::class, 'destroy']);
 });
 Route::middleware('auth:api')->get('/profile-user/user-posts', [App\Http\Controllers\PostController::class, 'userPost']);
+Route::middleware('auth:api')->get('/user', [App\Http\Controllers\UserController::class, 'getUser']);
+Route::delete('/image/{postId}', [App\Http\Controllers\ImageController::class, 'destroy']);

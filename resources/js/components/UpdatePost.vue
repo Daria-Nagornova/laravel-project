@@ -16,7 +16,7 @@
                 <div class="error">{{ errTitle }}</div>
                 <div class="form-group">
                     <label for="subcategory">Выберите подкатегорию:</label>
-                    <select class="form-control" :class="{ 'is-invalid': activeSub }" id="subcategory" v-model="blogPostData.subcategory.id">
+                    <select class="form-control" :class="{ 'is-invalid': activeSub }" id="subcategory" v-model="blogPostData.subcategory_id">
                         <option v-for="item in arr" :key="item.id" :value="item.id">{{ item.name }}</option>
                     </select>
                 </div>
@@ -41,7 +41,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Данные успешно сохранены. Пост добавлен!</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Пост отредактирован!</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="cancel">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -60,7 +60,7 @@ export default {
         return {
             title: '',
             content: '',
-            subcategory: 1,
+            subcategory: '',
             blogPostData: {},
             massage: '',
             arr: '',
@@ -78,11 +78,15 @@ export default {
     methods: {
         selectFile(event) {
             this.image = event.target.files[0]
+            axios.delete('/api/image/' + this.blogPostData.id)
+                .then(r => console.log(r))
+                .catch(e => console.log(e))
         },
         loadBlogPost() {
             axios.get('/api/communities/' + this.$route.params.categories+ '/' + this.$route.params.post)
                 .then(r => this.blogPostData = r.data)
                 .catch(e => console.log(e))
+
         },
         updatePost() {
             this.active = false
@@ -95,23 +99,15 @@ export default {
             this.errContent = ''
             this.errFile = ''
 
-            /*let form = new FormData()
-            //form.append('image', this.image)
+            let form = new FormData()
+            form.append('image', this.image)
             form.append('title', this.blogPostData.title)
             form.append('content', this.blogPostData.content)
             form.append('subcategory_id', this.blogPostData.subcategory_id)
             form.append('category_id', this.$route.params.categories)
-            form.append('user_id', '61')*/
+            form.append('user_id', this.blogPostData.user_id)
 
-            axios.patch('/api/communities/' + this.$route.params.categories + '/' + this.$route.params.post  + '/update',  {
-                title: this.blogPostData.title,
-                content: this.blogPostData.content,
-                subcategory_id: this.blogPostData.subcategory_id,
-                category_id: this.$route.params.categories,
-                user_id: 5,
-                //image: this.image
-            })
-            //axios.patch('/api/communities/' + this.$route.params.categories + '/' + this.$route.params.post  + '/update', form)
+            axios.post('/api/communities/' + this.$route.params.categories + '/' + this.$route.params.post  + '/update', form)
                 .then(r => this.success())
                 .catch(e => this.error(e))
         },

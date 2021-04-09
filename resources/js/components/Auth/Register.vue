@@ -80,17 +80,6 @@ export default {
     },
     methods: {
         saveUser() {
-            /*let form = new FormData()
-            form.append('name', this.name)
-            form.append('email', this.email)
-            form.append('password', this.password)
-            form.append('c_password', this.c_password)
-            form.append('role', 'пользователь')
-
-            axios.post('/api/register', form)
-                .then(r => this.cancel())
-                .catch(e => console.log(e))*/
-
             this.$store.dispatch('register', {
                 name: this.name,
                 email: this.email,

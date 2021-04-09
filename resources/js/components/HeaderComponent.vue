@@ -24,7 +24,7 @@
                                     <router-link to="/consultations" class="nav-link animsition-link">Консультации</router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <router-link to="/profile-user" class="nav-link animsition-link">Профиль</router-link>
+                                    <router-link v-if="loggedIn" to="/profile-user" class="nav-link animsition-link">Профиль</router-link>
                                 </li>
                                 <li class="nav-item">
                                     <router-link to="/profile-doctor" class="nav-link animsition-link">Врач</router-link>
@@ -35,15 +35,15 @@
                             </ul>
                         </div>
                     <div>
-                        <span>Авторизованный пользователь</span>
-                        <button class="btn btn-outline-secondary">Выход</button>
+                        <span v-if="loggedIn" class="user">{{ userData.name }}</span>
+                        <router-link v-if="loggedIn" to="/logout" class="btn btn-outline-secondary btn-q">Выход</router-link>
                     </div>
                     <ul class="navbar-nav ml-auto align-items-center main-menu">
                         <li class="nav-item">
-                            <router-link to="/login" class="nav-link animsition-link">Вход</router-link>
+                            <router-link v-if="!loggedIn" to="/login" class="nav-link animsition-link">Вход</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link to="/register" class="nav-link animsition-link">Регистрация</router-link>
+                            <router-link v-if="!loggedIn" to="/register" class="nav-link animsition-link">Регистрация</router-link>
                         </li>
                     </ul>
                 </div>
@@ -55,7 +55,29 @@
 
 <script>
 export default {
-    name: "Header"
+    name: "Header",
+    data() {
+        return {
+            userData: {},
+        }
+    },
+    methods: {
+        loadUser() {
+            axios.get('/api/user', { headers: {
+                    'Authorization': 'Bearer ' + this.$store.state.token }
+            })
+                .then(r => this.userData = r.data)
+                .catch(e => console.log(e))
+        }
+    },
+    created() {
+        this.loadUser()
+    },
+    computed: {
+        loggedIn() {
+            return this.$store.getters.loggedIn
+        }
+    }
 }
 </script>
 
@@ -64,7 +86,19 @@ export default {
     font-family: "Nunito", sans-serif;
     margin: 0 auto;
 }
-router-link.nav-link:active {
+.main-menu a:active {
     color: #796AEE;
+}
+.btn-q {
+    background-color: white;
+    border: none;
+    border-bottom: 2px solid #95999c;
+}
+.user {
+    color: #796AEE;
+    margin: 0 15px;
+    font-size: 1rem;
+    font-weight: 500;
+
 }
 </style>

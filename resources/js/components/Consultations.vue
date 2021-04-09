@@ -81,7 +81,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4">
+            <div v-if="loggedIn" class="col-4">
                 <h3 class="questions-title">Задать вопрос врачу</h3>
                 <form @submit.prevent="saveConsultation">
                     <div class="form-group">
@@ -105,7 +105,6 @@
                     <button type="submit" class="btn btn-outline-secondary btn-cons">Отправить</button>
                     <small>*Врачи отвечают в течении 24 часов. Ответ появится в личном кабинете, на вкладке консультации</small>
                 </form>
-
             </div>
         </div>
         <div class="questions">
@@ -212,10 +211,16 @@ export default {
         },
         success() {
             this.email = ''
-            this.text = ''
-            this.doctor_id = ''
+            this.question = ''
+            this.doctor = ''
+
             $('#myModal').modal('toggle')
         },
+    },
+    computed: {
+        loggedIn() {
+            return this.$store.getters.loggedIn
+        }
     },
     mounted() {
         this.loadConsultation()

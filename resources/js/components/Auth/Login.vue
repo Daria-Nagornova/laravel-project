@@ -55,14 +55,6 @@ name: "Login",
     },
     methods: {
         authUser() {
-           /* let form = new FormData()
-            form.append('email', this.email)
-            form.append('password', this.password)
-
-            axios.post('/api/login', form)
-                .then(r => console.log(r.data))
-                .catch(e => console.log(e))*/
-
             this.$store.dispatch('retrieveToken', {
                 email: this.email,
                 password: this.password,

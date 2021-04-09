@@ -15,7 +15,8 @@ class Post extends Model
 
     protected $fillable = ['title', 'content', 'user_id', 'category_id', 'subcategory_id'];
 
-    public static function savePost(array $post, User $user) {
+    public static function savePost(array $post, User $user)
+    {
 
         $newPost = new Post;
         $newPost->fill($post);

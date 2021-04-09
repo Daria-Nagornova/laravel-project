@@ -16,7 +16,6 @@ class User extends Authenticatable
     const USER = 'пользователь';
     const DOCTOR = 'врач';
     const ADMIN = 'администратор';
-    const GUEST = 'гость';
 
     /**
      * The attributes that are mass assignable.
@@ -70,7 +69,6 @@ class User extends Authenticatable
             self::USER,
             self::ADMIN,
             self::DOCTOR,
-            self::GUEST,
         ];
     }
 

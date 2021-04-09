@@ -10,7 +10,7 @@
             <h1>Сообщества</h1>
             <h2>Обменивайтесь знанием и опытом в тематических сообществах, общайтесь и находите новых подруг</h2>
             <div v-for="category in categoriesData.data" :key="category.id" class="row d-flex align-items-stretch community">
-                <div class="image col-lg-4"><img src="img/pregn.jpg"></div>
+                <div class="image col-lg-4"><img :src="$store.state.site + category.image"></div>
                 <div class="text col-lg-8">
                     <div class="text-inner d-flex align-items-center">
                         <div class="content">
