@@ -27,6 +27,7 @@ class PostController extends Controller
     public function index(Category $category): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
         $posts = $category->posts()->paginate(6);
+
         return PostResource::collection($posts);
     }
 

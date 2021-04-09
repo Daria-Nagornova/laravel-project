@@ -17,7 +17,7 @@ class ConsultationController extends Controller
      */
     public function index(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-        $consultation = Consultation::where('status', 'не выполнена')->with('answer', 'doctor')->paginate(10);
+        $consultation = Consultation::where('status', Consultation::NOT_DONE)->with('answer', 'doctor')->paginate(10);
         return ConsultationResource::collection($consultation);
     }
 

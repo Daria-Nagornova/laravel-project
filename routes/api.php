@@ -95,3 +95,4 @@ Route::prefix('/profile-user/child-diary')->group(function () {
 Route::middleware('auth:api')->get('/profile-user/user-posts', [App\Http\Controllers\PostController::class, 'userPost']);
 Route::middleware('auth:api')->get('/user', [App\Http\Controllers\UserController::class, 'getUser']);
 Route::delete('/image/{postId}', [App\Http\Controllers\ImageController::class, 'destroy']);
+Route::get('/doctors', [App\Http\Controllers\DoctorController::class, 'index']);

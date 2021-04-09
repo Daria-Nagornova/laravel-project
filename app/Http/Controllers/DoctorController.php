@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class DoctorController extends Controller
@@ -10,11 +11,14 @@ class DoctorController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
+        $doctors = Doctor::all();
+
+        return response()->json($doctors, 200);
+        //return DoctorResource::collection($doctors);
     }
 
     /**
@@ -81,14 +85,6 @@ class DoctorController extends Controller
     public function destroy(Doctor $doctor)
     {
         //
-    }
-    public function pediatr(Request $request): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
-    {
-        $posts = $request->user();
-        dd($posts);
-        //$posts = $request->user()->posts()->paginate(6);
-        //return PostResource::collection($posts);
-
     }
 
 }

@@ -10,74 +10,38 @@
             <div class="col-8">
                 <h3>Педиатры</h3>
                 <div class="specialisation">
-                    <div class="doctor">
-                        <div class="avatar-doctor">
-                            <img src="img/avatar-3.jpg" class="img-fluid">
+                    <div v-for="doctor in doctorsData" :key="doctor.id">
+                        <div v-if="doctor.specialisation_id === 1" class="doctor">
+                            <div class="avatar-doctor">
+                                <img :src="$store.state.site + doctor.image" class="img-fluid">
+                            </div>
+                            <div class="doctor-name">{{ doctor.name }}</div>
+                            <span class="doctor-info">{{ doctor.description }}</span>
                         </div>
-                        <div class="doctor-name">Имя врача</div>
-                        <span class="doctor-info">Описание</span>
-                    </div>
-                    <div class="doctor">
-                        <div class="avatar-doctor">
-                            <img src="img/avatar-3.jpg" class="img-fluid">
-                        </div>
-                        <div class="doctor-name">Имя врача</div>
-                        <span class="doctor-info">Описание</span>
-                    </div>
-                    <div class="doctor">
-                        <div class="avatar-doctor">
-                            <img src="img/avatar-3.jpg" class="img-fluid">
-                        </div>
-                        <div class="doctor-name">Имя врача</div>
-                        <span class="doctor-info">Описание</span>
                     </div>
                 </div>
                 <h3>Неврологи</h3>
                 <div class="specialisation">
-                    <div class="doctor">
-                        <div class="avatar-doctor">
-                            <img src="img/avatar-3.jpg" class="img-fluid">
+                    <div v-for="doctor in doctorsData" :key="doctor.id">
+                        <div v-if="doctor.specialisation_id === 2" class="doctor">
+                            <div class="avatar-doctor">
+                                <img :src="$store.state.site + doctor.image" class="img-fluid">
+                            </div>
+                            <div class="doctor-name">{{ doctor.name }}</div>
+                            <span class="doctor-info">{{ doctor.description }}</span>
                         </div>
-                        <div class="doctor-name">Имя врача</div>
-                        <span class="doctor-info">Описание</span>
-                    </div>
-                    <div class="doctor">
-                        <div class="avatar-doctor">
-                            <img src="img/avatar-3.jpg" class="img-fluid">
-                        </div>
-                        <div class="doctor-name">Имя врача</div>
-                        <span class="doctor-info">Описание</span>
-                    </div>
-                    <div class="doctor">
-                        <div class="avatar-doctor">
-                            <img src="img/avatar-3.jpg" class="img-fluid">
-                        </div>
-                        <div class="doctor-name">Имя врача</div>
-                        <span class="doctor-info">Описание</span>
                     </div>
                 </div>
                 <h3>Психологи</h3>
                 <div class="specialisation">
-                    <div class="doctor">
-                        <div class="avatar-doctor">
-                            <img src="img/avatar-3.jpg" class="img-fluid">
+                    <div v-for="doctor in doctorsData" :key="doctor.id">
+                        <div v-if="doctor.specialisation_id === 3" class="doctor">
+                            <div class="avatar-doctor">
+                                <img :src="$store.state.site + doctor.image" class="img-fluid">
+                            </div>
+                            <div class="doctor-name">{{ doctor.name }}</div>
+                            <span class="doctor-info">{{ doctor.description }}</span>
                         </div>
-                        <div class="doctor-name">Имя врача</div>
-                        <span class="doctor-info">Описание</span>
-                    </div>
-                    <div class="doctor">
-                        <div class="avatar-doctor">
-                            <img src="img/avatar-3.jpg" class="img-fluid">
-                        </div>
-                        <div class="doctor-name">Имя врача</div>
-                        <span class="doctor-info">Описание</span>
-                    </div>
-                    <div class="doctor">
-                        <div class="avatar-doctor">
-                            <img src="img/avatar-3.jpg" class="img-fluid">
-                        </div>
-                        <div class="doctor-name">Имя врача</div>
-                        <span class="doctor-info">Описание</span>
                     </div>
                 </div>
             </div>
@@ -145,6 +109,7 @@ export default {
             email: '',
             doctor: '',
             consultationData: {},
+            doctorsData: {},
             massage: '',
             active: false,
             activeQuestion: false,
@@ -161,6 +126,11 @@ export default {
         loadConsultation(page = 1) {
             axios.get('/api/consultations/?page=' + page)
                 .then(r => this.consultationData = r.data)
+                .catch(e => console.log(e))
+        },
+        loadDoctors() {
+            axios.get('/api/doctors')
+                .then(r => this.doctorsData = r.data)
                 .catch(e => console.log(e))
         },
         saveConsultation() {
@@ -224,6 +194,7 @@ export default {
     },
     mounted() {
         this.loadConsultation()
+        this.loadDoctors()
     }
 }
 </script>
@@ -238,6 +209,7 @@ export default {
 }
 .doctor {
     margin: 20px;
+    text-align: center;
 }
 .questions ul li {
     padding: 15px 0;
@@ -274,4 +246,13 @@ ul.paginate {
     color: red;
     margin-bottom: 10px;
 }
+.doctor-name {
+    border-bottom: 2px darkviolet;
+    font-weight: 500;
+    padding: 5px;
+}
+.doctor-info {
+    font-size: 0.8rem;
+    padding: 5px;
+ }
 </style>
