@@ -96,3 +96,6 @@ Route::middleware('auth:api')->get('/profile-user/user-posts', [App\Http\Control
 Route::middleware('auth:api')->get('/user', [App\Http\Controllers\UserController::class, 'getUser']);
 Route::delete('/image/{postId}', [App\Http\Controllers\ImageController::class, 'destroy']);
 Route::get('/doctors', [App\Http\Controllers\DoctorController::class, 'index']);
+Route::middleware('auth:api')->get('/user-consultations', [App\Http\Controllers\ConsultationController::class, 'userConsultation']);
+Route::middleware('auth:api')->get('/doctor-consultations', [App\Http\Controllers\ConsultationController::class, 'doctorConsultation']);
+Route::post('/add-answer', [App\Http\Controllers\AnswerController::class, 'store']);

@@ -17,9 +17,14 @@ class Doctor extends Model
     {
         return $this->belongsTo(Specialisation::class);
     }
+
     public function consultations() : hasMany
     {
         return $this->hasMany(Consultation::class);
     }
 
+    public function user() : belongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

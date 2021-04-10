@@ -60,4 +60,34 @@ class ConsultationController extends Controller
 
         return response()->json($consultation, 200);
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function userConsultation(Request $request): JsonResponse
+    {
+        $user = $request->user();
+        $consultations = $user->load('consultations.answer');
+
+        return response()->json($consultations, 200);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function doctorConsultation(Request $request): JsonResponse
+    {
+        $user = $request->user();
+        $consultations = $user->load('doctors.consultations');
+
+        return response()->json($consultations, 200);
+
+    }
 }

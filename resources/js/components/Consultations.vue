@@ -7,11 +7,11 @@
             </ol>
         </nav>
         <div class="row">
-            <div class="col-8">
+            <div class="col-lg-8">
                 <h3>Педиатры</h3>
-                <div class="specialisation">
-                    <div v-for="doctor in doctorsData" :key="doctor.id">
-                        <div v-if="doctor.specialisation_id === 1" class="doctor">
+                <div class="row specialisation">
+                    <div v-for="doctor in doctorsData" :key="doctor.id" v-if="doctor.specialisation_id === 1" class="col-sm-6 col-lg-3">
+                        <div class="doctor">
                             <div class="avatar-doctor">
                                 <img :src="$store.state.site + doctor.image" class="img-fluid">
                             </div>
@@ -21,9 +21,9 @@
                     </div>
                 </div>
                 <h3>Неврологи</h3>
-                <div class="specialisation">
-                    <div v-for="doctor in doctorsData" :key="doctor.id">
-                        <div v-if="doctor.specialisation_id === 2" class="doctor">
+                <div class="row specialisation">
+                    <div v-for="doctor in doctorsData" :key="doctor.id" v-if="doctor.specialisation_id === 2" class="col-sm-4">
+                        <div class="doctor">
                             <div class="avatar-doctor">
                                 <img :src="$store.state.site + doctor.image" class="img-fluid">
                             </div>
@@ -33,9 +33,9 @@
                     </div>
                 </div>
                 <h3>Психологи</h3>
-                <div class="specialisation">
-                    <div v-for="doctor in doctorsData" :key="doctor.id">
-                        <div v-if="doctor.specialisation_id === 3" class="doctor">
+                <div class="row specialisation">
+                    <div v-for="doctor in doctorsData" :key="doctor.id" v-if="doctor.specialisation_id === 3" class="col-sm-4">
+                        <div class="doctor">
                             <div class="avatar-doctor">
                                 <img :src="$store.state.site + doctor.image" class="img-fluid">
                             </div>
@@ -45,7 +45,7 @@
                     </div>
                 </div>
             </div>
-            <div v-if="loggedIn" class="col-4">
+            <div v-if="loggedIn" class="col-lg-4">
                 <h3 class="questions-title">Задать вопрос врачу</h3>
                 <form @submit.prevent="saveConsultation">
                     <div class="form-group">
@@ -56,8 +56,7 @@
                     <div class="form-group">
                         <label for="doctor">Выберите доктора:</label>
                         <select class="form-control" :class="{ 'is-invalid': activeDoctor }" id="doctor" v-model="doctor">
-                            <option value="1">Иванов</option>
-                            <option value="2">Петров</option>
+                            <option v-for="doctor in doctorsData" :key="doctor.id" :value="doctor.id">{{ doctor.name }}</option>
                         </select>
                     </div>
                     <div class="error">{{ errDoctor }}</div>
