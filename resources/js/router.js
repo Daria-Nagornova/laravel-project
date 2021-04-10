@@ -44,7 +44,7 @@ export default new VueRouter({
         { path: '/profile-user', component: ProfileUser },
         { path: '/profile-user/child-diary', component: ChildDiary },
         { path: '/profile-user/child-diary/add-child', component: AddChild },
-        { path: '/profile-user/child-diary/add-notes', component: AddNotes },
+        { path: '/profile-user/child-diary/add-notes/:id', component: AddNotes },
         { path: '/profile-user/child-diary/add-notes/sleep', component: Sleep },
         { path: '/profile-user/child-diary/add-notes/feeding', component: Feeding },
         { path: '/profile-user/child-diary/add-notes/height', component: Height },
@@ -53,7 +53,7 @@ export default new VueRouter({
         { path: '/profile-user/child-diary/add-notes/walk', component: Walk },
         { path: '/profile-user/user-posts', component: UserPost },
         { path: '/profile-user/user-consultations', component: UserConsultations },
-        { path: '/doctor', component: DoctorProfile },
+        { path: '/profile-doctor', component: DoctorProfile },
         { path: '/admin', component: MainAdmin },
         { path: '/logout', component: Logout },
         { path: '/:notFound(.*)', component: ErrorPage }

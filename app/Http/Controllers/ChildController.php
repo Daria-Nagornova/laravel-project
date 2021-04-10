@@ -18,21 +18,24 @@ class ChildController extends Controller
      */
     public function index(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-       $children = Child::paginate(10);
-       return ChildResource::collection($children);
+        $children = Child::paginate(10);
+
+        return ChildResource::collection($children);
     }
 
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  StoreRequest  $request
+     * @param StoreRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(StoreRequest $request) : JsonResponse
+    public function store(StoreRequest $request): JsonResponse
     {
         $child = new Child;
         $child->fill($request->validated());
+        $user = $request->user();
+        $child->user_id = $user->id;
         $child->save();
 
         return response()->json($child, 200);
@@ -41,10 +44,10 @@ class ChildController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Child  $child
+     * @param \App\Models\Child $child
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Child $child) : JsonResponse
+    public function show(Child $child): JsonResponse
     {
         return response()->json($child, 200);
     }
@@ -53,11 +56,11 @@ class ChildController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  UpdateRequest $request
-     * @param  \App\Models\Child  $child
+     * @param UpdateRequest $request
+     * @param \App\Models\Child $child
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdateRequest $request, Child $child) : JsonResponse
+    public function update(UpdateRequest $request, Child $child): JsonResponse
     {
         $child->update($request->validated());
 
@@ -67,12 +70,27 @@ class ChildController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Child  $child
+     * @param \App\Models\Child $child
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Child $child) : JsonResponse
+    public function destroy(Child $child): JsonResponse
     {
         $child->delete();
+
+        return response()->json($child, 200);
+    }
+
+    /**
+     * User child
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getChild(Request $request): JsonResponse
+    {
+        $user = $request->user();
+        $child = $user->load('children');
+
 
         return response()->json($child, 200);
     }

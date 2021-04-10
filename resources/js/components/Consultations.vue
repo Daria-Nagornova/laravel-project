@@ -76,7 +76,6 @@
                 <li v-for="consultation in consultationData.data" :key="consultation">
                     <div>{{ consultation.text }}</div>
                     <answer :data="consultation"></answer>
-
                 </li>
             </ul>
         </div>

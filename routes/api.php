@@ -26,7 +26,7 @@ Route::get('/', [App\Http\Controllers\PostController::class, 'postForHome']);
 
 Route::prefix('/profile-user/child-diary')->group(function () {
     Route::get('/', [App\Http\Controllers\ChildController::class, 'index']);
-    Route::post('/add-child', [App\Http\Controllers\ChildController::    class, 'store']);
+    Route::middleware('auth:api')->post('/add-child', [App\Http\Controllers\ChildController::class, 'store']);
     Route::get('/{child}', [App\Http\Controllers\ChildController::class, 'show']);
     Route::patch('/{child}', [App\Http\Controllers\ChildController::class, 'update']);
     Route::delete('/{child}', [App\Http\Controllers\ChildController::class, 'destroy']);
@@ -99,3 +99,6 @@ Route::get('/doctors', [App\Http\Controllers\DoctorController::class, 'index']);
 Route::middleware('auth:api')->get('/user-consultations', [App\Http\Controllers\ConsultationController::class, 'userConsultation']);
 Route::middleware('auth:api')->get('/doctor-consultations', [App\Http\Controllers\ConsultationController::class, 'doctorConsultation']);
 Route::post('/add-answer', [App\Http\Controllers\AnswerController::class, 'store']);
+Route::patch('/update-consultation/{consultation}', [App\Http\Controllers\ConsultationController::class, 'update']);
+Route::get('/answer', [App\Http\Controllers\AnswerController::class, 'index']);
+Route::middleware('auth:api')->get('/child', [App\Http\Controllers\ChildController::class, 'getChild']);

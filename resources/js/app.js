@@ -31,6 +31,7 @@ import ErrorPage from "./components/NoteCategoties/ErrorPage";
 import Logout from "./components/Auth/Logout";
 import Answer from "./components/Answer";
 import UserConsultations from "./components/UserConsultations";
+import AddAnswer from "./components/Doctor/AddAnswer";
 
 
 
@@ -89,8 +90,8 @@ const app = new Vue({
         ErrorPage,
         Logout,
         Answer,
-        UserConsultations
-
+        UserConsultations,
+        AddAnswer
     },
     router,
     store

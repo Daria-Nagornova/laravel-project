@@ -18,7 +18,6 @@ class DoctorController extends Controller
         $doctors = Doctor::all();
 
         return response()->json($doctors, 200);
-        //return DoctorResource::collection($doctors);
     }
 
     /**

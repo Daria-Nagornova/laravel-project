@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Consultation\StoreRequest;
+use App\Http\Requests\Consultation\UpdateRequest;
 use App\Http\Resources\ConsultationResource;
 use App\Models\Consultation;
 use Illuminate\Http\JsonResponse;
@@ -17,7 +18,7 @@ class ConsultationController extends Controller
      */
     public function index(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-        $consultation = Consultation::where('status', Consultation::NOT_DONE)->with('answer', 'doctor')->paginate(10);
+        $consultation = Consultation::where('status', Consultation::DONE)->with('answer', 'doctor')->paginate(10);
         return ConsultationResource::collection($consultation);
     }
 
@@ -47,6 +48,19 @@ class ConsultationController extends Controller
         return response()->json($consultation, 200);
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param Consultation $consultation
+     * @return JsonResponse
+     */
+    public function update(UpdateRequest $request, Consultation $consultation): JsonResponse
+    {
+        $consultation->update($request->validated());
+
+        return response()->json($consultation, 200);
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -85,7 +99,7 @@ class ConsultationController extends Controller
     public function doctorConsultation(Request $request): JsonResponse
     {
         $user = $request->user();
-        $consultations = $user->load('doctors.consultations');
+        $consultations = $user->load('doctor.consultations.answer');
 
         return response()->json($consultations, 200);
 

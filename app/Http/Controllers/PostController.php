@@ -39,7 +39,7 @@ class PostController extends Controller
      */
     public function store(StoreRequest $request) : JsonResponse
     {
-        $post = Post::savePost($request->validated(), $request->user());
+       $post = Post::savePost($request->validated(), $request->user());
 
         if ($request->hasFile('image')) {
             $image = Image::saveForPost($request->file('image'), $post);
@@ -47,7 +47,6 @@ class PostController extends Controller
         }
 
         return response()->json($post, 200);
-
     }
 
     /**
@@ -61,6 +60,7 @@ class PostController extends Controller
         //$this->authorize(Ability::VIEW, $post);
 
         $blog = $post->load('user', 'subcategory', 'category', 'comments.user', 'image');
+
         return response()->json($blog, 200);
     }
 

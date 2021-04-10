@@ -24,12 +24,12 @@
                                     <router-link to="/consultations" class="nav-link animsition-link">Консультации</router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <router-link v-if="loggedIn" to="/profile-user" class="nav-link animsition-link">Профиль</router-link>
+                                    <router-link v-if="loggedIn && userData.role === 'пользователь'" to="/profile-user" class="nav-link animsition-link">Профиль</router-link>
                                 </li>
-                                <li class="nav-item">
+                                <li v-if="userData.role === 'врач'" class="nav-item">
                                     <router-link to="/profile-doctor" class="nav-link animsition-link">Врач</router-link>
                                 </li>
-                                <li class="nav-item">
+                                <li v-if="userData.role === 'администратор'" class="nav-item">
                                     <router-link to="/profile-admin" class="nav-link animsition-link">Админ</router-link>
                                 </li>
                             </ul>

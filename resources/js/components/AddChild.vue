@@ -46,7 +46,6 @@ export default {
       errorName: '',
       errorDate: '',
       errorGender: '',
-      user: 2
     }
   },
   methods: {
@@ -55,11 +54,12 @@ export default {
               name: this.name,
               date_birth: this.dateOfBirth,
               gender: this.gender,
-              user_id: this.user,
+          },
+          { headers: {
+               'Authorization': 'Bearer ' + this.$store.state.token }
           })
-              .then(r => console.log(r))
+              .then(r => this.cancel())
               .catch(e => console.log(e))
-          this.cancel()
       },
     cancel () {
       this.$router.push('/profile-user/child-diary')

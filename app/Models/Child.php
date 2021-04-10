@@ -11,7 +11,7 @@ class Child extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id', 'name', 'date_birth', 'gender', 'user_id'];
+    protected $fillable = ['name', 'date_birth', 'gender', 'user_id'];
 
 
     public function user() : belongsTo

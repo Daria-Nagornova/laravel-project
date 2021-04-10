@@ -9,18 +9,9 @@
         <div class="questions">
             <div class="questions-form">Консультации</div>
             <ul>
-                <li v-for="consultation in consultationData.data" :key="consultation">
+                <li v-for="consultation in consultationData.doctor.consultations" :key="consultation">
                     <div>{{ consultation.text }}</div>
-                    <form @submit.prevent="saveAnswer(consultation.id)" class="add-comment">
-                        <div class="form-group">
-                            <label for="post">Комментарий:</label>
-                            <textarea class="form-control" id="post" rows="4" v-model="text"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-outline-secondary btn-post">Отправить</button>
-                    </form>
-                    <div class="post-details">
-                        <p class="text-muted">Текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст отзыва текст</p>
-                    </div>
+                    <add-answer :data="consultation" @update="loadConsultation"></add-answer>
                 </li>
             </ul>
         </div>
@@ -28,35 +19,23 @@
 </template>
 
 <script>
+import AddAnswer from "./AddAnswer";
 export default {
 name: "DoctorProfile",
+    components: {AddAnswer},
     data() {
         return {
             consultationData: {},
-            text: ''
         }
     },
     methods: {
-        loadConsultation(page = 1) {
+        loadConsultation() {
             axios.get('/api/doctor-consultations', { headers: {
                     'Authorization': 'Bearer ' + this.$store.state.token }
             })
                 .then(r => this.consultationData = r.data)
                 .catch(e => console.log(e))
         },
-        saveAnswer(id) {
-            axios.post('/api/add-answer',
-                {
-                    text: this.text,
-                    consultation_id: this.id
-                },
-                { headers: {
-                        'Authorization': 'Bearer ' + this.$store.state.token }
-                })
-                .then(r => this.loadBlogPost())
-                .catch(e => this.error(e))
-            this.text = ''
-        }
     },
     mounted() {
         this.loadConsultation()
