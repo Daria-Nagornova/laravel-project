@@ -12,7 +12,7 @@
             <div class="post blogpost">
                 <div v-if="blogPostData.user_id === userData.id" class="form-group btn-box">
                     <router-link :to="'/communities/' + category + '/' + post + '/update'" class="btn btn-outline-secondary btn-blogpost">Редактировать</router-link>
-                    <button class="btn btn-outline-secondary btn-blogpost" @click="deletePost">Удалить</button>
+                    <button class="btn btn-outline-secondary btn-blogpost" @click="confirmation">Удалить</button>
                 </div>
                 <div class="post-thumbnail">
                     <img :src="$store.state.site + blogPostData.image.path" class="img-fluid">
@@ -50,6 +50,19 @@
                 </div>
             </div>
         </div>
+        <div id="myModal" class="modal fade massage" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Вы уверены, что хотите удалить пост?</h5>
+                    </div>
+                    <div class="modal-button">
+                        <button type="button" data-dismiss="modal" aria-label="Close" @click="deletePost">Удалить</button>
+                        <button type="button" data-dismiss="modal" aria-label="Close" @click="cancelDelete">Отмена</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -77,14 +90,20 @@ export default {
                 .then(r => this.count = r.data)
                 .catch(e => console.log(e))
         },
+        confirmation() {
+            $('#myModal').modal('toggle')
+        },
         deletePost() {
-            axios.delete('/api/communities/' + this.$route.params.categories+ '/' + this.$route.params.post)
+            axios.delete('/api/communities/' + this.$route.params.categories + '/' + this.$route.params.post)
                 .then(r => this.blogPostData = r.data)
                 .catch(e => console.log(e))
             this.cancel()
         },
-        cancel () {
+        cancel() {
             this.$router.push('/communities/' +  this.$route.params.categories)
+        },
+        cancelDelete() {
+            this.$router.push('/communities/' +  this.$route.params.categories + '/' + this.$route.params.post)
         },
         saveComment() {
             this.active = false
@@ -183,5 +202,18 @@ export default {
 .error {
     color: red;
     margin-bottom: 10px;
+}
+.modal-button {
+    font-size: 0.9rem !important;
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+.modal-button button {
+    margin: 10px;
+    font-size: 0.9rem !important;
+}
+.massage {
+    margin-top: 100px;
 }
 </style>

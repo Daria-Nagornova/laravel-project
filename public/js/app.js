@@ -2655,6 +2655,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "BlogPost",
   data: function data() {
@@ -2684,6 +2697,9 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(e);
       });
     },
+    confirmation: function confirmation() {
+      $('#myModal').modal('toggle');
+    },
     deletePost: function deletePost() {
       var _this2 = this;
 
@@ -2696,6 +2712,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     cancel: function cancel() {
       this.$router.push('/communities/' + this.$route.params.categories);
+    },
+    cancelDelete: function cancelDelete() {
+      this.$router.push('/communities/' + this.$route.params.categories + '/' + this.$route.params.post);
     },
     saveComment: function saveComment() {
       var _this3 = this;
@@ -4193,6 +4212,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "NotesToday",
   data: function data() {
@@ -4210,12 +4251,66 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (e) {
         return console.log(e);
       });
+    },
+    deleteFeeding: function deleteFeeding(id) {
+      var _this2 = this;
+
+      axios["delete"]('/api/delete-feeding/' + id).then(function (r) {
+        return _this2.loadNotes();
+      })["catch"](function (e) {
+        return console.log(e);
+      });
+    },
+    deleteWalk: function deleteWalk(id) {
+      var _this3 = this;
+
+      axios["delete"]('/api/delete-walk/' + id).then(function (r) {
+        return _this3.loadNotes();
+      })["catch"](function (e) {
+        return console.log(e);
+      });
+    },
+    deleteHeight: function deleteHeight(id) {
+      var _this4 = this;
+
+      axios["delete"]('/api/delete-height/' + id).then(function (r) {
+        return _this4.loadNotes();
+      })["catch"](function (e) {
+        return console.log(e);
+      });
+    },
+    deleteVaccination: function deleteVaccination(id) {
+      var _this5 = this;
+
+      axios["delete"]('/api/delete-vaccination/' + id).then(function (r) {
+        return _this5.loadNotes();
+      })["catch"](function (e) {
+        return console.log(e);
+      });
+    },
+    deleteSleep: function deleteSleep(id) {
+      var _this6 = this;
+
+      axios["delete"]('/api/delete-sleep/' + id).then(function (r) {
+        return _this6.loadNotes();
+      })["catch"](function (e) {
+        return console.log(e);
+      });
+    },
+    deleteTeeth: function deleteTeeth(id) {
+      var _this7 = this;
+
+      axios["delete"]('/api/delete-teeth/' + id).then(function (r) {
+        return _this7.loadNotes();
+      })["catch"](function (e) {
+        return console.log(e);
+      });
     }
   },
   computed: {
     todayDate: function todayDate() {
       if (this.date === '') {
-        return new Date().getDate() + '-0' + (new Date().getMonth() + 1) + '-' + new Date().getFullYear();
+        return new Date().getFullYear() + '-0' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
       } else return this.date;
     }
   },
@@ -9567,7 +9662,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_storage_content_massage_png__WEBPACK_IMPORTED_MODULE_2__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-bdf3a066] {\n    background-color: #e9ecef;\n    font-family: \"Nunito\", sans-serif;\n    color: #494f54;\n    border-radius: 15px;\n}\n.comments-icon[data-v-bdf3a066] {\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") 0 50% no-repeat;\n}\n.blogpost[data-v-bdf3a066], .add-comment[data-v-bdf3a066] {\n    margin: 20px auto;\n    width: 70%;\n    background-color: white;\n    padding: 20px;\n    border-radius: 15px;\n}\n.post-details[data-v-bdf3a066] {\n    margin: 20px auto;\n}\n.btn-box[data-v-bdf3a066] {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    font-size: 0.8rem;\n}\n.btn-blogpost[data-v-bdf3a066] {\n    border: none;\n    border-bottom: 2px solid gray;\n    margin: 0 20px;\n}\n.post-thumbnail img[data-v-bdf3a066] {\n    display: block;\n    margin: 0 auto;\n}\n.error[data-v-bdf3a066] {\n    color: red;\n    margin-bottom: 10px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-bdf3a066] {\n    background-color: #e9ecef;\n    font-family: \"Nunito\", sans-serif;\n    color: #494f54;\n    border-radius: 15px;\n}\n.comments-icon[data-v-bdf3a066] {\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") 0 50% no-repeat;\n}\n.blogpost[data-v-bdf3a066], .add-comment[data-v-bdf3a066] {\n    margin: 20px auto;\n    width: 70%;\n    background-color: white;\n    padding: 20px;\n    border-radius: 15px;\n}\n.post-details[data-v-bdf3a066] {\n    margin: 20px auto;\n}\n.btn-box[data-v-bdf3a066] {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    font-size: 0.8rem;\n}\n.btn-blogpost[data-v-bdf3a066] {\n    border: none;\n    border-bottom: 2px solid gray;\n    margin: 0 20px;\n}\n.post-thumbnail img[data-v-bdf3a066] {\n    display: block;\n    margin: 0 auto;\n}\n.error[data-v-bdf3a066] {\n    color: red;\n    margin-bottom: 10px;\n}\n.modal-button[data-v-bdf3a066] {\n    font-size: 0.9rem !important;\n    display: flex;\n    justify-content: center;\n    margin: 10px;\n}\n.modal-button button[data-v-bdf3a066] {\n    margin: 10px;\n    font-size: 0.9rem !important;\n}\n.massage[data-v-bdf3a066] {\n    margin-top: 100px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -46704,7 +46799,7 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-outline-secondary btn-blogpost",
-                    on: { click: _vm.deletePost }
+                    on: { click: _vm.confirmation }
                   },
                   [_vm._v("Удалить")]
                 )
@@ -46879,10 +46974,70 @@ var render = function() {
         ],
         2
       )
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade massage",
+        attrs: { id: "myModal", tabindex: "-1", role: "dialog" }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-button" }, [
+                _c(
+                  "button",
+                  {
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close"
+                    },
+                    on: { click: _vm.deletePost }
+                  },
+                  [_vm._v("Удалить")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close"
+                    },
+                    on: { click: _vm.cancelDelete }
+                  },
+                  [_vm._v("Отмена")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Вы уверены, что хотите удалить пост?")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -47077,13 +47232,13 @@ var render = function() {
               staticClass: "row d-flex align-items-stretch community"
             },
             [
-              _c("div", { staticClass: "image col-lg-4" }, [
+              _c("div", { staticClass: "image col-lg-6" }, [
                 _c("img", {
                   attrs: { src: _vm.$store.state.site + category.image }
                 })
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "text col-lg-8" }, [
+              _c("div", { staticClass: "text col-lg-6" }, [
                 _c(
                   "div",
                   { staticClass: "text-inner d-flex align-items-center" },
@@ -49756,80 +49911,206 @@ var render = function() {
     _c("div", { staticClass: "row" }, [
       _c(
         "div",
-        { staticClass: "col-8" },
+        { staticClass: "col-md-8" },
         [
-          _c("div", { staticClass: "date" }, [_vm._v(_vm._s(_vm.todayDate))]),
+          _c("div", { staticClass: "date" }, [
+            _c("span", [_vm._v(" " + _vm._s(_vm.noteData.name) + " ")]),
+            _vm._v(" "),
+            _c("span", [_vm._v(" " + _vm._s(_vm.todayDate) + " ")])
+          ]),
           _vm._v(" "),
           _vm._l(_vm.noteData.feedings, function(feeding) {
-            return _c("div", { key: feeding, staticClass: "item" }, [
-              _c("span", [_vm._v(" Кормление ")]),
-              _vm._v(" "),
-              _c("span", [_vm._v("Время: " + _vm._s(feeding.time))]),
-              _vm._v(" "),
-              _c("span", [
-                _vm._v("Продукты: " + _vm._s(feeding.products) + " ")
-              ])
-            ])
+            return feeding.created_at.slice(0, 10) === _vm.todayDate
+              ? _c("div", { key: feeding, staticClass: "item" }, [
+                  _c("span", [_vm._v(" Кормление ")]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v("Время: " + _vm._s(feeding.time))]),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v("Продукты: " + _vm._s(feeding.products) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "ml-2 mb-1 close",
+                      attrs: { type: "button", "aria-label": "Close" },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteFeeding(feeding.id)
+                        }
+                      }
+                    },
+                    [
+                      _c("span", { attrs: { "aria-hidden": "true" } }, [
+                        _vm._v("×")
+                      ])
+                    ]
+                  )
+                ])
+              : _vm._e()
           }),
           _vm._v(" "),
           _vm._l(_vm.noteData.heighths, function(heighth) {
-            return _c("div", { key: heighth, staticClass: "item" }, [
-              _c("span", [_vm._v(" Рост и вес ")]),
-              _vm._v(" "),
-              _c("span", [_vm._v("Рост: " + _vm._s(heighth.height))]),
-              _vm._v(" "),
-              _c("span", [_vm._v("Вес: " + _vm._s(heighth.weight) + " ")])
-            ])
+            return heighth.created_at.slice(0, 10) === _vm.todayDate
+              ? _c("div", { key: heighth, staticClass: "item" }, [
+                  _c("span", [_vm._v(" Рост и вес ")]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v("Рост: " + _vm._s(heighth.height))]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v("Вес: " + _vm._s(heighth.weight) + " ")]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "ml-2 mb-1 close",
+                      attrs: { type: "button", "aria-label": "Close" },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteHeight(heighth.id)
+                        }
+                      }
+                    },
+                    [
+                      _c("span", { attrs: { "aria-hidden": "true" } }, [
+                        _vm._v("×")
+                      ])
+                    ]
+                  )
+                ])
+              : _vm._e()
           }),
           _vm._v(" "),
           _vm._l(_vm.noteData.sleeps, function(sleep) {
-            return _c("div", { key: sleep, staticClass: "item" }, [
-              _c("span", [_vm._v(" Сон ")]),
-              _vm._v(" "),
-              _c("span", [_vm._v("Начало: " + _vm._s(sleep.start))]),
-              _vm._v(" "),
-              _c("span", [_vm._v("Конец: " + _vm._s(sleep.end) + " ")]),
-              _vm._v(" "),
-              _c("span", [
-                _vm._v("Комментарий: " + _vm._s(sleep.comment) + " ")
-              ])
-            ])
+            return sleep.created_at.slice(0, 10) === _vm.todayDate
+              ? _c("div", { key: sleep, staticClass: "item" }, [
+                  _c("span", [_vm._v(" Сон ")]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v("Начало: " + _vm._s(sleep.start))]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v("Конец: " + _vm._s(sleep.end) + " ")]),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v("Комментарий: " + _vm._s(sleep.comment) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "ml-2 mb-1 close",
+                      attrs: { type: "button", "aria-label": "Close" },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteSleep(sleep.id)
+                        }
+                      }
+                    },
+                    [
+                      _c("span", { attrs: { "aria-hidden": "true" } }, [
+                        _vm._v("×")
+                      ])
+                    ]
+                  )
+                ])
+              : _vm._e()
           }),
           _vm._v(" "),
           _vm._l(_vm.noteData.teeths, function(teeth) {
-            return _c("div", { key: teeth, staticClass: "item" }, [
-              _c("span", [_vm._v(" Прорезывание зубов ")]),
-              _vm._v(" "),
-              _c("span", [_vm._v("Дата: " + _vm._s(teeth.date))]),
-              _vm._v(" "),
-              _c("span", [_vm._v(" " + _vm._s(teeth.name) + " ")])
-            ])
+            return teeth.created_at.slice(0, 10) === _vm.todayDate
+              ? _c("div", { key: teeth, staticClass: "item" }, [
+                  _c("span", [_vm._v(" Прорезывание зубов ")]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v("Дата: " + _vm._s(teeth.date))]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v(" " + _vm._s(teeth.name) + " ")]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "ml-2 mb-1 close",
+                      attrs: { type: "button", "aria-label": "Close" },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteTeeth(teeth.id)
+                        }
+                      }
+                    },
+                    [
+                      _c("span", { attrs: { "aria-hidden": "true" } }, [
+                        _vm._v("×")
+                      ])
+                    ]
+                  )
+                ])
+              : _vm._e()
           }),
           _vm._v(" "),
           _vm._l(_vm.noteData.vaccinations, function(vaccination) {
-            return _c("div", { key: vaccination, staticClass: "item" }, [
-              _c("span", [_vm._v(" Прививки ")]),
-              _vm._v(" "),
-              _c("span", [_vm._v("Название: " + _vm._s(vaccination.name))]),
-              _vm._v(" "),
-              _c("span", [
-                _vm._v("Комментарий: " + _vm._s(vaccination.comment) + " ")
-              ])
-            ])
+            return vaccination.created_at.slice(0, 10) === _vm.todayDate
+              ? _c("div", { key: vaccination, staticClass: "item" }, [
+                  _c("span", [_vm._v(" Прививки ")]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v("Название: " + _vm._s(vaccination.name))]),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v("Комментарий: " + _vm._s(vaccination.comment) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "ml-2 mb-1 close",
+                      attrs: { type: "button", "aria-label": "Close" },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteVaccination(vaccination.id)
+                        }
+                      }
+                    },
+                    [
+                      _c("span", { attrs: { "aria-hidden": "true" } }, [
+                        _vm._v("×")
+                      ])
+                    ]
+                  )
+                ])
+              : _vm._e()
           }),
           _vm._v(" "),
           _vm._l(_vm.noteData.walks, function(walk) {
-            return _c("div", { key: walk, staticClass: "item" }, [
-              _c("span", [_vm._v("Начало: " + _vm._s(walk.start))]),
-              _vm._v(" "),
-              _c("span", [_vm._v("Конец: " + _vm._s(walk.end) + " ")])
-            ])
+            return walk.created_at.slice(0, 10) === _vm.todayDate
+              ? _c("div", { key: walk, staticClass: "item" }, [
+                  _c("span", [_vm._v(" Прогулка ")]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v("Начало: " + _vm._s(walk.start))]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v("Конец: " + _vm._s(walk.end) + " ")]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "ml-2 mb-1 close",
+                      attrs: { type: "button", "aria-label": "Close" },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteWalk(walk.id)
+                        }
+                      }
+                    },
+                    [
+                      _c("span", { attrs: { "aria-hidden": "true" } }, [
+                        _vm._v("×")
+                      ])
+                    ]
+                  )
+                ])
+              : _vm._e()
           })
         ],
         2
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "col-4" }, [
+      _c("div", { staticClass: "col-md-4" }, [
         _c("div", { staticClass: "col" }, [
           _c("label", [_vm._v("Выбрать дату")]),
           _vm._v(" "),
