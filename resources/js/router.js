@@ -26,6 +26,8 @@ import ErrorPage from "./components/NoteCategoties/ErrorPage";
 import Logout from "./components/Auth/Logout";
 import UserConsultations from "./components/UserConsultations";
 import NotesToday from "./components/NotesToday";
+import AddCategory from "./components/Admin/AddCategory";
+import DeleteCategory from "./components/Admin/DeleteCategory";
 
 
 
@@ -57,6 +59,8 @@ export default new VueRouter({
         { path: '/profile-user/user-consultations', component: UserConsultations },
         { path: '/profile-doctor', component: DoctorProfile },
         { path: '/admin', component: MainAdmin },
+        { path: '/admin/add-category', component: AddCategory },
+        { path: '/admin/delete-category/:id', component: DeleteCategory },
         { path: '/logout', component: Logout },
         { path: '/:notFound(.*)', component: ErrorPage }
     ],

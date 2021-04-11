@@ -33,6 +33,8 @@ import Answer from "./components/Answer";
 import UserConsultations from "./components/UserConsultations";
 import AddAnswer from "./components/Doctor/AddAnswer";
 import NotesToday from "./components/NotesToday";
+import AddCategory from "./components/Admin/AddCategory";
+import DeleteCategory from "./components/Admin/DeleteCategory";
 
 
 
@@ -93,7 +95,9 @@ const app = new Vue({
         Answer,
         UserConsultations,
         AddAnswer,
-        NotesToday
+        NotesToday,
+        AddCategory,
+        DeleteCategory
     },
     router,
     store

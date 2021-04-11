@@ -78,9 +78,6 @@ export default {
     methods: {
         selectFile(event) {
             this.image = event.target.files[0]
-            axios.delete('/api/image/' + this.blogPostData.id)
-                .then(r => console.log(r))
-                .catch(e => console.log(e))
         },
         loadBlogPost() {
             axios.get('/api/communities/' + this.$route.params.categories+ '/' + this.$route.params.post)

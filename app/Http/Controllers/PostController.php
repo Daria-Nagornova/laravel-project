@@ -83,6 +83,10 @@ class PostController extends Controller
         $post->update($request->validated());
 
         if ($request->hasFile('image')) {
+
+            $oldImage = Image::where('post_id', $post->id);
+            $oldImage->delete();
+
             $image = Image::saveForPost($request->file('image'), $post);
             return response()->json($image, 201);
         }

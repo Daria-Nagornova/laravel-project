@@ -9,8 +9,10 @@
 </template>
 
 <script>
+import MainAdmin from "./Admin/MainAdmin";
 export default {
-name: "ProfileUser"
+name: "ProfileUser",
+    components: {MainAdmin}
 }
 </script>
 
