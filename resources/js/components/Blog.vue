@@ -4,7 +4,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><router-link to="/">Главная</router-link></li>
                 <li class="breadcrumb-item"><router-link to="/communities">Сообщества</router-link></li>
-                <li v-for="post in postData.data" :key="post" class="breadcrumb-item active" aria-current="page">{{ post.category_name }}</li>
+                <li class="breadcrumb-item active" aria-current="page">{{ name }}</li>
             </ol>
         </nav>
         <div class="row">
@@ -78,6 +78,7 @@
 <script>
 export default {
 name: "Blog",
+    props: ['name'],
     data() {
         return {
             postData: {},
@@ -127,8 +128,8 @@ name: "Blog",
 
 <style scoped>
     .paginate {
-        margin: 20px auto;
-        background-color: #c6e0f5;
+        justify-content: center;
+        display: flex;
     }
     .container {
         margin: 30px auto;

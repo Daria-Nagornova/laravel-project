@@ -2523,6 +2523,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Blog",
+  props: ['name'],
   data: function data() {
     return {
       postData: {},
@@ -2842,6 +2843,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
 //
 //
 //
@@ -4166,6 +4168,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "NotesToday",
   data: function data() {
@@ -4187,7 +4214,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     todayDate: function todayDate() {
-      return new Date().getDate() + '-0' + (new Date().getMonth() + 1) + '-' + new Date().getFullYear();
+      if (this.date === '') {
+        return new Date().getDate() + '-0' + (new Date().getMonth() + 1) + '-' + new Date().getFullYear();
+      } else return this.date;
     }
   },
   created: function created() {
@@ -4807,7 +4836,9 @@ vue__WEBPACK_IMPORTED_MODULE_26__.default.use(vue_router__WEBPACK_IMPORTED_MODUL
     component: _components_Communities__WEBPACK_IMPORTED_MODULE_0__.default
   }, {
     path: '/communities/:categories',
-    component: _components_Blog__WEBPACK_IMPORTED_MODULE_13__.default
+    component: _components_Blog__WEBPACK_IMPORTED_MODULE_13__.default,
+    name: 'blog',
+    props: true
   }, {
     path: '/communities/:categories/:post',
     component: _components_BlogPost__WEBPACK_IMPORTED_MODULE_14__.default
@@ -9506,7 +9537,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_storage_content_massage_png__WEBPACK_IMPORTED_MODULE_2__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.paginate[data-v-7c31058d] {\n    margin: 20px auto;\n    background-color: #c6e0f5;\n}\n.container[data-v-7c31058d] {\n    margin: 30px auto;\n}\n.write[data-v-7c31058d] {\n    background-color: white;\n    border: none;\n    border-bottom: 2px solid darkgray;\n    font-size: 20px;\n    color: #494f54;\n}\n.path[data-v-7c31058d] {\n    background-color: white;\n    color: #494f54;\n}\n.post[data-v-7c31058d] {\n    margin: 20px 0;\n}\n.comments-icon[data-v-7c31058d] {\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") 0 50% no-repeat;\n}\nmain[data-v-7c31058d] {\n    padding-top: 0 !important;\n}\naside[data-v-7c31058d] {\n    margin-top: 50px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.paginate[data-v-7c31058d] {\n    justify-content: center;\n    display: flex;\n}\n.container[data-v-7c31058d] {\n    margin: 30px auto;\n}\n.write[data-v-7c31058d] {\n    background-color: white;\n    border: none;\n    border-bottom: 2px solid darkgray;\n    font-size: 20px;\n    color: #494f54;\n}\n.path[data-v-7c31058d] {\n    background-color: white;\n    color: #494f54;\n}\n.post[data-v-7c31058d] {\n    margin: 20px 0;\n}\n.comments-icon[data-v-7c31058d] {\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") 0 50% no-repeat;\n}\nmain[data-v-7c31058d] {\n    padding-top: 0 !important;\n}\naside[data-v-7c31058d] {\n    margin-top: 50px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -9878,7 +9909,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.date[data-v-02d29dab] {\n    text-align: center;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.date[data-v-02d29dab] {\n    text-align: center;\n}\n.item[data-v-02d29dab] {\n    background: #fafafa;\n    padding: 10px;\n    color: #777;\n    font-weight: 700;\n}\n.item[data-v-02d29dab]:nth-of-type(2n+1) {\n    background: none;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -46310,42 +46341,34 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("nav", { staticClass: "path", attrs: { "aria-label": "breadcrumb" } }, [
-      _c(
-        "ol",
-        { staticClass: "breadcrumb" },
-        [
-          _c(
-            "li",
-            { staticClass: "breadcrumb-item" },
-            [_c("router-link", { attrs: { to: "/" } }, [_vm._v("Главная")])],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "li",
-            { staticClass: "breadcrumb-item" },
-            [
-              _c("router-link", { attrs: { to: "/communities" } }, [
-                _vm._v("Сообщества")
-              ])
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _vm._l(_vm.postData.data, function(post) {
-            return _c(
-              "li",
-              {
-                key: post,
-                staticClass: "breadcrumb-item active",
-                attrs: { "aria-current": "page" }
-              },
-              [_vm._v(_vm._s(post.category_name))]
-            )
-          })
-        ],
-        2
-      )
+      _c("ol", { staticClass: "breadcrumb" }, [
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [_c("router-link", { attrs: { to: "/" } }, [_vm._v("Главная")])],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "breadcrumb-item" },
+          [
+            _c("router-link", { attrs: { to: "/communities" } }, [
+              _vm._v("Сообщества")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          {
+            staticClass: "breadcrumb-item active",
+            attrs: { "aria-current": "page" }
+          },
+          [_vm._v(_vm._s(_vm.name))]
+        )
+      ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
@@ -47073,7 +47096,15 @@ var render = function() {
                           "router-link",
                           {
                             staticClass: "animsition-link",
-                            attrs: { to: "/communities/" + category.id }
+                            attrs: {
+                              to: {
+                                name: "blog",
+                                params: {
+                                  categories: category.id,
+                                  name: category.name
+                                }
+                              }
+                            }
                           },
                           [
                             _c("h2", { staticClass: "h4" }, [
@@ -49723,17 +49754,80 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-8" }, [
-        _c("div", { staticClass: "date" }, [_vm._v(_vm._s(_vm.todayDate))]),
-        _vm._v(" "),
-        _c("div", { staticClass: "item" }, [
-          _c("span", [_vm._v(_vm._s(_vm.$route.params.id))]),
+      _c(
+        "div",
+        { staticClass: "col-8" },
+        [
+          _c("div", { staticClass: "date" }, [_vm._v(_vm._s(_vm.todayDate))]),
           _vm._v(" "),
-          _c("span", [_vm._v(" Начало-конец ")]),
+          _vm._l(_vm.noteData.feedings, function(feeding) {
+            return _c("div", { key: feeding, staticClass: "item" }, [
+              _c("span", [_vm._v(" Кормление ")]),
+              _vm._v(" "),
+              _c("span", [_vm._v("Время: " + _vm._s(feeding.time))]),
+              _vm._v(" "),
+              _c("span", [
+                _vm._v("Продукты: " + _vm._s(feeding.products) + " ")
+              ])
+            ])
+          }),
           _vm._v(" "),
-          _c("span", [_vm._v("Длительность ")])
-        ])
-      ]),
+          _vm._l(_vm.noteData.heighths, function(heighth) {
+            return _c("div", { key: heighth, staticClass: "item" }, [
+              _c("span", [_vm._v(" Рост и вес ")]),
+              _vm._v(" "),
+              _c("span", [_vm._v("Рост: " + _vm._s(heighth.height))]),
+              _vm._v(" "),
+              _c("span", [_vm._v("Вес: " + _vm._s(heighth.weight) + " ")])
+            ])
+          }),
+          _vm._v(" "),
+          _vm._l(_vm.noteData.sleeps, function(sleep) {
+            return _c("div", { key: sleep, staticClass: "item" }, [
+              _c("span", [_vm._v(" Сон ")]),
+              _vm._v(" "),
+              _c("span", [_vm._v("Начало: " + _vm._s(sleep.start))]),
+              _vm._v(" "),
+              _c("span", [_vm._v("Конец: " + _vm._s(sleep.end) + " ")]),
+              _vm._v(" "),
+              _c("span", [
+                _vm._v("Комментарий: " + _vm._s(sleep.comment) + " ")
+              ])
+            ])
+          }),
+          _vm._v(" "),
+          _vm._l(_vm.noteData.teeths, function(teeth) {
+            return _c("div", { key: teeth, staticClass: "item" }, [
+              _c("span", [_vm._v(" Прорезывание зубов ")]),
+              _vm._v(" "),
+              _c("span", [_vm._v("Дата: " + _vm._s(teeth.date))]),
+              _vm._v(" "),
+              _c("span", [_vm._v(" " + _vm._s(teeth.name) + " ")])
+            ])
+          }),
+          _vm._v(" "),
+          _vm._l(_vm.noteData.vaccinations, function(vaccination) {
+            return _c("div", { key: vaccination, staticClass: "item" }, [
+              _c("span", [_vm._v(" Прививки ")]),
+              _vm._v(" "),
+              _c("span", [_vm._v("Название: " + _vm._s(vaccination.name))]),
+              _vm._v(" "),
+              _c("span", [
+                _vm._v("Комментарий: " + _vm._s(vaccination.comment) + " ")
+              ])
+            ])
+          }),
+          _vm._v(" "),
+          _vm._l(_vm.noteData.walks, function(walk) {
+            return _c("div", { key: walk, staticClass: "item" }, [
+              _c("span", [_vm._v("Начало: " + _vm._s(walk.start))]),
+              _vm._v(" "),
+              _c("span", [_vm._v("Конец: " + _vm._s(walk.end) + " ")])
+            ])
+          })
+        ],
+        2
+      ),
       _vm._v(" "),
       _c("div", { staticClass: "col-4" }, [
         _c("div", { staticClass: "col" }, [

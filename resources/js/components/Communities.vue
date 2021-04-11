@@ -14,8 +14,9 @@
                 <div class="text col-lg-8">
                     <div class="text-inner d-flex align-items-center">
                         <div class="content">
-                            <router-link :to="'/communities/' + category.id" class="animsition-link">
-                                <h2 class="h4">{{ category.name }} </h2></router-link>
+                            <router-link :to="{name: 'blog', params: {categories: category.id, name: category.name}}" class="animsition-link">
+                                <h2 class="h4">{{ category.name }} </h2>
+                            </router-link>
                             <p>{{ category.description }}</p>
                         </div>
                     </div>
