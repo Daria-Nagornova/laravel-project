@@ -11,7 +11,7 @@
         </nav>
         <h2 class="title">Прививки</h2>
         <div class="row">
-            <form @submit.prevent="saveVaccination" class="add-post col-8">
+            <form @submit.prevent="saveVaccination(childId)" class="add-post col-8">
                 <div class="form-group">
                     <label for="timeFeeding">Название вакцины</label>
                     <input class="form-control" type="text" v-model="name">
@@ -39,24 +39,27 @@ export default {
       name: '',
       errorComment: '',
       errorName: '',
-      path: 'vaccination'
     }
   },
   methods: {
-      saveVaccination() {
-          axios.post('/api/profile-user/child-diary/add-notes/vaccination', {
+      saveVaccination(id) {
+          axios.post('/api/vaccination', {
               name: this.name,
               comment: this.comment,
-              child_id: 3,
+              child_id: id,
           })
-              .then(r => console.log(r))
+              .then(r => this.cancel())
               .catch(e => console.log(e))
-          this.cancel()
       },
       cancel () {
           this.$router.push('/profile-user/child-diary')
       }
-  }
+  },
+    computed: {
+        childId() {
+            return this.$route.params.id;
+        }
+    }
 }
 </script>
 

@@ -11,7 +11,7 @@
       </nav>
       <h2 class="title">Прогулка</h2>
       <div class="row">
-          <form @submit.prevent="saveWalk" class="add-post col-8">
+          <form @submit.prevent="saveWalk(childId)" class="add-post col-8">
               <div class="form-group">
                   <label for="startWalk">Начало прогулки</label>
                   <input class="form-control" type="time" v-model="start">
@@ -41,18 +41,22 @@ export default {
       }
   },
   methods: {
-        saveWalk() {
-            axios.post('/api/profile-user/child-diary/add-notes/walk', {
+        saveWalk(id) {
+            axios.post('/api/walk/', {
                 start: this.start,
                 end: this.end,
-                child_id: 3,
+                child_id: id
             })
-                .then(r => console.log(r))
+                .then(r => this.cancel())
                 .catch(e => console.log(e))
-            this.cancel()
         },
         cancel () {
             this.$router.push('/profile-user/child-diary')
+        }
+    },
+    computed: {
+        childId() {
+            return this.$route.params.id;
         }
     }
 }

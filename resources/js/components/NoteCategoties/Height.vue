@@ -11,7 +11,7 @@
       </nav>
       <h2 class="title">Рост и вес</h2>
       <div class="row">
-          <form @submit.prevent="saveHeight" class="add-post col-8">
+          <form @submit.prevent="saveHeight(childId)" class="add-post col-8">
               <div class="form-group">
                   <label for="childHeight">Рост ребенка, см</label>
                   <input class="form-control" type="text" v-model="height">
@@ -43,19 +43,23 @@ export default {
     }
   },
   methods: {
-      saveHeight() {
-          axios.post('/api/profile-user/child-diary/add-notes/height', {
+      saveHeight(id) {
+          axios.post('/api/height', {
               height: this.height,
               weight: this.weight,
-              child_id: 3,
+              child_id: id,
           })
-              .then(r => console.log(r))
+              .then(r => this.cancel())
               .catch(e => console.log(e))
-          this.cancel()
       },
       cancel () {
           this.$router.push('/profile-user/child-diary')
       }
+  },
+  computed: {
+        childId() {
+            return this.$route.params.id;
+        }
   }
 }
 </script>

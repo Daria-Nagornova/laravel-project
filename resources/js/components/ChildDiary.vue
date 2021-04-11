@@ -9,29 +9,13 @@
         </nav>
         <router-link to="/profile-user/child-diary/add-child" class="btn-q">Добавить ребенка</router-link>
         <div v-for="child in childrenData.children" :key="child.id" class="row child">
-            <div class="col-8">
-                <div class="child">
+            <router-link :to="'/profile-user/child-diary/notes-today/' + child.id" class="col-8">
                     <span> {{ child.name }} </span>
                     <span> {{ child.date_birth }} </span>
                     <span> {{ child.gender }} </span>
-                </div>
-            </div>
+            </router-link>
             <div class="col-4">
-                <router-link :to="'/profile-user/child-diary/add-notes/' + child.id" class="btn btn-outline-secondary addNotes">+ Добавить запись</router-link>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8">
-                <div>{{ todayDate }}</div>
-                <span>Прогулка</span>
-                <span> Начало-конец </span>
-                <span>Длительность </span>
-            </div>
-            <div class="col-4">
-                <div class="col">
-                    <label>Выбрать дату</label>
-                    <input class="form-control" type="date" v-model="date">
-                </div>
+                <router-link :to="'/profile-user/child-diary/add-notes/' + child.id" class="btn btn-outline-secondary add-notes">+ Добавить запись</router-link>
             </div>
         </div>
         <router-view></router-view>
@@ -58,11 +42,6 @@ export default {
     mounted() {
         this.loadChildren()
     },
-    computed: {
-        todayDate() {
-            return ((new Date()).getDate() + '-0' + ((new Date()).getMonth() + 1) + '-' + (new Date()).getFullYear())
-        }
-    }
 }
 </script>
 
@@ -78,7 +57,15 @@ a {
     color: #6c757d;
 }
 .child {
-    background: #95999c;
+    background: #e9ecef;
     margin: 15px;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    padding: 15px;
+    border-radius: 10px;
+}
+.add-notes {
+    border: none;
 }
 </style>

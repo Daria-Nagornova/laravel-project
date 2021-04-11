@@ -94,4 +94,18 @@ class ChildController extends Controller
 
         return response()->json($child, 200);
     }
+
+    /**
+     * Child notes
+     *
+     * @param Child $child
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getNotes(Child $child): JsonResponse
+    {
+
+        $notes = $child->load('walks', 'feedings', 'sleeps', 'teeths', 'vaccinations', 'heighths');
+
+        return response()->json($notes, 200);
+    }
 }

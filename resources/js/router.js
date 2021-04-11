@@ -25,6 +25,7 @@ import MainAdmin from "./components/Admin/MainAdmin";
 import ErrorPage from "./components/NoteCategoties/ErrorPage";
 import Logout from "./components/Auth/Logout";
 import UserConsultations from "./components/UserConsultations";
+import NotesToday from "./components/NotesToday";
 
 
 
@@ -45,12 +46,13 @@ export default new VueRouter({
         { path: '/profile-user/child-diary', component: ChildDiary },
         { path: '/profile-user/child-diary/add-child', component: AddChild },
         { path: '/profile-user/child-diary/add-notes/:id', component: AddNotes },
-        { path: '/profile-user/child-diary/add-notes/sleep', component: Sleep },
-        { path: '/profile-user/child-diary/add-notes/feeding', component: Feeding },
-        { path: '/profile-user/child-diary/add-notes/height', component: Height },
-        { path: '/profile-user/child-diary/add-notes/teeth', component: Teeth },
-        { path: '/profile-user/child-diary/add-notes/vaccination', component: Vaccination },
-        { path: '/profile-user/child-diary/add-notes/walk', component: Walk },
+        { path: '/profile-user/child-diary/notes-today/:id', component: NotesToday },
+        { path: '/profile-user/child-diary/add-notes/:id/sleep', component: Sleep },
+        { path: '/profile-user/child-diary/add-notes/:id/feeding', component: Feeding },
+        { path: '/profile-user/child-diary/add-notes/:id/height', component: Height },
+        { path: '/profile-user/child-diary/add-notes/:id/teeth', component: Teeth },
+        { path: '/profile-user/child-diary/add-notes/:id/vaccination', component: Vaccination },
+        { path: '/profile-user/child-diary/add-notes/:id/walk', component: Walk },
         { path: '/profile-user/user-posts', component: UserPost },
         { path: '/profile-user/user-consultations', component: UserConsultations },
         { path: '/profile-doctor', component: DoctorProfile },

@@ -59,39 +59,38 @@ Route::prefix('/consultations')->group(function () {
     Route::delete('/{consultation}', [App\Http\Controllers\ConsultationController::class, 'destroy']);
 });
 
+Route::post('/walk', [App\Http\Controllers\WalkController::class, 'store']);
+Route::post('/feeding', [App\Http\Controllers\FeedingController::class, 'store']);
+Route::post('/sleep', [App\Http\Controllers\SleepController::class, 'store']);
+Route::post('/teeth', [App\Http\Controllers\TeethController::class, 'store']);
+Route::post('/vaccination', [App\Http\Controllers\VaccinationController::class, 'store']);
+Route::post('/height', [App\Http\Controllers\HeighthController::class, 'store']);
 
-
-
-Route::prefix('/profile-user/child-diary')->group(function () {
+/*Route::prefix('/profile-user/child-diary')->group(function () {
   //  Route::get('/', [App\Http\Controllers\WalkController::class, 'index']);
-    Route::post('/add-notes/walk', [App\Http\Controllers\WalkController::class, 'store']);
   //  Route::delete('/{notes}', [App\Http\Controllers\WalkController::class, 'destroy']);
 });
 Route::prefix('/profile-user/child-diary')->group(function () {
     //  Route::get('/', [App\Http\Controllers\SleepController::class, 'index']);
-    Route::post('/add-notes/sleep', [App\Http\Controllers\SleepController::class, 'store']);
     //  Route::delete('/{notes}', [App\Http\Controllers\SleepController::class, 'destroy']);
 });
 Route::prefix('/profile-user/child-diary')->group(function () {
     //  Route::get('/', [App\Http\Controllers\TeethController::class, 'index']);
-    Route::post('/add-notes/teeth', [App\Http\Controllers\TeethController::class, 'store']);
     //  Route::delete('/{notes}', [App\Http\Controllers\TeethController::class, 'destroy']);
 });
 Route::prefix('/profile-user/child-diary')->group(function () {
     //  Route::get('/', [App\Http\Controllers\VaccinationController::class, 'index']);
-    Route::post('/add-notes/vaccination', [App\Http\Controllers\VaccinationController::class, 'store']);
     //  Route::delete('/{notes}', [App\Http\Controllers\VaccinationController::class, 'destroy']);
 });
 Route::prefix('/profile-user/child-diary')->group(function () {
     //  Route::get('/', [App\Http\Controllers\HeighthController::class, 'index']);
-    Route::post('/add-notes/height', [App\Http\Controllers\HeighthController::class, 'store']);
     //  Route::delete('/{notes}', [App\Http\Controllers\HeighthController::class, 'destroy']);
 });
 Route::prefix('/profile-user/child-diary')->group(function () {
     //  Route::get('/', [App\Http\Controllers\FeedingController::class, 'index']);
     Route::post('/add-notes/feeding', [App\Http\Controllers\FeedingController::class, 'store']);
     //  Route::delete('/{notes}', [App\Http\Controllers\FeedingController::class, 'destroy']);
-});
+});*/
 Route::middleware('auth:api')->get('/profile-user/user-posts', [App\Http\Controllers\PostController::class, 'userPost']);
 Route::middleware('auth:api')->get('/user', [App\Http\Controllers\UserController::class, 'getUser']);
 Route::delete('/image/{postId}', [App\Http\Controllers\ImageController::class, 'destroy']);
@@ -102,3 +101,4 @@ Route::post('/add-answer', [App\Http\Controllers\AnswerController::class, 'store
 Route::patch('/update-consultation/{consultation}', [App\Http\Controllers\ConsultationController::class, 'update']);
 Route::get('/answer', [App\Http\Controllers\AnswerController::class, 'index']);
 Route::middleware('auth:api')->get('/child', [App\Http\Controllers\ChildController::class, 'getChild']);
+Route::get('/notes/{child}', [App\Http\Controllers\ChildController::class, 'getNotes']);

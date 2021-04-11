@@ -11,7 +11,7 @@
       </nav>
       <h2 class="title">Сон</h2>
       <div class="row">
-          <form @submit.prevent="saveSleep" class="add-post col-8">
+          <form @submit.prevent="saveSleep(childId)" class="add-post col-8">
               <div class="form-group">
                   <label for="startSleep">Начало сна</label>
                   <input class="form-control" type="time" v-model="start">
@@ -50,21 +50,25 @@ export default {
     }
   },
   methods: {
-      saveSleep() {
-          axios.post('/api/profile-user/child-diary/add-notes/sleep', {
+      saveSleep(id) {
+          axios.post('/api/sleep', {
               start: this.start,
               end: this.end,
               comment: this.comment,
-              child_id: 3,
+              child_id: id,
           })
-              .then(r => console.log(r))
+              .then(r => this.cancel())
               .catch(e => console.log(e))
-          this.cancel()
       },
       cancel () {
           this.$router.push('/profile-user/child-diary')
       }
-  }
+  },
+    computed: {
+        childId() {
+            return this.$route.params.id;
+        }
+    }
 }
 </script>
 

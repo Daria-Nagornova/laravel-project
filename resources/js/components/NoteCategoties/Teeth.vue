@@ -10,50 +10,53 @@
           </ol>
       </nav>
       <h2 class="title">Прорезывание зубов</h2>
-      <div class="box">
+      <div>
           <div>
-              <button class="btn btn-primary btn-teeth btn11" @click="name='Центральный верхний резец'"></button>
-              <button class="btn btn-primary btn-teeth btn11" @click="name='Центральный верхний резец'"></button>
+              <div class="box">
+                  <button class="btn btn-primary btn-teeth btn11" @click="name='Центральный верхний резец'"></button>
+                  <button class="btn btn-primary btn-teeth btn11" @click="name='Центральный верхний резец'"></button>
+              </div>
+              <div class="box">
+                  <button class="btn btn-primary btn-teeth btn1" @click="name='Боковой верхний резец'"></button>
+                  <button class="btn btn-primary btn-teeth btn1" @click="name='Боковой верхний резец'"></button>
+              </div>
+              <div class="box">
+                  <button class="btn btn-primary btn-teeth btn2" @click="name='Верхний клык'"></button>
+                  <button class="btn btn-primary btn-teeth btn2" @click="name='Верхний клык'"></button>
+              </div>
+              <div class="box">
+                  <button class="btn btn-primary btn-teeth btn3" @click="name='Верхний первый моляр'"></button>
+                  <button class="btn btn-primary btn-teeth btn3" @click="name='Верхний первый моляр'"></button>
+              </div>
+              <div class="box">
+                  <button class="btn btn-primary btn-teeth btn4" @click="name='Верхний второй моляр'"></button>
+                  <button class="btn btn-primary btn-teeth btn4" @click="name='Верхний второй моляр'"></button>
+              </div>
           </div>
-          <div>
-              <button class="btn btn-primary btn-teeth btn1" @click="name='Боковой верхний резец'"></button>
-              <button class="btn btn-primary btn-teeth btn1" @click="name='Боковой верхний резец'"></button>
-          </div>
-          <div>
-              <button class="btn btn-primary btn-teeth btn2" @click="name='Верхний клык'"></button>
-              <button class="btn btn-primary btn-teeth btn2" @click="name='Верхний клык'"></button>
-          </div>
-          <div>
-              <button class="btn btn-primary btn-teeth btn3" @click="name='Верхний первый моляр'"></button>
-              <button class="btn btn-primary btn-teeth btn3" @click="name='Верхний первый моляр'"></button>
-          </div>
-          <div>
-              <button class="btn btn-primary btn-teeth btn4" @click="name='Верхний второй моляр'"></button>
-              <button class="btn btn-primary btn-teeth btn4" @click="name='Верхний второй моляр'"></button>
-          </div>
-
-          <div>
-              <button class="btn btn-primary btn-teeth btn16" @click="name='Нижний второй моляр'"></button>
-              <button class="btn btn-primary btn-teeth btn16" @click="name='Нижний второй моляр'"></button>
-          </div>
-          <div>
-              <button class="btn btn-primary btn-teeth btn12" @click="name='Нижний первый моляр'"></button>
-              <button class="btn btn-primary btn-teeth btn12" @click="name='Нижний первый моляр'"></button>
-          </div>
-          <div>
-              <button class="btn btn-primary btn-teeth btn13" @click="name='Нижний клык'"></button>
-              <button class="btn btn-primary btn-teeth btn13" @click="name='Нижний клык'"></button>
-          </div>
-          <div>
-              <button class="btn btn-primary btn-teeth btn14" @click="name='Боковой нижний резец'"></button>
-              <button class="btn btn-primary btn-teeth btn14" @click="name='Боковой нижний резец'"></button>
-          </div>
-          <div>
-              <button class="btn btn-primary btn-teeth btn15" @click="name='Центральный нижний резец'"></button>
-              <button class="btn btn-primary btn-teeth btn15" @click="name='Центральный нижний резец'"></button>
+          <div class="teeth-2">
+              <div class="box">
+                  <button class="btn btn-primary btn-teeth btn16" @click="name='Нижний второй моляр'"></button>
+                  <button class="btn btn-primary btn-teeth btn16" @click="name='Нижний второй моляр'"></button>
+              </div>
+              <div class="box">
+                  <button class="btn btn-primary btn-teeth btn12" @click="name='Нижний первый моляр'"></button>
+                  <button class="btn btn-primary btn-teeth btn12" @click="name='Нижний первый моляр'"></button>
+              </div>
+              <div class="box">
+                  <button class="btn btn-primary btn-teeth btn13" @click="name='Нижний клык'"></button>
+                  <button class="btn btn-primary btn-teeth btn13" @click="name='Нижний клык'"></button>
+              </div>
+              <div class="box">
+                  <button class="btn btn-primary btn-teeth btn14" @click="name='Боковой нижний резец'"></button>
+                  <button class="btn btn-primary btn-teeth btn14" @click="name='Боковой нижний резец'"></button>
+              </div>
+              <div class="box">
+                  <button class="btn btn-primary btn-teeth btn15" @click="name='Центральный нижний резец'"></button>
+                  <button class="btn btn-primary btn-teeth btn15" @click="name='Центральный нижний резец'"></button>
+              </div>
           </div>
           <div class="error">{{ errorTeeth }}</div>
-          <form @submit.prevent="saveTeeth" class="add-post col-8">
+          <form @submit.prevent="saveTeeth(childId)" class="add-post col-8">
               <div class="form-group">
                   <label class="elem-margin">{{ name }} прорезался:</label>
                   <input class="form-control elem-margin" type="date" v-model="date">
@@ -80,29 +83,40 @@ export default {
     }
   },
   methods: {
-      saveTeeth() {
-          axios.post('/api/profile-user/child-diary/add-notes/teeth', {
+      saveTeeth(id) {
+          axios.post('/api/teeth', {
               name: this.name,
               date: this.date,
-              child_id: 3,
+              child_id: id,
           })
-              .then(r => console.log(r))
+              .then(r => this.cancel())
               .catch(e => console.log(e))
-          this.cancel()
       },
       cancel () {
           this.$router.push('/profile-user/child-diary')
       }
-  }
+  },
+    computed: {
+        childId() {
+            return this.$route.params.id;
+        }
+    }
 }
 </script>
 
 <style scoped>
 .box {
-
+    display: flex;
+    justify-content: center;
+}
+.box button {
+    border-radius: 2px !important;
+    border: none;
+}
+.teeth-2 {
+    margin-top: 20px;
 }
 .btn-teeth {
-   /*position: absolute;*/
   width: 15px;
   height: 15px;
 }
@@ -111,40 +125,40 @@ export default {
   background: blueviolet;
 }
 .btn1 {
-  margin: -10px 25px 0 25px;
+  margin: 2px 25px 0 25px;
   background: fuchsia;
 }
 .btn2 {
-  margin: -20px 35px 0 35px;
+  margin: 4px 35px 0 35px;
   background: gold;
 }
 .btn3 {
-  margin: -30px 45px 0 45px;
+  margin: 6px 50px 0 50px;
   background: lightsalmon;
 }
 .btn4 {
-  margin: -40px 55px 0 55px;
+  margin: 8px 60px 0 60px;
   background: crimson;
 }
 
 .btn16 {
-  margin: 0 55px 0 55px;
+  margin: 0 60px 0 60px;
   background: crimson;
 }
 .btn12 {
-  margin: -10px 45px 0 45px;
+  margin: 8px 50px 0 50px;
   background: lightsalmon;
 }
 .btn13 {
-  margin: -20px 35px 0 35px;
+  margin: 6px 35px 0 35px;
   background: gold;
 }
 .btn14 {
-  margin: -30px 25px 0 25px;
+  margin: 4px 25px 0 25px;
   background: fuchsia;
 }
 .btn15 {
-  margin: -40px 2px 0 2px;
+  margin: 2px 2px 0 2px;
   background: blueviolet;
 }
 .elem-margin {

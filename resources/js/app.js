@@ -32,6 +32,7 @@ import Logout from "./components/Auth/Logout";
 import Answer from "./components/Answer";
 import UserConsultations from "./components/UserConsultations";
 import AddAnswer from "./components/Doctor/AddAnswer";
+import NotesToday from "./components/NotesToday";
 
 
 
@@ -91,7 +92,8 @@ const app = new Vue({
         Logout,
         Answer,
         UserConsultations,
-        AddAnswer
+        AddAnswer,
+        NotesToday
     },
     router,
     store
