@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Subcategory\StoreRequest;
 use App\Models\Subcategory;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class SubcategoryController extends Controller
@@ -10,76 +12,40 @@ class SubcategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
-    }
+        $subcategories = Subcategory::all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json($subcategories, 200);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request): JsonResponse
     {
-        //
-    }
+        $subcategory = new Subcategory;
+        $subcategory->fill($request->validated());
+        $subcategory->save();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Subcategory  $subcategory
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Subcategory $subcategory)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Subcategory  $subcategory
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Subcategory $subcategory)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Subcategory  $subcategory
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Subcategory $subcategory)
-    {
-        //
+        return response()->json($subcategory, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Subcategory  $subcategory
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function destroy(Subcategory $subcategory)
+    public function destroy(Subcategory $subcategory): JsonResponse
     {
-        //
+        $subcategory->delete();
+
+        return response()->json($subcategory, 200);
     }
 }

@@ -1,5 +1,11 @@
 <template>
     <div class="container">
+        <div class="flex">
+            <router-link to="/admin" class="nav-link animsition-link">Категории</router-link>
+            <router-link to="/admin/subcategories" class="nav-link animsition-link">Подкатегории</router-link>
+            <router-link to="/admin/doctors" class="nav-link animsition-link">Врачи</router-link>
+            <router-view></router-view>
+        </div>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -38,12 +44,6 @@ name: "MainAdmin",
                 .then(r => this.categoriesData = r.data)
                 .catch(e => console.log(e))
         },
-        red(item) {
-            console.log('редактировать' + item)
-        },
-        del(item) {
-            console.log('удалить' + item)
-        }
     },
     created() {
         this.loadCategories()
@@ -52,5 +52,8 @@ name: "MainAdmin",
 </script>
 
 <style scoped>
-
+.flex {
+    display: flex;
+    margin: 30px;
+}
 </style>

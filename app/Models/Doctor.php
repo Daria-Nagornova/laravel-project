@@ -11,6 +11,8 @@ class Doctor extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = ['name', 'description', 'specialisation_id', 'user_id', 'image'];
 
     public function specialisation() : belongsTo

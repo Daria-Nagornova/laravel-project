@@ -4,19 +4,19 @@
 
 <script>
 export default {
-name: "DeleteCategory",
+    name: "DeleteDoctor",
     methods: {
-        deleteCategory(id) {
-            axios.delete('/api/communities/' + id)
+        deleteDoctor(id) {
+            axios.delete('/api/admin/doctors/' + id)
                 .then(r => this.cancel())
                 .catch(e => console.log(e))
         },
         cancel () {
-            this.$router.push('/admin')
+            this.$router.push('/admin/doctors')
         },
     },
     mounted() {
-        this.deleteCategory(this.$route.params.id)
+        this.deleteDoctor(this.$route.params.id)
     }
 }
 </script>

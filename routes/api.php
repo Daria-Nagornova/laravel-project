@@ -42,8 +42,17 @@ Route::prefix('/communities/{category}')->group(function () {
 Route::prefix('/communities')->group(function () {
     Route::get('/', [App\Http\Controllers\CategoryController::class, 'index']);
     Route::post('/', [App\Http\Controllers\CategoryController::class, 'store']);
-    Route::patch('/{category}', [App\Http\Controllers\CategoryController::class, 'update']);
     Route::delete('/{category}', [App\Http\Controllers\CategoryController::class, 'destroy']);
+});
+Route::prefix('/admin/subcategories')->group(function () {
+    Route::get('/', [App\Http\Controllers\SubcategoryController::class, 'index']);
+    Route::post('/', [App\Http\Controllers\SubcategoryController::class, 'store']);
+    Route::delete('/{subcategory}', [App\Http\Controllers\SubcategoryController::class, 'destroy']);
+});
+Route::prefix('/admin/doctors')->group(function () {
+    Route::get('/', [App\Http\Controllers\DoctorController::class, 'index']);
+    Route::post('/', [App\Http\Controllers\DoctorController::class, 'store']);
+    Route::delete('/{doctor}', [App\Http\Controllers\DoctorController::class, 'destroy']);
 });
 Route::get('/popular/{category}', [App\Http\Controllers\CommentController::class, 'popular']);
 Route::get('/count/{post}', [App\Http\Controllers\CommentController::class, 'postComments']);

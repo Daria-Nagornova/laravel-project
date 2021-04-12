@@ -4,19 +4,19 @@
 
 <script>
 export default {
-name: "DeleteCategory",
+    name: "DeleteSub",
     methods: {
-        deleteCategory(id) {
-            axios.delete('/api/communities/' + id)
+        deleteSubcategory(id) {
+            axios.delete('/api/admin/subcategories/' + id)
                 .then(r => this.cancel())
                 .catch(e => console.log(e))
         },
         cancel () {
-            this.$router.push('/admin')
+            this.$router.push('/admin/subcategories')
         },
     },
     mounted() {
-        this.deleteCategory(this.$route.params.id)
+        this.deleteSubcategory(this.$route.params.id)
     }
 }
 </script>

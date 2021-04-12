@@ -35,6 +35,12 @@ import AddAnswer from "./components/Doctor/AddAnswer";
 import NotesToday from "./components/NotesToday";
 import AddCategory from "./components/Admin/AddCategory";
 import DeleteCategory from "./components/Admin/DeleteCategory";
+import Subcategory from "./components/Admin/Subcategory";
+import AddSub from "./components/Admin/AddSub";
+import DeleteSub from "./components/Admin/DeleteSub";
+import Doctor from "./components/Admin/Doctor";
+import AddDoctor from "./components/Admin/AddDoctor";
+import DeleteDoctor from "./components/Admin/DeleteDoctor";
 
 
 
@@ -97,7 +103,13 @@ const app = new Vue({
         AddAnswer,
         NotesToday,
         AddCategory,
-        DeleteCategory
+        DeleteCategory,
+        Subcategory,
+        AddSub,
+        DeleteSub,
+        Doctor,
+        AddDoctor,
+        DeleteDoctor
     },
     router,
     store

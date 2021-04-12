@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Doctor\StoreRequest;
 use App\Models\Doctor;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -20,70 +21,34 @@ class DoctorController extends Controller
         return response()->json($doctors, 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request): JsonResponse
     {
-        //
-    }
+        $doctor = new Doctor;
+        $doctor->fill($request->validated());
+        $doctor->image = $request->image->store("/images/doctors", 'public');
+        $doctor->save();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Doctor  $doctor
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Doctor $doctor)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Doctor  $doctor
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Doctor $doctor)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Doctor  $doctor
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Doctor $doctor)
-    {
-        //
+        return response()->json($doctor, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Doctor  $doctor
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function destroy(Doctor $doctor)
+    public function destroy(Doctor $doctor): JsonResponse
     {
-        //
+        $doctor->delete();
+
+        return response()->json($doctor, 200);
     }
 
 }

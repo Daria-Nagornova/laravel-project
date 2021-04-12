@@ -28,6 +28,12 @@ import UserConsultations from "./components/UserConsultations";
 import NotesToday from "./components/NotesToday";
 import AddCategory from "./components/Admin/AddCategory";
 import DeleteCategory from "./components/Admin/DeleteCategory";
+import Subcategory from "./components/Admin/Subcategory";
+import AddSub from "./components/Admin/AddSub";
+import DeleteSub from "./components/Admin/DeleteSub";
+import Doctor from "./components/Admin/Doctor";
+import AddDoctor from "./components/Admin/AddDoctor";
+import DeleteDoctor from "./components/Admin/DeleteDoctor";
 
 
 
@@ -61,6 +67,12 @@ export default new VueRouter({
         { path: '/admin', component: MainAdmin },
         { path: '/admin/add-category', component: AddCategory },
         { path: '/admin/delete-category/:id', component: DeleteCategory },
+        { path: '/admin/subcategories', component: Subcategory },
+        { path: '/admin/add-subcategory', component: AddSub },
+        { path: '/admin/delete-subcategory/:id', component: DeleteSub },
+        { path: '/admin/doctors', component: Doctor },
+        { path: '/admin/add-doctor', component: AddDoctor },
+        { path: '/admin/delete-doctor/:id', component: DeleteDoctor },
         { path: '/logout', component: Logout },
         { path: '/:notFound(.*)', component: ErrorPage }
     ],
