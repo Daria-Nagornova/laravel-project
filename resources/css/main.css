@@ -12,7 +12,6 @@ i,
 span {
   display: inline-block;
   text-decoration: none;
-/* transition: all 0.3s;*/
 }
 
 a:hover, a:focus,
@@ -23,10 +22,6 @@ span:focus {
   text-decoration: none;
 }
 
-/*a i {
-  transition: none;
-}
-*/
 ul {
   margin: 0;
   padding: 0;
@@ -39,7 +34,7 @@ section {
 
 button,
 input {
-  outline: none /*!important*/;
+  outline: none;
   font-family: "Open Sans", sans-serif;
 }
 
@@ -47,8 +42,7 @@ button {
   cursor: pointer;
 }
 
-main/*,
-aside */{
+main {
   padding: 50px 0 100px;
 }
 
@@ -56,7 +50,6 @@ h1 a {
   margin-left: 10px;
   font-size: 0.9em;
   opacity: 0;
-  /*transition: all 0.3s;*/
   color: #555;
   text-decoration: none;
 }
@@ -77,17 +70,6 @@ h1:hover a {
   text-decoration: none;
   font-size: 13px;
 }
-
-/*.category a::after {
-  content: ',';
-  color: #ddd;
-  display: inline-block;
-  margin-right: 5px;
-}
-
-.category a:last-of-type::after {
-  display: none;
-}*/
 
 .category a:hover {
   color: #000;
@@ -383,8 +365,11 @@ a.hero-link:hover::after {
 .navbar .navbar-nav a.nav-link:hover {
   color: #796AEE;
 }
-
-.navbar .navbar-nav a.nav-link.active {
+.navbar .navbar-nav a:active {
+    color: #796AEE;
+    font-weight: bold;
+}
+.navbar .navbar-nav a:focus {
   color: #796AEE;
   font-weight: bold;
 }
@@ -435,10 +420,6 @@ section.hero h1 {
 section.featured-posts .row:nth-of-type(odd) .text {
   background: #fafafa;
 }
-
-/*section.featured-posts .row:last-of-type {
-  margin-bottom: 0;
-}*/
 
 section.featured-posts p {
   font-weight: 400;
@@ -633,7 +614,9 @@ footer.main-footer a {
 footer.main-footer a:hover, footer.main-footer a:focus {
   color: #999;
 }
-
+footer.main-footer a:hover, footer.main-footer a:active {
+    color: #999;
+}
 footer.main-footer ul {
   margin-right: 30px;
 }

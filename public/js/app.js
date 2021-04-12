@@ -2564,6 +2564,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Doctor",
   data: function data() {
@@ -2632,6 +2634,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "MainAdmin",
   data: function data() {
@@ -2668,6 +2672,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
 //
 //
 //
@@ -3877,8 +3883,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
 //
 //
 //
@@ -10502,6 +10506,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.questions ul li[data-v-2e3d659a] {\n    padding: 15px 0;\n    border-bottom: 1px solid darkgray;\n}\n.questions-form[data-v-2e3d659a] {\n    text-align: center;\n    border-bottom: 2px solid #95999c;\n    margin: 20px 0;\n    font-size: 28px;\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Doctor/DoctorProfile.vue?vue&type=style&index=0&id=f5733336&scoped=true&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Doctor/DoctorProfile.vue?vue&type=style&index=0&id=f5733336&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.questions-form[data-v-f5733336] {\n    text-align: center;\n    border-bottom: 2px solid #95999c;\n    margin: 20px 0;\n    font-size: 28px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -42930,6 +42958,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Doctor/DoctorProfile.vue?vue&type=style&index=0&id=f5733336&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Doctor/DoctorProfile.vue?vue&type=style&index=0&id=f5733336&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DoctorProfile_vue_vue_type_style_index_0_id_f5733336_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DoctorProfile.vue?vue&type=style&index=0&id=f5733336&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Doctor/DoctorProfile.vue?vue&type=style&index=0&id=f5733336&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DoctorProfile_vue_vue_type_style_index_0_id_f5733336_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DoctorProfile_vue_vue_type_style_index_0_id_f5733336_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/HeaderComponent.vue?vue&type=style&index=0&id=153bfd55&scoped=true&lang=css&":
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/HeaderComponent.vue?vue&type=style&index=0&id=153bfd55&scoped=true&lang=css& ***!
@@ -44498,15 +44556,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _DoctorProfile_vue_vue_type_template_id_f5733336_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DoctorProfile.vue?vue&type=template&id=f5733336&scoped=true& */ "./resources/js/components/Doctor/DoctorProfile.vue?vue&type=template&id=f5733336&scoped=true&");
 /* harmony import */ var _DoctorProfile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DoctorProfile.vue?vue&type=script&lang=js& */ "./resources/js/components/Doctor/DoctorProfile.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _DoctorProfile_vue_vue_type_style_index_0_id_f5733336_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DoctorProfile.vue?vue&type=style&index=0&id=f5733336&scoped=true&lang=css& */ "./resources/js/components/Doctor/DoctorProfile.vue?vue&type=style&index=0&id=f5733336&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
   _DoctorProfile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
   _DoctorProfile_vue_vue_type_template_id_f5733336_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
   _DoctorProfile_vue_vue_type_template_id_f5733336_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
@@ -45976,6 +46036,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AddAnswer_vue_vue_type_style_index_0_id_2e3d659a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AddAnswer.vue?vue&type=style&index=0&id=2e3d659a&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Doctor/AddAnswer.vue?vue&type=style&index=0&id=2e3d659a&scoped=true&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Doctor/DoctorProfile.vue?vue&type=style&index=0&id=f5733336&scoped=true&lang=css&":
+/*!*******************************************************************************************************************!*\
+  !*** ./resources/js/components/Doctor/DoctorProfile.vue?vue&type=style&index=0&id=f5733336&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DoctorProfile_vue_vue_type_style_index_0_id_f5733336_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DoctorProfile.vue?vue&type=style&index=0&id=f5733336&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Doctor/DoctorProfile.vue?vue&type=style&index=0&id=f5733336&scoped=true&lang=css&");
 
 
 /***/ }),
@@ -48140,41 +48213,43 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("table", { staticClass: "table table-bordered" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          { staticClass: "table-striped" },
-          _vm._l(_vm.doctorsData, function(doctor) {
-            return _c("tr", { key: doctor.id }, [
-              _c("td", [_vm._v(_vm._s(doctor.id))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(doctor.name))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(doctor.description))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(doctor.specialisation_id))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(doctor.user_id))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(doctor.image))]),
-              _vm._v(" "),
-              _c(
-                "td",
-                [
-                  _c(
-                    "router-link",
-                    { attrs: { to: "/admin/delete-doctor/" + doctor.id } },
-                    [_vm._v("Удалить")]
-                  )
-                ],
-                1
-              )
-            ])
-          }),
-          0
-        )
+      _c("div", { staticClass: "row" }, [
+        _c("table", { staticClass: "table table-bordered" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            { staticClass: "table-striped" },
+            _vm._l(_vm.doctorsData, function(doctor) {
+              return _c("tr", { key: doctor.id }, [
+                _c("td", [_vm._v(_vm._s(doctor.id))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(doctor.name))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(doctor.description))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(doctor.specialisation_id))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(doctor.user_id))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(doctor.image))]),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  [
+                    _c(
+                      "router-link",
+                      { attrs: { to: "/admin/delete-doctor/" + doctor.id } },
+                      [_vm._v("Удалить")]
+                    )
+                  ],
+                  1
+                )
+              ])
+            }),
+            0
+          )
+        ])
       ]),
       _vm._v(" "),
       _c(
@@ -48275,37 +48350,41 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("table", { staticClass: "table table-bordered" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          { staticClass: "table-striped" },
-          _vm._l(_vm.categoriesData.data, function(category) {
-            return _c("tr", { key: category.id }, [
-              _c("td", [_vm._v(_vm._s(category.id))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(category.name))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(category.description))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(category.image))]),
-              _vm._v(" "),
-              _c(
-                "td",
-                [
-                  _c(
-                    "router-link",
-                    { attrs: { to: "/admin/delete-category/" + category.id } },
-                    [_vm._v("Удалить")]
-                  )
-                ],
-                1
-              )
-            ])
-          }),
-          0
-        )
+      _c("div", { staticClass: "row" }, [
+        _c("table", { staticClass: "table table-bordered" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            { staticClass: "table-striped" },
+            _vm._l(_vm.categoriesData.data, function(category) {
+              return _c("tr", { key: category.id }, [
+                _c("td", [_vm._v(_vm._s(category.id))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(category.name))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(category.description))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(category.image))]),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        attrs: { to: "/admin/delete-category/" + category.id }
+                      },
+                      [_vm._v("Удалить")]
+                    )
+                  ],
+                  1
+                )
+              ])
+            }),
+            0
+          )
+        ])
       ]),
       _vm._v(" "),
       _c(
@@ -48402,39 +48481,41 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("table", { staticClass: "table table-bordered" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          { staticClass: "table-striped" },
-          _vm._l(_vm.subcategoriesData, function(subcategory) {
-            return _c("tr", { key: subcategory.id }, [
-              _c("td", [_vm._v(_vm._s(subcategory.id))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(subcategory.name))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(subcategory.category_id))]),
-              _vm._v(" "),
-              _c(
-                "td",
-                [
-                  _c(
-                    "router-link",
-                    {
-                      attrs: {
-                        to: "/admin/delete-subcategory/" + subcategory.id
-                      }
-                    },
-                    [_vm._v("Удалить")]
-                  )
-                ],
-                1
-              )
-            ])
-          }),
-          0
-        )
+      _c("div", { staticClass: "row" }, [
+        _c("table", { staticClass: "table table-bordered" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            { staticClass: "table-striped" },
+            _vm._l(_vm.subcategoriesData, function(subcategory) {
+              return _c("tr", { key: subcategory.id }, [
+                _c("td", [_vm._v(_vm._s(subcategory.id))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(subcategory.name))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(subcategory.category_id))]),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        attrs: {
+                          to: "/admin/delete-subcategory/" + subcategory.id
+                        }
+                      },
+                      [_vm._v("Удалить")]
+                    )
+                  ],
+                  1
+                )
+              ])
+            }),
+            0
+          )
+        ])
       ]),
       _vm._v(" "),
       _c(
@@ -48497,7 +48578,12 @@ var render = function() {
     _vm.show
       ? _c("div", { staticClass: "post-details" }, [
           _c("div", { staticClass: "post-footer d-flex align-items-center" }, [
-            _vm._m(0),
+            _c("div", { staticClass: "avatar" }, [
+              _c("img", {
+                staticClass: "img-fluid",
+                attrs: { src: _vm.$store.state.site + _vm.data.doctor.image }
+              })
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "title" }, [
               _vm._v(_vm._s(_vm.data.doctor.name))
@@ -48511,19 +48597,7 @@ var render = function() {
       : _vm._e()
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "avatar" }, [
-      _c("img", {
-        staticClass: "img-fluid",
-        attrs: { src: "img/avatar-3.jpg" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -50456,88 +50530,100 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("footer", { staticClass: "main-footer" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-4" }, [
+            _c("div", { staticClass: "menus d-flex" }, [
+              _c("ul", { staticClass: "list-unstyled" }, [
+                _c(
+                  "li",
+                  [
+                    _c("router-link", { attrs: { to: "/" } }, [
+                      _vm._v("Главная")
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  [
+                    _c("router-link", { attrs: { to: "/communities" } }, [
+                      _vm._v("Сообщества")
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  [
+                    _c("router-link", { attrs: { to: "/consultations" } }, [
+                      _vm._v("Консультации")
+                    ])
+                  ],
+                  1
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("footer", { staticClass: "main-footer" }, [
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-4" }, [
-              _c("p", [
-                _vm._v(
-                  "© 2021. Mom and baby — сайт о беременности и материнстве"
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-4" }, [
-              _c("div", { staticClass: "contact-details" }, [
-                _c("p", [
-                  _vm._v("Email: "),
-                  _c("a", { attrs: { href: "mailto:momandbaby@gmail.com" } }, [
-                    _vm._v("momandbaby@gmail.com")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("ul", { staticClass: "social-menu" }, [
-                  _c("li", { staticClass: "list-inline-item" }, [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("img", { attrs: { src: "img/icon1.svg" } })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "list-inline-item" }, [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("img", { attrs: { src: "img/icon2.svg" } })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "list-inline-item" }, [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("img", { attrs: { src: "img/icon3.svg" } })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "list-inline-item" }, [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("img", { attrs: { src: "img/icon4.svg" } })
-                    ])
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-4" }, [
-              _c("div", { staticClass: "menus d-flex" }, [
-                _c("ul", { staticClass: "list-unstyled" }, [
-                  _c("li", [
-                    _c("a", { attrs: { href: "#" } }, [_vm._v("Главная")])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("a", { attrs: { href: "#" } }, [_vm._v("Сообщества")])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("a", { attrs: { href: "#" } }, [_vm._v("Календари")])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _vm._v("Полезные материалы")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("a", { attrs: { href: "#" } }, [_vm._v("Консультации")])
-                  ])
-                ])
-              ])
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c("p", [
+        _vm._v("© 2021. Mom and baby — сайт о беременности и материнстве")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c("div", { staticClass: "contact-details" }, [
+        _c("p", [
+          _vm._v("Email: "),
+          _c("a", { attrs: { href: "mailto:momandbaby@gmail.com" } }, [
+            _vm._v("momandbaby@gmail.com")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("ul", { staticClass: "social-menu" }, [
+          _c("li", { staticClass: "list-inline-item" }, [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("img", { attrs: { src: "img/icon1.svg" } })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "list-inline-item" }, [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("img", { attrs: { src: "img/icon2.svg" } })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "list-inline-item" }, [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("img", { attrs: { src: "img/icon3.svg" } })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "list-inline-item" }, [
+            _c("a", { attrs: { href: "#" } }, [
+              _c("img", { attrs: { src: "img/icon4.svg" } })
             ])
           ])
         ])
@@ -51072,7 +51158,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "image col-lg-5" }, [
-      _c("img", { attrs: { src: "img/38.jpg" } })
+      _c("img", { attrs: { src: "img/39.jpg" } })
     ])
   },
   function() {
@@ -51080,7 +51166,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "image col-lg-5 img-fluid" }, [
-      _c("img", { attrs: { src: "img/49.jpg" } })
+      _c("img", { attrs: { src: "img/58.jpg" } })
     ])
   },
   function() {
@@ -51088,7 +51174,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "image col-lg-5" }, [
-      _c("img", { attrs: { src: "img/48.jpg" } })
+      _c("img", { attrs: { src: "img/49.jpg" } })
     ])
   },
   function() {

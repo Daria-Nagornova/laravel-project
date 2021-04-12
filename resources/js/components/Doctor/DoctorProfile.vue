@@ -44,5 +44,10 @@ name: "DoctorProfile",
 </script>
 
 <style scoped>
-
+.questions-form {
+    text-align: center;
+    border-bottom: 2px solid #95999c;
+    margin: 20px 0;
+    font-size: 28px;
+}
 </style>

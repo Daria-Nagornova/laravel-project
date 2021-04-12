@@ -4,7 +4,7 @@
         <div v-if="show" class="post-details">
             <div class="post-footer d-flex align-items-center">
                 <div class="avatar">
-                    <img src="img/avatar-3.jpg" class="img-fluid">
+                    <img :src="$store.state.site + data.doctor.image" class="img-fluid">
                 </div>
                 <div class="title">{{ data.doctor.name }}</div>
             </div>

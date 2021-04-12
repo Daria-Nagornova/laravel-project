@@ -6,26 +6,28 @@
             <router-link to="/admin/doctors" class="nav-link animsition-link">Врачи</router-link>
             <router-view></router-view>
         </div>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Название</th>
-                    <th>Описание</th>
-                    <th>Изображение</th>
-                    <th>Действие</th>
-                </tr>
-            </thead>
-            <tbody class="table-striped">
-                <tr v-for="category in categoriesData.data" :key="category.id">
-                    <td>{{ category.id }}</td>
-                    <td>{{ category.name }}</td>
-                    <td>{{ category.description }}</td>
-                    <td>{{ category.image }}</td>
-                    <td><router-link :to="'/admin/delete-category/' + category.id">Удалить</router-link></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="row">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Название</th>
+                        <th>Описание</th>
+                        <th>Изображение</th>
+                        <th>Действие</th>
+                    </tr>
+                </thead>
+                <tbody class="table-striped">
+                    <tr v-for="category in categoriesData.data" :key="category.id">
+                        <td>{{ category.id }}</td>
+                        <td>{{ category.name }}</td>
+                        <td>{{ category.description }}</td>
+                        <td>{{ category.image }}</td>
+                        <td><router-link :to="'/admin/delete-category/' + category.id">Удалить</router-link></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <router-link to="/admin/add-category" class="btn btn-outline-secondary">Добавить категорию</router-link>
     </div>
 </template>

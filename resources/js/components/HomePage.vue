@@ -35,10 +35,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="image col-lg-5"><img src="img/38.jpg"></div>
+                    <div class="image col-lg-5"><img src="img/39.jpg"></div>
                 </div>
                 <div class="row d-flex align-items-stretch">
-                    <div class="image col-lg-5 img-fluid"><img src="img/49.jpg"></div>
+                    <div class="image col-lg-5 img-fluid"><img src="img/58.jpg"></div>
                     <div class="text col-lg-7">
                         <div class="text-inner d-flex align-items-center">
                             <div class="content">
@@ -61,7 +61,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="image col-lg-5"><img src="img/48.jpg"></div>
+                    <div class="image col-lg-5"><img src="img/49.jpg"></div>
                 </div>
             </div>
         </section>

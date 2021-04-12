@@ -20,11 +20,9 @@
                     <div class="col-md-4">
                         <div class="menus d-flex">
                             <ul class="list-unstyled">
-                                <li> <a href="#">Главная</a></li>
-                                <li> <a href="#">Сообщества</a></li>
-                                <li> <a href="#">Календари</a></li>
-                                <li> <a href="#">Полезные материалы</a></li>
-                                <li> <a href="#">Консультации</a></li>
+                                <li> <router-link to="/">Главная</router-link></li>
+                                <li> <router-link to="/communities">Сообщества</router-link></li>
+                                <li> <router-link to="/consultations">Консультации</router-link></li>
                             </ul>
                         </div>
                     </div>

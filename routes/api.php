@@ -82,31 +82,6 @@ Route::post('/height', [App\Http\Controllers\HeighthController::class, 'store'])
 Route::delete('/delete-height/{height}', [App\Http\Controllers\HeighthController::class, 'destroy']);
 
 
-/*Route::prefix('/profile-user/child-diary')->group(function () {
-  //  Route::get('/', [App\Http\Controllers\WalkController::class, 'index']);
-  //
-});
-Route::prefix('/profile-user/child-diary')->group(function () {
-    //  Route::get('/', [App\Http\Controllers\SleepController::class, 'index']);
-    //
-});
-Route::prefix('/profile-user/child-diary')->group(function () {
-    //  Route::get('/', [App\Http\Controllers\TeethController::class, 'index']);
-    //
-});
-Route::prefix('/profile-user/child-diary')->group(function () {
-    //  Route::get('/', [App\Http\Controllers\VaccinationController::class, 'index']);
-    //
-});
-Route::prefix('/profile-user/child-diary')->group(function () {
-    //  Route::get('/', [App\Http\Controllers\HeighthController::class, 'index']);
-    //
-});
-Route::prefix('/profile-user/child-diary')->group(function () {
-    //  Route::get('/', [App\Http\Controllers\FeedingController::class, 'index']);
-    Route::post('/add-notes/feeding', [App\Http\Controllers\FeedingController::class, 'store']);
-    //
-});*/
 Route::middleware('auth:api')->get('/profile-user/user-posts', [App\Http\Controllers\PostController::class, 'userPost']);
 Route::middleware('auth:api')->get('/user', [App\Http\Controllers\UserController::class, 'getUser']);
 Route::delete('/image/{postId}', [App\Http\Controllers\ImageController::class, 'destroy']);
