@@ -26,10 +26,6 @@ class Post extends Model
         return $newPost;
     }
 
-    public function getShortContentAttribute(): string {
-        return Str::limit($this->content, 150);
-    }
-
     public function user() : belongsTo
     {
         return $this->belongsTo(User::class);

@@ -30,7 +30,7 @@
                                     <router-link to="/profile-doctor" class="nav-link animsition-link">Врач</router-link>
                                 </li>
                                 <li v-if="userData.role === 'администратор'" class="nav-item">
-                                    <router-link to="/profile-admin" class="nav-link animsition-link">Админ</router-link>
+                                    <router-link to="/admin" class="nav-link animsition-link">Админ</router-link>
                                 </li>
                             </ul>
                         </div>

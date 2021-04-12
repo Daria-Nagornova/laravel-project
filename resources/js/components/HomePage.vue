@@ -86,7 +86,7 @@
                             <router-link :to="'/communities/' + post.category_id + '/' + post.id" class="animsition-link">
                                 <h3 class="h4">{{ post.title }}</h3>
                             </router-link>
-                            <p class="text-muted">{{ post.content }}</p>
+                            <p class="text-muted">{{ post.content.slice(0, 200) + '...' }}</p>
                         </div>
                     </div>
                 </div>

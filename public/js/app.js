@@ -49110,7 +49110,7 @@ var render = function() {
                         ),
                         _vm._v(" "),
                         _c("p", { staticClass: "text-muted" }, [
-                          _vm._v(_vm._s(post.content))
+                          _vm._v(_vm._s(post.content.slice(0, 200) + "..."))
                         ]),
                         _vm._v(" "),
                         _c(
@@ -50682,7 +50682,7 @@ var render = function() {
                             "router-link",
                             {
                               staticClass: "nav-link animsition-link",
-                              attrs: { to: "/profile-admin" }
+                              attrs: { to: "/admin" }
                             },
                             [_vm._v("Админ")]
                           )
@@ -51006,7 +51006,7 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("p", { staticClass: "text-muted" }, [
-                    _vm._v(_vm._s(post.content))
+                    _vm._v(_vm._s(post.content.slice(0, 200) + "..."))
                   ])
                 ],
                 1

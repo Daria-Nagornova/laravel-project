@@ -26,7 +26,7 @@
                                 <router-link :to="'/communities/' + category + '/' + post.id" class="animsition-link">
                                     <h3 class="h4">{{ post.title }}</h3>
                                 </router-link>
-                                <p class="text-muted">{{ post.content }}</p>
+                                <p class="text-muted">{{ post.content.slice(0, 200) + '...' }}</p>
                                 <footer class="post-footer d-flex align-items-center">
                                     <div class="title">{{ post.user_name }}</div>
                                     <div v-if="count !== 0" class="comments meta-last comments-icon">{{ count }}</div>
