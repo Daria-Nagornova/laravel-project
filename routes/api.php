@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::middleware('auth:api')->get('/profile-user', function (Request $request) {
+    return $request->user();
+});
 Route::post('login', [App\Http\Controllers\Api\AuthController::class, 'login']);
 Route::post('register', [App\Http\Controllers\Api\AuthController::class, 'register']);
 //Route::middleware('auth:api')->get('/', [App\Http\Controllers\ChildController::class, 'index']);
@@ -44,11 +47,10 @@ Route::prefix('/communities')->group(function () {
     Route::post('/', [App\Http\Controllers\CategoryController::class, 'store']);
     Route::delete('/{category}', [App\Http\Controllers\CategoryController::class, 'destroy']);
 });
-Route::prefix('/admin/subcategories')->group(function () {
-    Route::get('/', [App\Http\Controllers\SubcategoryController::class, 'index']);
-    Route::post('/', [App\Http\Controllers\SubcategoryController::class, 'store']);
-    Route::delete('/{subcategory}', [App\Http\Controllers\SubcategoryController::class, 'destroy']);
-});
+/*Route::group(['middleware' => 'admin'], function () {
+
+});*/
+
 Route::prefix('/admin/doctors')->group(function () {
     Route::get('/', [App\Http\Controllers\DoctorController::class, 'index']);
     Route::post('/', [App\Http\Controllers\DoctorController::class, 'store']);
