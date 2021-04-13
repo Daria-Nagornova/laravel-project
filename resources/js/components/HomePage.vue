@@ -43,9 +43,9 @@
                         <div class="text-inner d-flex align-items-center">
                             <div class="content">
                                 <header class="post-header">
-                                    <router-link to="/communities/consultations" class="animsition-link"><h2 class="h4">Консультации</h2></router-link>
+                                    <router-link to="/consultations" class="animsition-link"><h2 class="h4">Консультации</h2></router-link>
                                 </header>
-                                <div> Предлагаем получить бесплатную онлайн-консультацию педиатра, невролога, психолога. Оставить свой вопрос вы можете в любое время, и наши специалисты на него обязательно ответят. Мы не разглашаем личные данные наших читателей и гарантируем полную анонимность и конфиденциальность.></div>
+                                <div> Предлагаем получить бесплатную онлайн-консультацию педиатра, невролога, психолога. Оставить свой вопрос вы можете в любое время, и наши специалисты на него обязательно ответят. Мы не разглашаем личные данные наших читателей и гарантируем полную анонимность и конфиденциальность.</div>
                             </div>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                         <div class="text-inner d-flex align-items-center">
                             <div class="content">
                                 <header class="post-header">
-                                    <router-link to="/registration" class="animsition-link"><h2>Дневник ребенка</h2></router-link>
+                                    <router-link to="/profile-user/child-diary" class="animsition-link"><h2>Дневник ребенка</h2></router-link>
                                 </header>
                                 <div>Зарегистрируйтесь на сайте и получите доступ к закрытому разделу - Дневник ребенка. Вы сможете ежедевно делать заметки о прогулках, сне, кормлении, отмечать рост и вес вашего малыша, а также даты прорезывания зубов. Наш дневник поможет наладить режим дня малыша, проследив комфортное для него время сна и приемов пищи.</div>
                             </div>

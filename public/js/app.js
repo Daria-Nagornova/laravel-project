@@ -4208,6 +4208,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ErrorPage"
 });
@@ -10637,17 +10639,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/getUrl.js */ "./node_modules/css-loader/dist/runtime/getUrl.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _storage_content_404_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../storage/content/404.png */ "./storage/content/404.png");
 // Imports
 
-
-
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_storage_content_404_png__WEBPACK_IMPORTED_MODULE_2__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.error-page[data-v-15d587c2] {\n    max-width: 1400px;\n    max-height: 800px;\n    background: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.error-page[data-v-15d587c2] {\n    text-align: center;\n    font-size: 2rem;\n    max-width: 1400px;\n    max-height: 800px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11011,21 +11007,6 @@ module.exports = function (url, options) {
 
   return url;
 };
-
-/***/ }),
-
-/***/ "./storage/content/404.png":
-/*!*********************************!*\
-  !*** ./storage/content/404.png ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/404.png?c0bc7d0b97fa8387bee7778e5fddc6ea");
 
 /***/ }),
 
@@ -51010,7 +50991,7 @@ var render = function() {
                       "router-link",
                       {
                         staticClass: "animsition-link",
-                        attrs: { to: "/communities/consultations" }
+                        attrs: { to: "/consultations" }
                       },
                       [
                         _c("h2", { staticClass: "h4" }, [
@@ -51024,7 +51005,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", [
                   _vm._v(
-                    " Предлагаем получить бесплатную онлайн-консультацию педиатра, невролога, психолога. Оставить свой вопрос вы можете в любое время, и наши специалисты на него обязательно ответят. Мы не разглашаем личные данные наших читателей и гарантируем полную анонимность и конфиденциальность.>"
+                    " Предлагаем получить бесплатную онлайн-консультацию педиатра, невролога, психолога. Оставить свой вопрос вы можете в любое время, и наши специалисты на него обязательно ответят. Мы не разглашаем личные данные наших читателей и гарантируем полную анонимность и конфиденциальность."
                   )
                 ])
               ])
@@ -51044,7 +51025,7 @@ var render = function() {
                       "router-link",
                       {
                         staticClass: "animsition-link",
-                        attrs: { to: "/registration" }
+                        attrs: { to: "/profile-user/child-diary" }
                       },
                       [_c("h2", [_vm._v("Дневник ребенка")])]
                     )
@@ -51246,7 +51227,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container error-page" })
+  return _c("div", { staticClass: "container error-page" }, [
+    _vm._v("\n    Страница не найдена 404\n")
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
