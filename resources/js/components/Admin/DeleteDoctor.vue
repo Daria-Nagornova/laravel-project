@@ -7,7 +7,8 @@ export default {
     name: "DeleteDoctor",
     methods: {
         deleteDoctor(id) {
-            axios.delete('/api/admin/doctors/' + id)
+            axios.delete('/api/admin/doctors/' + id, { headers: {
+                    'Authorization': 'Bearer ' + this.$store.state.token } })
                 .then(r => this.cancel())
                 .catch(e => console.log(e))
         },

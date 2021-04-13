@@ -53,7 +53,8 @@ export default {
             form.append('name', this.name)
             form.append('description', this.description)
 
-            axios.post('/api/communities/', form)
+            axios.post('/api/admin/communities/', form, { headers: {
+                    'Authorization': 'Bearer ' + this.$store.state.token } })
                 .then(r => this.success())
                 .catch(e => this.error(e))
 

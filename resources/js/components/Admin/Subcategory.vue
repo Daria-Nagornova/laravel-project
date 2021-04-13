@@ -40,7 +40,8 @@ export default {
     },
     methods: {
         loadSubcategories() {
-            axios.get('/api/admin/subcategories')
+            axios.get('/api/admin/subcategories', { headers: {
+                    'Authorization': 'Bearer ' + this.$store.state.token } })
                 .then(r => this.subcategoriesData = r.data)
                 .catch(e => console.log(e))
         },

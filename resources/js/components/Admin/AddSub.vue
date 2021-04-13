@@ -48,7 +48,8 @@ export default {
             form.append('name', this.name)
             form.append('category_id', this.category)
 
-            axios.post('/api/admin/subcategories/', form)
+            axios.post('/api/admin/subcategories/', form, { headers: {
+                    'Authorization': 'Bearer ' + this.$store.state.token } })
                 .then(r => this.success())
                 .catch(e => this.error(e))
 

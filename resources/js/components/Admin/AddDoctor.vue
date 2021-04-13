@@ -69,7 +69,8 @@ export default {
             form.append('specialisation_id', this.category)
             form.append('user_id', this.userId)
 
-            axios.post('/api/admin/doctors/', form)
+            axios.post('/api/admin/doctors/', form, { headers: {
+                    'Authorization': 'Bearer ' + this.$store.state.token } })
                 .then(r => this.success())
                 .catch(e => this.error(e))
 

@@ -104,7 +104,9 @@ export default {
             form.append('category_id', this.$route.params.categories)
             form.append('user_id', this.blogPostData.user_id)
 
-            axios.post('/api/communities/' + this.$route.params.categories + '/' + this.$route.params.post  + '/update', form)
+            axios.post('/api/communities/' + this.$route.params.categories + '/' + this.$route.params.post  + '/update', form, { headers: {
+                    'Authorization': 'Bearer ' + this.$store.state.token }
+            })
                 .then(r => this.success())
                 .catch(e => this.error(e))
         },

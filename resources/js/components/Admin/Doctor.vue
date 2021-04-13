@@ -46,7 +46,8 @@ name: "Doctor",
     },
     methods: {
         loadDoctors() {
-            axios.get('/api/admin/doctors')
+            axios.get('/api/admin/doctors', { headers: {
+                    'Authorization': 'Bearer ' + this.$store.state.token } })
                 .then(r => this.doctorsData = r.data)
                 .catch(e => console.log(e))
         },

@@ -42,7 +42,8 @@ name: "MainAdmin",
     },
     methods: {
         loadCategories() {
-            axios.get('/api/communities')
+            axios.get('/api/admin/communities', { headers: {
+                    'Authorization': 'Bearer ' + this.$store.state.token } })
                 .then(r => this.categoriesData = r.data)
                 .catch(e => console.log(e))
         },

@@ -39,23 +39,30 @@ Route::prefix('/communities/{category}')->group(function () {
     Route::get('/', [App\Http\Controllers\PostController::class, 'index']);
     Route::middleware('auth:api')->post('/add/post', [App\Http\Controllers\PostController::class, 'store']);
     Route::get('/{post}', [App\Http\Controllers\PostController::class, 'show']);
-    Route::post('/{post}/update', [App\Http\Controllers\PostController::class, 'update']);
+    Route::middleware('auth:api')->post('/{post}/update', [App\Http\Controllers\PostController::class, 'update']);
     Route::delete('/{post}', [App\Http\Controllers\PostController::class, 'destroy']);
 });
 Route::prefix('/communities')->group(function () {
     Route::get('/', [App\Http\Controllers\CategoryController::class, 'index']);
-    Route::post('/', [App\Http\Controllers\CategoryController::class, 'store']);
-    Route::delete('/{category}', [App\Http\Controllers\CategoryController::class, 'destroy']);
 });
-/*Route::group(['middleware' => 'admin'], function () {
-
-});*/
-
-Route::prefix('/admin/doctors')->group(function () {
-    Route::get('/', [App\Http\Controllers\DoctorController::class, 'index']);
-    Route::post('/', [App\Http\Controllers\DoctorController::class, 'store']);
-    Route::delete('/{doctor}', [App\Http\Controllers\DoctorController::class, 'destroy']);
+Route::group(['middleware' => 'admin'], function () {
+    Route::prefix('/admin/communities')->group(function () {
+        Route::middleware('auth:api')->get('/', [App\Http\Controllers\CategoryController::class, 'index']);
+        Route::middleware('auth:api')->post('/', [App\Http\Controllers\CategoryController::class, 'store']);
+        Route::middleware('auth:api')->delete('/{category}', [App\Http\Controllers\CategoryController::class, 'destroy']);
+    });
+    Route::prefix('/admin/subcategories')->group(function () {
+        Route::middleware('auth:api')->get('/', [App\Http\Controllers\SubcategoryController::class, 'index']);
+        Route::middleware('auth:api')->post('/', [App\Http\Controllers\SubcategoryController::class, 'store']);
+        Route::middleware('auth:api')->delete('/{subcategory}', [App\Http\Controllers\SubcategoryController::class, 'destroy']);
+    });
+    Route::prefix('/admin/doctors')->group(function () {
+        Route::middleware('auth:api')->get('/', [App\Http\Controllers\DoctorController::class, 'index']);
+        Route::middleware('auth:api')->post('/', [App\Http\Controllers\DoctorController::class, 'store']);
+        Route::middleware('auth:api')->delete('/{doctor}', [App\Http\Controllers\DoctorController::class, 'destroy']);
+    });
 });
+
 Route::get('/popular/{category}', [App\Http\Controllers\CommentController::class, 'popular']);
 Route::get('/count/{post}', [App\Http\Controllers\CommentController::class, 'postComments']);
 Route::middleware('auth:api')->post('/communities/{category}/{post}', [App\Http\Controllers\CommentController::class, 'store']);
@@ -89,9 +96,13 @@ Route::middleware('auth:api')->get('/user', [App\Http\Controllers\UserController
 Route::delete('/image/{postId}', [App\Http\Controllers\ImageController::class, 'destroy']);
 Route::get('/doctors', [App\Http\Controllers\DoctorController::class, 'index']);
 Route::middleware('auth:api')->get('/user-consultations', [App\Http\Controllers\ConsultationController::class, 'userConsultation']);
-Route::middleware('auth:api')->get('/doctor-consultations', [App\Http\Controllers\ConsultationController::class, 'doctorConsultation']);
-Route::post('/add-answer', [App\Http\Controllers\AnswerController::class, 'store']);
-Route::patch('/update-consultation/{consultation}', [App\Http\Controllers\ConsultationController::class, 'update']);
+
+Route::group(['middleware' => 'doctor'], function () {
+    Route::middleware('auth:api')->get('/doctor-consultations', [App\Http\Controllers\ConsultationController::class, 'doctorConsultation']);
+    Route::middleware('auth:api')->post('/add-answer', [App\Http\Controllers\AnswerController::class, 'store']);
+    Route::middleware('auth:api')->patch('/update-consultation/{consultation}', [App\Http\Controllers\ConsultationController::class, 'update']);
+});
+
 Route::get('/answer', [App\Http\Controllers\AnswerController::class, 'index']);
 Route::middleware('auth:api')->get('/child', [App\Http\Controllers\ChildController::class, 'getChild']);
 Route::get('/notes/{child}', [App\Http\Controllers\ChildController::class, 'getNotes']);

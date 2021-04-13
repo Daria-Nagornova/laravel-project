@@ -7,7 +7,8 @@ export default {
 name: "DeleteCategory",
     methods: {
         deleteCategory(id) {
-            axios.delete('/api/communities/' + id)
+            axios.delete('/api/admin/communities/' + id, { headers: {
+                    'Authorization': 'Bearer ' + this.$store.state.token } })
                 .then(r => this.cancel())
                 .catch(e => console.log(e))
         },

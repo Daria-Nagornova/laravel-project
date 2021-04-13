@@ -2209,7 +2209,11 @@ __webpack_require__.r(__webpack_exports__);
       form.append('image', this.image);
       form.append('name', this.name);
       form.append('description', this.description);
-      axios.post('/api/communities/', form).then(function (r) {
+      axios.post('/api/admin/communities/', form, {
+        headers: {
+          'Authorization': 'Bearer ' + this.$store.state.token
+        }
+      }).then(function (r) {
         return _this.success();
       })["catch"](function (e) {
         return _this.error(e);
@@ -2308,7 +2312,11 @@ __webpack_require__.r(__webpack_exports__);
       form.append('description', this.description);
       form.append('specialisation_id', this.category);
       form.append('user_id', this.userId);
-      axios.post('/api/admin/doctors/', form).then(function (r) {
+      axios.post('/api/admin/doctors/', form, {
+        headers: {
+          'Authorization': 'Bearer ' + this.$store.state.token
+        }
+      }).then(function (r) {
         return _this.success();
       })["catch"](function (e) {
         return _this.error(e);
@@ -2386,7 +2394,11 @@ __webpack_require__.r(__webpack_exports__);
       var form = new FormData();
       form.append('name', this.name);
       form.append('category_id', this.category);
-      axios.post('/api/admin/subcategories/', form).then(function (r) {
+      axios.post('/api/admin/subcategories/', form, {
+        headers: {
+          'Authorization': 'Bearer ' + this.$store.state.token
+        }
+      }).then(function (r) {
         return _this.success();
       })["catch"](function (e) {
         return _this.error(e);
@@ -2424,7 +2436,11 @@ __webpack_require__.r(__webpack_exports__);
     deleteCategory: function deleteCategory(id) {
       var _this = this;
 
-      axios["delete"]('/api/communities/' + id).then(function (r) {
+      axios["delete"]('/api/admin/communities/' + id, {
+        headers: {
+          'Authorization': 'Bearer ' + this.$store.state.token
+        }
+      }).then(function (r) {
         return _this.cancel();
       })["catch"](function (e) {
         return console.log(e);
@@ -2462,7 +2478,11 @@ __webpack_require__.r(__webpack_exports__);
     deleteDoctor: function deleteDoctor(id) {
       var _this = this;
 
-      axios["delete"]('/api/admin/doctors/' + id).then(function (r) {
+      axios["delete"]('/api/admin/doctors/' + id, {
+        headers: {
+          'Authorization': 'Bearer ' + this.$store.state.token
+        }
+      }).then(function (r) {
         return _this.cancel();
       })["catch"](function (e) {
         return console.log(e);
@@ -2500,7 +2520,11 @@ __webpack_require__.r(__webpack_exports__);
     deleteSubcategory: function deleteSubcategory(id) {
       var _this = this;
 
-      axios["delete"]('/api/admin/subcategories/' + id).then(function (r) {
+      axios["delete"]('/api/admin/subcategories/' + id, {
+        headers: {
+          'Authorization': 'Bearer ' + this.$store.state.token
+        }
+      }).then(function (r) {
         return _this.cancel();
       })["catch"](function (e) {
         return console.log(e);
@@ -2577,7 +2601,11 @@ __webpack_require__.r(__webpack_exports__);
     loadDoctors: function loadDoctors() {
       var _this = this;
 
-      axios.get('/api/admin/doctors').then(function (r) {
+      axios.get('/api/admin/doctors', {
+        headers: {
+          'Authorization': 'Bearer ' + this.$store.state.token
+        }
+      }).then(function (r) {
         return _this.doctorsData = r.data;
       })["catch"](function (e) {
         return console.log(e);
@@ -2647,7 +2675,11 @@ __webpack_require__.r(__webpack_exports__);
     loadCategories: function loadCategories() {
       var _this = this;
 
-      axios.get('/api/communities').then(function (r) {
+      axios.get('/api/admin/communities', {
+        headers: {
+          'Authorization': 'Bearer ' + this.$store.state.token
+        }
+      }).then(function (r) {
         return _this.categoriesData = r.data;
       })["catch"](function (e) {
         return console.log(e);
@@ -2715,7 +2747,11 @@ __webpack_require__.r(__webpack_exports__);
     loadSubcategories: function loadSubcategories() {
       var _this = this;
 
-      axios.get('/api/admin/subcategories').then(function (r) {
+      axios.get('/api/admin/subcategories', {
+        headers: {
+          'Authorization': 'Bearer ' + this.$store.state.token
+        }
+      }).then(function (r) {
         return _this.subcategoriesData = r.data;
       })["catch"](function (e) {
         return console.log(e);
@@ -5034,7 +5070,11 @@ __webpack_require__.r(__webpack_exports__);
       form.append('subcategory_id', this.blogPostData.subcategory_id);
       form.append('category_id', this.$route.params.categories);
       form.append('user_id', this.blogPostData.user_id);
-      axios.post('/api/communities/' + this.$route.params.categories + '/' + this.$route.params.post + '/update', form).then(function (r) {
+      axios.post('/api/communities/' + this.$route.params.categories + '/' + this.$route.params.post + '/update', form, {
+        headers: {
+          'Authorization': 'Bearer ' + this.$store.state.token
+        }
+      }).then(function (r) {
         return _this2.success();
       })["catch"](function (e) {
         return _this2.error(e);

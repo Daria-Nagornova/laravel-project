@@ -57,8 +57,6 @@ class PostController extends Controller
      */
     public function show(Category $category, Post $post): JsonResponse
     {
-        //$this->authorize(Ability::VIEW, $post);
-
         $blog = $post->load('user', 'subcategory', 'category', 'comments.user', 'image');
 
         return response()->json($blog, 200);
@@ -75,10 +73,7 @@ class PostController extends Controller
      */
     public function update(UpdateRequest $request, Category $category, Post $post): JsonResponse
     {
-        /*if (! Gate::allows('update-post', $post)) {
-            abort(403);
-        }*/
-        //$this->authorize(Ability::UPDATE, $post);
+        $this->authorize(Ability::UPDATE, $post);
 
         $post->update($request->validated());
 
