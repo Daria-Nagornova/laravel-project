@@ -10,7 +10,7 @@
         <div class="row">
             <div v-for="post in postData.posts" :key="post" class="post col-xl-6">
                 <div class="post-thumbnail">
-                    <router-link :to="'/communities/' + category + '/' + post.id" class="animsition-link">
+                    <router-link :to="'/communities/' + post.category_id + '/' + post.id" class="animsition-link">
                         <img :src="$store.state.site + post.image.path" class="img-fluid">
                     </router-link>
                 </div>

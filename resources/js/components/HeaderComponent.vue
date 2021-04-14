@@ -26,16 +26,16 @@
                                 <li class="nav-item">
                                     <router-link v-if="loggedIn && userData.role === 'пользователь'" to="/profile-user" class="nav-link animsition-link">Профиль</router-link>
                                 </li>
-                                <li v-if="userData.role === 'врач'" class="nav-item">
+                                <li v-if="loggedIn && userData.role === 'врач'" class="nav-item">
                                     <router-link to="/profile-doctor" class="nav-link animsition-link">Врач</router-link>
                                 </li>
-                                <li v-if="userData.role === 'администратор'" class="nav-item">
+                                <li v-if="loggedIn && userData.role === 'администратор'" class="nav-item">
                                     <router-link to="/admin" class="nav-link animsition-link">Админ</router-link>
                                 </li>
                             </ul>
                         </div>
                     <div>
-                        <span v-if="loggedIn" class="user">{{ userData.name }}</span>
+                        <span v-if="login" class="user">{{ login.name }}</span>
                         <router-link v-if="loggedIn" to="/logout" class="btn btn-outline-secondary btn-q">Выход</router-link>
                     </div>
                     <ul class="navbar-nav ml-auto align-items-center main-menu">
@@ -68,14 +68,21 @@ export default {
             })
                 .then(r => this.userData = r.data)
                 .catch(e => console.log(e))
-        }
-    },
-    created() {
-       this.loadUser()
+        },
     },
     computed: {
         loggedIn() {
             return this.$store.getters.loggedIn
+        },
+        login() {
+            if(this.loggedIn) {
+                this.loadUser()
+                return this.userData
+            }
+            else {
+               return this.userData = {}
+            }
+
         },
     }
 }
