@@ -35,7 +35,6 @@ name: "AddAnswer",
                 .then(r => this.updateConsultation(id))
                 .catch(e => console.log(e))
 
-            this.$emit('update');
         },
         updateConsultation(id) {
             axios.patch('/api/update-consultation/' + id,
@@ -47,6 +46,8 @@ name: "AddAnswer",
                 })
                 .then(r => console.log(r))
                 .catch(e => console.log(e))
+
+            this.$emit('update');
         }
     },
 }

@@ -71,12 +71,12 @@ export default {
         }
     },
     created() {
-        this.loadUser()
+       this.loadUser()
     },
     computed: {
         loggedIn() {
             return this.$store.getters.loggedIn
-        }
+        },
     }
 }
 </script>

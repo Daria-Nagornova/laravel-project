@@ -3788,7 +3788,6 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (e) {
         return console.log(e);
       });
-      this.$emit('update');
     },
     updateConsultation: function updateConsultation(id) {
       axios.patch('/api/update-consultation/' + id, {
@@ -3802,6 +3801,7 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (e) {
         return console.log(e);
       });
+      this.$emit('update');
     }
   }
 });
