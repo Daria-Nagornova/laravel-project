@@ -38,15 +38,4 @@ class AnswerController extends Controller
         return response()->json($answer, 200);
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Answer  $answer
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Answer $answer)
-    {
-        //
-    }
 }

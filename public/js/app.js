@@ -2890,7 +2890,6 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     cancel: function cancel() {
-      //this.$emit('login');
       this.$router.push('/');
     }
   }
